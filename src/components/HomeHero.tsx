@@ -1,22 +1,30 @@
-import { useEffect, useRef } from 'react'
+import { useEffect, useRef, useState } from 'react'
+import { createPortal } from 'react-dom'
 import gsap from 'gsap'
 import { ScrollTrigger } from 'gsap/ScrollTrigger'
+import { Play, X } from '@phosphor-icons/react'
 import { Container, Eyebrow } from './ui'
 import Btn from './Btn'
 
 const NOISE_BG =
   "data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='120' height='120'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E"
 
+const HERO_VIDEO_SRC = '/herovideo.m4v'
+
 export default function HomeHero() {
   const sectionRef = useRef<HTMLElement | null>(null)
   const videoRef = useRef<HTMLVideoElement | null>(null)
+  const scrimRef = useRef<HTMLDivElement | null>(null)
+  const hintRef = useRef<HTMLDivElement | null>(null)
   const line1 = useRef<HTMLSpanElement | null>(null)
   const line2 = useRef<HTMLSpanElement | null>(null)
   const line3 = useRef<HTMLSpanElement | null>(null)
   const subRef = useRef<HTMLParagraphElement | null>(null)
   const pipelineRef = useRef<HTMLDivElement | null>(null)
   const ctaRef = useRef<HTMLDivElement | null>(null)
+  const [lightboxOpen, setLightboxOpen] = useState(false)
 
+  // Entrance timeline + scroll parallax on the background video
   useEffect(() => {
     const lines = [line1.current, line2.current, line3.current].filter(Boolean)
     gsap.set(lines, { yPercent: 110 })
@@ -42,6 +50,74 @@ export default function HomeHero() {
     }
   }, [])
 
+  // Cursor-follow spotlight — punches a soft hole in the dark scrim so the
+  // full-brightness video shows through wherever the pointer is, across the whole hero.
+  useEffect(() => {
+    const section = sectionRef.current
+    const scrim = scrimRef.current
+    const hint = hintRef.current
+    if (!section || !scrim) return
+
+    const target = { x: -9999, y: -9999 }
+    const current = { x: -9999, y: -9999 }
+    let raf = 0
+
+    const loop = () => {
+      current.x += (target.x - current.x) * 0.08
+      current.y += (target.y - current.y) * 0.08
+      scrim.style.setProperty('--x', `${current.x}px`)
+      scrim.style.setProperty('--y', `${current.y}px`)
+      if (hint) hint.style.transform = `translate(${current.x}px, ${current.y}px) translate(-50%, 20px)`
+      raf = requestAnimationFrame(loop)
+    }
+    raf = requestAnimationFrame(loop)
+
+    const onMove = (e: PointerEvent) => {
+      const r = section.getBoundingClientRect()
+      target.x = e.clientX - r.left
+      target.y = e.clientY - r.top
+      hint?.classList.add('opacity-100')
+      hint?.classList.remove('opacity-0')
+    }
+    const onLeave = () => {
+      target.x = -9999
+      target.y = -9999
+      hint?.classList.add('opacity-0')
+      hint?.classList.remove('opacity-100')
+    }
+
+    section.addEventListener('pointermove', onMove)
+    section.addEventListener('pointerleave', onLeave)
+    return () => {
+      cancelAnimationFrame(raf)
+      section.removeEventListener('pointermove', onMove)
+      section.removeEventListener('pointerleave', onLeave)
+    }
+  }, [])
+
+  // Pause the background loop while the lightbox is open; lock page scroll
+  useEffect(() => {
+    if (lightboxOpen) {
+      videoRef.current?.pause()
+      document.body.style.overflow = 'hidden'
+    } else {
+      videoRef.current?.play().catch(() => {})
+      document.body.style.overflow = ''
+    }
+    return () => {
+      document.body.style.overflow = ''
+    }
+  }, [lightboxOpen])
+
+  useEffect(() => {
+    if (!lightboxOpen) return
+    const onKey = (e: KeyboardEvent) => {
+      if (e.key === 'Escape') setLightboxOpen(false)
+    }
+    window.addEventListener('keydown', onKey)
+    return () => window.removeEventListener('keydown', onKey)
+  }, [lightboxOpen])
+
   return (
     <section
       ref={sectionRef}
@@ -62,12 +138,32 @@ export default function HomeHero() {
           ;(e.currentTarget as HTMLVideoElement).style.display = 'none'
         }}
       >
-        <source src="/video/hero-reel.mp4" type="video/mp4" />
+        <source src={HERO_VIDEO_SRC} type="video/mp4" />
       </video>
-      <div className="absolute inset-0 bg-[linear-gradient(180deg,rgba(5,6,7,.35)_0%,rgba(5,6,7,.55)_55%,var(--color-sv-black)_100%)]" />
-      <div className="absolute inset-0 opacity-[.03]" style={{ backgroundImage: `url("${NOISE_BG}")` }} />
 
-      <div className="relative z-2 w-full py-[140px] pb-24">
+      {/* Dark scrim with a cursor-follow spotlight hole — purely visual, so the mask
+          cutout never eats clicks (masked-out areas stop receiving pointer events). */}
+      <div ref={scrimRef} className="hero-video-scrim pointer-events-none absolute inset-0 h-full w-full" />
+
+      {/* Full-hero click target, kept separate from the scrim above so the whole area is clickable */}
+      <button
+        type="button"
+        aria-label="Watch the full video"
+        onClick={() => setLightboxOpen(true)}
+        className="absolute inset-0 h-full w-full cursor-pointer border-0 bg-transparent p-0"
+      />
+
+      <div
+        ref={hintRef}
+        className="pointer-events-none absolute left-0 top-0 z-2 flex items-center gap-2 whitespace-nowrap rounded-full border border-white/25 bg-black/50 px-4 py-2 font-display text-xs font-bold uppercase tracking-[0.08em] text-white opacity-0 backdrop-blur-sm transition-opacity duration-300"
+      >
+        <Play size={13} weight="fill" />
+        Watch full video
+      </div>
+
+      <div className="pointer-events-none absolute inset-0 opacity-[.03]" style={{ backgroundImage: `url("${NOISE_BG}")` }} />
+
+      <div className="pointer-events-none relative z-2 w-full py-[140px] pb-24">
         <Container>
           <Eyebrow>The Global Sports Production Platform</Eyebrow>
           <h1 className="mt-5 font-display text-[clamp(44px,8.4vw,72px)] font-extrabold leading-[1.02] tracking-[-0.02em] text-sv-white">
@@ -98,7 +194,7 @@ export default function HomeHero() {
               </span>
             ))}
           </div>
-          <div ref={ctaRef} className="mt-[72px] flex flex-wrap gap-4">
+          <div ref={ctaRef} className="pointer-events-auto mt-[72px] flex flex-wrap gap-4">
             <Btn to="/for-organisations#proposal" variant="primary">
               Get a Proposal
             </Btn>
@@ -108,6 +204,29 @@ export default function HomeHero() {
           </div>
         </Container>
       </div>
+
+      {lightboxOpen &&
+        createPortal(
+          <div className="fixed inset-0 z-200 flex items-center justify-center bg-black/92 p-6" onClick={() => setLightboxOpen(false)}>
+            <button
+              type="button"
+              aria-label="Close video"
+              onClick={() => setLightboxOpen(false)}
+              className="absolute right-6 top-6 flex h-11 w-11 items-center justify-center rounded-full border border-white/20 text-white transition-colors hover:border-sv-primary-light hover:text-sv-primary-light"
+            >
+              <X size={22} weight="bold" />
+            </button>
+            <video
+              src={HERO_VIDEO_SRC}
+              controls
+              autoPlay
+              playsInline
+              className="max-h-[85vh] w-full max-w-5xl rounded-sv-lg"
+              onClick={(e) => e.stopPropagation()}
+            />
+          </div>,
+          document.body,
+        )}
     </section>
   )
 }

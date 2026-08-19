@@ -64,7 +64,7 @@ export default function Home() {
               Whether you run tournaments or want to play in one — SportVot has a world built for you.
             </h2>
           </SectionHead>
-          <RevealGroup className="grid grid-cols-[1.1fr_.9fr] items-stretch gap-6 max-[900px]:grid-cols-1">
+          <RevealGroup className="grid grid-cols-2 items-stretch gap-6 max-[900px]:grid-cols-1">
             <ForkCard
               to="/for-organisations"
               variant="blue"

@@ -47,7 +47,7 @@ function StatCell({ target, suffix, label }: Stat) {
 
   return (
     <div className="bg-sv-surface px-3 py-12 text-center">
-      <p ref={numRef} className="font-display text-[clamp(30px,3.4vw,44px)] font-black text-sv-primary">
+      <p ref={numRef} className="font-display text-[clamp(30px,3.4vw,44px)] font-black text-sv-primary-light">
         0
       </p>
       <span className="mt-2 block text-[13px] uppercase tracking-[0.06em] text-sv-text-muted">{label}</span>

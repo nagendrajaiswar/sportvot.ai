@@ -61,7 +61,7 @@ export default function Play() {
               Your highlight reel.
             </ColMedia>
             <Reveal>
-              <p className="font-display text-xs font-bold uppercase tracking-[0.16em] text-sv-primary">How SportVot Play Works</p>
+              <p className="font-display text-xs font-bold uppercase tracking-[0.16em] text-sv-primary-light">How SportVot Play Works</p>
               <h2 className="mt-4 font-display text-[clamp(28px,4.5vw,40px)] font-extrabold text-sv-white">From kickoff to highlight reel, in one booking.</h2>
               <ListCheck
                 items={[

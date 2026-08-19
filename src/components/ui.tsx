@@ -34,12 +34,12 @@ export function Eyebrow({ center, className, children }: { center?: boolean; cla
   return (
     <p
       className={cn(
-        'inline-flex items-center gap-2.5 font-display text-xs font-bold tracking-[0.16em] uppercase text-sv-primary',
+        'inline-flex items-center gap-2.5 font-display text-xs font-bold tracking-[0.16em] uppercase text-sv-primary-light',
         center && 'justify-center',
         className,
       )}
     >
-      <span className="h-0.5 w-[22px] shrink-0 bg-sv-primary" aria-hidden="true" />
+      <span className="h-0.5 w-[22px] shrink-0 bg-sv-primary-light" aria-hidden="true" />
       {children}
     </p>
   )
@@ -153,7 +153,7 @@ export function CTAStrip({
 
 export function Tag({ children }: { children: React.ReactNode }) {
   return (
-    <span className="rounded-full border border-sv-border-strong px-3.5 py-1.5 text-xs font-bold text-sv-text-muted transition-colors hover:border-sv-primary hover:text-sv-primary">
+    <span className="rounded-full border border-sv-border-strong px-3.5 py-1.5 text-xs font-bold text-sv-text-muted transition-colors hover:border-sv-primary-light hover:text-sv-primary-light">
       {children}
     </span>
   )
@@ -164,7 +164,7 @@ export function TrustList({ items }: { items: string[] }) {
     <ul className="mt-6 flex flex-col gap-3">
       {items.map((item) => (
         <li key={item} className="flex items-start gap-2.5 text-[15px] text-sv-text-muted">
-          <span className="font-extrabold text-sv-primary">✓</span>
+          <span className="font-extrabold text-sv-primary-light">✓</span>
           {item}
         </li>
       ))}
@@ -177,7 +177,7 @@ export function ListCheck({ items }: { items: string[] }) {
     <ul className="mt-6 flex flex-col gap-3">
       {items.map((item) => (
         <li key={item} className="flex items-start gap-2.5 text-sv-text-muted">
-          <span className="font-extrabold text-sv-primary">✓</span>
+          <span className="font-extrabold text-sv-primary-light">✓</span>
           {item}
         </li>
       ))}

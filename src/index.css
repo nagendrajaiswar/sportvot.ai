@@ -21,10 +21,11 @@
   --color-sv-text-muted: rgba(255, 255, 255, 0.60);
   --color-sv-text-faint: rgba(255, 255, 255, 0.40);
 
-  /* Brand primary — "Hero" indigo #1D1C8C, lightened just enough to stay legible as text on the dark canvas, used consistently for every accent */
-  --color-sv-primary: #7877ba;
-  --color-sv-primary-dim: rgba(120, 119, 186, 0.22);
-  --color-sv-primary-border: rgba(120, 119, 186, 0.7);
+  /* Brand primary — "Hero" indigo #1D1C8C, with a lightened tint for on-dark text/icon accents */
+  --color-sv-primary: #1d1c8c;
+  --color-sv-primary-light: #7877e0;
+  --color-sv-primary-dim: rgba(29, 28, 140, 0.22);
+  --color-sv-primary-border: rgba(120, 119, 224, 0.4);
 
   /* Action colors */
   --color-sv-green: #00ba57;
@@ -104,7 +105,7 @@ button {
   font-family: inherit;
 }
 ::selection {
-  background: var(--color-sv-primary);
+  background: var(--color-sv-primary-light);
   color: #06051f;
 }
 
@@ -180,7 +181,7 @@ button {
   width: 8px;
   height: 8px;
   border-radius: 50%;
-  background: var(--color-sv-primary);
+  background: var(--color-sv-primary-light);
   pointer-events: none;
   z-index: 9999;
   transform: translate(-50%, -50%);

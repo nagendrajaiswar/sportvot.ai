@@ -35,7 +35,7 @@ export default function Footer() {
                   key={s}
                   href="#"
                   aria-label={s}
-                  className="flex h-[38px] w-[38px] items-center justify-center rounded-full border border-sv-border-strong text-sm transition-all duration-300 hover:-translate-y-[3px] hover:border-sv-primary hover:text-sv-primary"
+                  className="flex h-[38px] w-[38px] items-center justify-center rounded-full border border-sv-border-strong text-sm transition-all duration-300 hover:-translate-y-[3px] hover:border-sv-primary-light hover:text-sv-primary-light"
                 >
                   {s}
                 </a>
@@ -48,7 +48,7 @@ export default function Footer() {
             <ul className="flex flex-col gap-2.5">
               {PRODUCT.map((l) => (
                 <li key={l.to}>
-                  <Link to={l.to} className="text-sm text-sv-text-muted transition-colors hover:text-sv-primary">
+                  <Link to={l.to} className="text-sm text-sv-text-muted transition-colors hover:text-sv-primary-light">
                     {l.label}
                   </Link>
                 </li>
@@ -61,7 +61,7 @@ export default function Footer() {
             <ul className="flex flex-col gap-2.5">
               {COMPANY.map((l) => (
                 <li key={l.to}>
-                  <Link to={l.to} className="text-sm text-sv-text-muted transition-colors hover:text-sv-primary">
+                  <Link to={l.to} className="text-sm text-sv-text-muted transition-colors hover:text-sv-primary-light">
                     {l.label}
                   </Link>
                 </li>
@@ -73,17 +73,17 @@ export default function Footer() {
             <h4 className="mb-4 text-xs uppercase tracking-[0.06em] text-sv-text-faint">Get Started</h4>
             <ul className="flex flex-col gap-2.5">
               <li>
-                <Link to="/for-organisations#proposal" className="text-sm text-sv-text-muted transition-colors hover:text-sv-primary">
+                <Link to="/for-organisations#proposal" className="text-sm text-sv-text-muted transition-colors hover:text-sv-primary-light">
                   Get a Proposal
                 </Link>
               </li>
               <li>
-                <Link to="/live-tv" className="text-sm text-sv-text-muted transition-colors hover:text-sv-primary">
+                <Link to="/live-tv" className="text-sm text-sv-text-muted transition-colors hover:text-sv-primary-light">
                   Watch Live Sports
                 </Link>
               </li>
               <li>
-                <a href="mailto:hello@sportvot.ai" className="text-sm text-sv-text-muted transition-colors hover:text-sv-primary">
+                <a href="mailto:hello@sportvot.ai" className="text-sm text-sv-text-muted transition-colors hover:text-sv-primary-light">
                   hello@sportvot.ai
                 </a>
               </li>

@@ -15,7 +15,7 @@ const LINKS = [
 
 const navLinkClasses = ({ isActive }: { isActive: boolean }) =>
   cn(
-    'relative py-1 font-display text-sm font-semibold text-sv-text-muted transition-colors after:absolute after:-bottom-0.5 after:left-0 after:h-px after:bg-sv-primary after:transition-[width] after:duration-300 hover:text-sv-white hover:after:w-full max-[960px]:text-[22px]',
+    'relative py-1 font-display text-sm font-semibold text-sv-text-muted transition-colors after:absolute after:-bottom-0.5 after:left-0 after:h-px after:bg-sv-primary-light after:transition-[width] after:duration-300 hover:text-sv-white hover:after:w-full max-[960px]:text-[22px]',
     isActive ? 'text-sv-white after:w-full' : 'after:w-0',
   )
 

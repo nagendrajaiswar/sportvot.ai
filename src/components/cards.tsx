@@ -29,12 +29,12 @@ export function ForkCard({
       onMouseMove={onMouseMove}
       onMouseLeave={onMouseLeave}
       className={cn(
-        'flex h-full min-h-[460px] flex-col overflow-hidden rounded-sv-xl border border-sv-border p-[72px] max-[640px]:p-9 transition-[transform,border-color] duration-400 hover:-translate-y-2 hover:border-sv-primary-border',
+        'flex h-full min-h-[460px] flex-col overflow-hidden rounded-sv-xl border border-sv-border p-[72px] max-[640px]:p-9 transition-[transform,border-color] duration-400 hover:-translate-y-2 hover:border-sv-primary-light-BORDERTMP',
         variant === 'blue' && 'bg-[linear-gradient(165deg,rgba(29,28,140,.45),var(--color-sv-surface)_55%)]',
         variant === 'green' && 'bg-[linear-gradient(165deg,rgba(0,186,87,.20),var(--color-sv-surface)_55%)]',
       )}
     >
-      <span className="font-display text-xs font-bold uppercase tracking-[0.1em] text-sv-primary">{tag}</span>
+      <span className="font-display text-xs font-bold uppercase tracking-[0.1em] text-sv-primary-light">{tag}</span>
       <h3 className="mt-4 font-display text-[clamp(26px,3.4vw,38px)] font-extrabold text-sv-white">{title}</h3>
       <p className="mt-3 text-sm text-sv-text-muted">{audience}</p>
       <p className="mt-5 max-w-[440px] flex-1 text-[17px] text-sv-text-muted">{body}</p>
@@ -50,7 +50,7 @@ export function ForkCard({
 export function CapCard({ statLine, title, body }: { statLine?: string; title: string; body: string }) {
   return (
     <div className="bg-sv-surface p-8 transition-colors duration-300 hover:bg-sv-surface-2">
-      {statLine && <div className="font-display text-sm font-extrabold text-sv-primary">{statLine}</div>}
+      {statLine && <div className="font-display text-sm font-extrabold text-sv-primary-light">{statLine}</div>}
       <h4 className={cn('text-lg text-sv-white', statLine ? 'mt-2.5' : '')}>{title}</h4>
       <p className="mt-2.5 text-sm text-sv-text-muted">{body}</p>
     </div>
@@ -90,17 +90,17 @@ export function CaseCard({
       ref={ref}
       onMouseMove={onMouseMove}
       onMouseLeave={onMouseLeave}
-      className="overflow-hidden rounded-sv-lg border border-sv-border bg-sv-surface transition-[transform,border-color] duration-300 hover:-translate-y-1.5 hover:border-sv-primary-border"
+      className="overflow-hidden rounded-sv-lg border border-sv-border bg-sv-surface transition-[transform,border-color] duration-300 hover:-translate-y-1.5 hover:border-sv-primary-light-BORDERTMP"
     >
       <div className="flex h-[170px] items-center justify-center bg-[linear-gradient(160deg,rgba(120,119,224,.16),rgba(29,28,140,.20))] text-center font-display font-extrabold text-sv-text-faint">
         {thumb}
       </div>
       <div className="p-6">
         <div className="text-xs uppercase tracking-[0.06em] text-sv-text-muted">{meta}</div>
-        {metric && <div className="mt-2 font-display text-[38px] font-black text-sv-primary">{metric}</div>}
+        {metric && <div className="mt-2 font-display text-[38px] font-black text-sv-primary-light">{metric}</div>}
         {metricLabel && <div className="text-[13px] text-sv-text-muted">{metricLabel}</div>}
         {title && <h4 className="mt-2 text-[17px] text-sv-white">{title}</h4>}
-        <Link to={href} className="mt-4 inline-block text-sm font-bold text-sv-primary">
+        <Link to={href} className="mt-4 inline-block text-sm font-bold text-sv-primary-light">
           {readLabel}
         </Link>
       </div>
@@ -121,9 +121,9 @@ export function PlayCard({ icon, title, body, cta }: { icon: React.ReactNode; ti
       ref={ref}
       onMouseMove={onMouseMove}
       onMouseLeave={onMouseLeave}
-      className="rounded-sv-lg border border-sv-border bg-sv-surface p-8 text-center transition-[transform,border-color] duration-300 hover:-translate-y-1.5 hover:border-sv-primary-border"
+      className="rounded-sv-lg border border-sv-border bg-sv-surface p-8 text-center transition-[transform,border-color] duration-300 hover:-translate-y-1.5 hover:border-sv-primary-light-BORDERTMP"
     >
-      <div className="mx-auto flex h-[60px] w-[60px] items-center justify-center rounded-full border border-sv-primary-border bg-sv-primary-dim text-sv-primary">
+      <div className="mx-auto flex h-[60px] w-[60px] items-center justify-center rounded-full border border-sv-primary-light-BORDERTMP bg-sv-primary-light-DIMTMP text-sv-primary-light">
         {icon}
       </div>
       <h3 className="mt-4 text-[19px] text-sv-white">{title}</h3>
@@ -138,11 +138,11 @@ export function PlayCard({ icon, title, body, cta }: { icon: React.ReactNode; ti
 export function TeamCard({ initials, name, role, body }: { initials: string; name: string; role: string; body: string }) {
   return (
     <div className="rounded-sv-lg border border-sv-border bg-sv-surface p-8 text-center">
-      <span className="mx-auto flex h-[88px] w-[88px] items-center justify-center rounded-full border border-sv-primary-border bg-sv-primary-dim font-display text-[28px] font-extrabold text-sv-primary">
+      <span className="mx-auto flex h-[88px] w-[88px] items-center justify-center rounded-full border border-sv-primary-light-BORDERTMP bg-sv-primary-light-DIMTMP font-display text-[28px] font-extrabold text-sv-primary-light">
         {initials}
       </span>
       <h3 className="mt-4 text-[19px] text-sv-white">{name}</h3>
-      <p className="mt-1 text-[13px] font-bold text-sv-primary">{role}</p>
+      <p className="mt-1 text-[13px] font-bold text-sv-primary-light">{role}</p>
       <p className="mt-3 text-sm text-sv-text-muted">{body}</p>
     </div>
   )
@@ -157,11 +157,11 @@ export function TestimonialCard({ quote, initials, name, role }: { quote: string
       ref={ref}
       onMouseMove={onMouseMove}
       onMouseLeave={onMouseLeave}
-      className="rounded-sv-lg border border-sv-border bg-sv-surface p-8 transition-[transform,border-color] duration-300 hover:-translate-y-1.5 hover:border-sv-primary-border"
+      className="rounded-sv-lg border border-sv-border bg-sv-surface p-8 transition-[transform,border-color] duration-300 hover:-translate-y-1.5 hover:border-sv-primary-light-BORDERTMP"
     >
-      <p className="text-[17px] text-sv-text before:mr-1 before:text-[34px] before:leading-[0] before:text-sv-primary before:content-['“']">{quote}</p>
+      <p className="text-[17px] text-sv-text before:mr-1 before:text-[34px] before:leading-[0] before:text-sv-primary-light before:content-['“']">{quote}</p>
       <div className="mt-6 flex items-center gap-3">
-        <span className="flex h-11 w-11 shrink-0 items-center justify-center rounded-full border border-sv-primary-border bg-sv-primary-dim font-display font-extrabold text-sv-primary">
+        <span className="flex h-11 w-11 shrink-0 items-center justify-center rounded-full border border-sv-primary-light-BORDERTMP bg-sv-primary-light-DIMTMP font-display font-extrabold text-sv-primary-light">
           {initials}
         </span>
         <span>
@@ -182,7 +182,7 @@ export function MatchCard({ sport, title, dur, live }: { sport: string; title: s
       ref={ref}
       onMouseMove={onMouseMove}
       onMouseLeave={onMouseLeave}
-      className="group overflow-hidden rounded-sv-md border border-sv-border bg-sv-surface transition-[transform,border-color] duration-300 hover:-translate-y-1.5 hover:border-sv-primary-border"
+      className="group overflow-hidden rounded-sv-md border border-sv-border bg-sv-surface transition-[transform,border-color] duration-300 hover:-translate-y-1.5 hover:border-sv-primary-light-BORDERTMP"
     >
       <div className="relative flex aspect-16/10 items-center justify-center overflow-hidden bg-[linear-gradient(160deg,rgba(120,119,224,.18),rgba(29,28,140,.18))] after:absolute after:inset-0 after:bg-[linear-gradient(180deg,transparent_60%,rgba(0,0,0,.5))]">
         {live && (
@@ -190,7 +190,7 @@ export function MatchCard({ sport, title, dur, live }: { sport: string; title: s
             LIVE
           </span>
         )}
-        <span className="relative z-10 flex h-11 w-11 items-center justify-center rounded-full border border-white/30 bg-white/12 transition-[transform,background-color,color] duration-300 group-hover:scale-110 group-hover:bg-sv-primary group-hover:text-white">
+        <span className="relative z-10 flex h-11 w-11 items-center justify-center rounded-full border border-white/30 bg-white/12 transition-[transform,background-color,color] duration-300 group-hover:scale-110 group-hover:bg-sv-primary-light group-hover:text-white">
           ▶
         </span>
         {dur && (
@@ -200,7 +200,7 @@ export function MatchCard({ sport, title, dur, live }: { sport: string; title: s
         )}
       </div>
       <div className="px-4 py-3">
-        <div className="text-[11px] font-bold uppercase tracking-[0.05em] text-sv-primary">{sport}</div>
+        <div className="text-[11px] font-bold uppercase tracking-[0.05em] text-sv-primary-light">{sport}</div>
         <div className="mt-1 text-sm font-bold leading-[1.35] text-sv-white">{title}</div>
       </div>
     </div>

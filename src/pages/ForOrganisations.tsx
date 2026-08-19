@@ -75,10 +75,10 @@ export default function ForOrganisations() {
         <Container>
           <TwoCol>
             <Reveal>
-              <p className="font-display text-xs font-bold uppercase tracking-[0.16em] text-sv-primary">The Problem</p>
+              <p className="font-display text-xs font-bold uppercase tracking-[0.16em] text-sv-primary-light">The Problem</p>
               <h2 className="mt-4 font-display text-[clamp(28px,4.5vw,42px)] font-extrabold text-sv-white">99% of sports have no form of broadcast coverage.</h2>
               <p className="mt-5 text-[17px] text-sv-text-muted">Not because the games aren't good enough. Because broadcast was never built for them.</p>
-              <p className="mt-4 font-display text-[22px] font-extrabold text-sv-primary">SportVot changes that.</p>
+              <p className="mt-4 font-display text-[22px] font-extrabold text-sv-primary-light">SportVot changes that.</p>
             </Reveal>
             <ColMedia>
               Real productions.
@@ -158,7 +158,7 @@ export default function ForOrganisations() {
         <Container>
           <TwoCol>
             <Reveal>
-              <p className="font-display text-xs font-bold uppercase tracking-[0.16em] text-sv-primary">Get a Proposal</p>
+              <p className="font-display text-xs font-bold uppercase tracking-[0.16em] text-sv-primary-light">Get a Proposal</p>
               <h2 className="mt-4 font-display text-[clamp(28px,4.5vw,42px)] font-extrabold text-sv-white">Ready to take your sport to the world?</h2>
               <p className="mt-4 text-[17px] text-sv-text-muted">No fixed packages. No pricing pressure. Just a plan built around your event — within 24 hours.</p>
               <TrustList

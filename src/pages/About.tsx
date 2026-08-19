@@ -41,7 +41,7 @@ export default function About() {
         <Container>
           <TwoCol>
             <Reveal>
-              <p className="font-display text-xs font-bold uppercase tracking-[0.16em] text-sv-primary">Our Mission</p>
+              <p className="font-display text-xs font-bold uppercase tracking-[0.16em] text-sv-primary-light">Our Mission</p>
               <h2 className="mt-4 font-display text-[clamp(28px,4.5vw,40px)] font-extrabold text-sv-white">To bring unseen sports talent to the world stage.</h2>
               <p className="mt-5 text-[17px] text-sv-text-muted">
                 By transforming the way grassroots sports are captured and broadcasted, SportVot fosters both athletic growth and community engagement —

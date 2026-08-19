@@ -2,7 +2,7 @@ import { useEffect, useRef, useState } from 'react'
 import { createPortal } from 'react-dom'
 import gsap from 'gsap'
 import { ScrollTrigger } from 'gsap/ScrollTrigger'
-import { Play, X } from '@phosphor-icons/react'
+import { X } from '@phosphor-icons/react'
 import { Container, Eyebrow } from './ui'
 import Btn from './Btn'
 
@@ -15,7 +15,6 @@ export default function HomeHero() {
   const sectionRef = useRef<HTMLElement | null>(null)
   const videoRef = useRef<HTMLVideoElement | null>(null)
   const scrimRef = useRef<HTMLDivElement | null>(null)
-  const hintRef = useRef<HTMLDivElement | null>(null)
   const line1 = useRef<HTMLSpanElement | null>(null)
   const line2 = useRef<HTMLSpanElement | null>(null)
   const line3 = useRef<HTMLSpanElement | null>(null)
@@ -58,7 +57,6 @@ export default function HomeHero() {
   useEffect(() => {
     const section = sectionRef.current
     const scrim = scrimRef.current
-    const hint = hintRef.current
     if (!section || !scrim) return
 
     const target = { x: -9999, y: -9999 }
@@ -70,7 +68,6 @@ export default function HomeHero() {
       current.y += (target.y - current.y) * 0.08
       scrim.style.setProperty('--x', `${current.x}px`)
       scrim.style.setProperty('--y', `${current.y}px`)
-      if (hint) hint.style.transform = `translate(${current.x}px, ${current.y}px) translate(-50%, 20px)`
       raf = requestAnimationFrame(loop)
     }
     raf = requestAnimationFrame(loop)
@@ -79,14 +76,10 @@ export default function HomeHero() {
       const r = section.getBoundingClientRect()
       target.x = e.clientX - r.left
       target.y = e.clientY - r.top
-      hint?.classList.add('opacity-100')
-      hint?.classList.remove('opacity-0')
     }
     const onLeave = () => {
       target.x = -9999
       target.y = -9999
-      hint?.classList.add('opacity-0')
-      hint?.classList.remove('opacity-100')
     }
 
     section.addEventListener('pointermove', onMove)
@@ -155,14 +148,6 @@ export default function HomeHero() {
         onClick={() => setLightboxOpen(true)}
         className="absolute inset-0 h-full w-full cursor-pointer border-0 bg-transparent p-0"
       />
-
-      <div
-        ref={hintRef}
-        className="pointer-events-none absolute left-0 top-0 z-2 flex items-center gap-2 whitespace-nowrap rounded-full border border-white/25 bg-black/50 px-4 py-2 font-display text-xs font-bold uppercase tracking-[0.08em] text-white opacity-0 backdrop-blur-sm transition-opacity duration-300"
-      >
-        <Play size={13} weight="fill" />
-        Watch full video
-      </div>
 
       <div className="pointer-events-none absolute inset-0 opacity-[.03]" style={{ backgroundImage: `url("${NOISE_BG}")` }} />
 

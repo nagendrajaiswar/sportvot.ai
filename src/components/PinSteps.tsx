@@ -25,7 +25,7 @@ export default function PinSteps({ steps }: { steps: Step[] }) {
   return (
     <div className="grid grid-cols-[0.8fr_1.2fr] items-start gap-12 max-[900px]:grid-cols-1">
       <div className="sticky top-[110px] flex h-[420px] items-center justify-center overflow-hidden rounded-sv-xl border border-sv-border bg-sv-surface max-[900px]:static max-[900px]:top-0">
-        <span className="font-display text-[120px] font-black text-sv-primary-light-DIMTMP">{String(active + 1).padStart(2, '0')}</span>
+        <span className="font-display text-[120px] font-black text-sv-primary-dim">{String(active + 1).padStart(2, '0')}</span>
       </div>
       <div className="flex flex-col">
         {steps.map((step, i) => (

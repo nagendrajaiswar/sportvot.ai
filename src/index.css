@@ -181,6 +181,52 @@
   }
 }
 
+/* Animated "running stroke" border — a bright arc chases around the card edge on
+   hover. Standard conic-gradient + @property technique so the angle interpolates
+   smoothly instead of snapping. Degrades gracefully (static border, no spin) in
+   browsers without @property support. */
+@property --sv-stroke-angle {
+  syntax: "<angle>";
+  initial-value: 0deg;
+  inherits: false;
+}
+@keyframes sv-stroke-spin {
+  to {
+    --sv-stroke-angle: 360deg;
+  }
+}
+.stroke-run {
+  position: relative;
+}
+.stroke-run::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  padding: 1.5px;
+  background: conic-gradient(
+    from var(--sv-stroke-angle),
+    transparent 0%,
+    var(--color-sv-primary-light) 12%,
+    var(--color-sv-white) 18%,
+    var(--color-sv-primary-light) 24%,
+    transparent 36%
+  );
+  -webkit-mask: linear-gradient(#000 0 0) content-box, linear-gradient(#000 0 0);
+  -webkit-mask-composite: xor;
+  mask: linear-gradient(#000 0 0) content-box, linear-gradient(#000 0 0);
+  mask-composite: exclude;
+  opacity: 0;
+  transition: opacity 0.35s;
+  animation: sv-stroke-spin 2.6s linear infinite;
+  animation-play-state: paused;
+  pointer-events: none;
+}
+.stroke-run:hover::before {
+  opacity: 1;
+  animation-play-state: running;
+}
+
 /* Hero video scrim — dark everywhere, with a soft glow that follows the cursor
    (via --x/--y, updated in JS) to gently reveal the full-brightness video beneath.
    The gradient has a wide, slow falloff on purpose so the reveal reads as a soft

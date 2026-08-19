@@ -59,7 +59,7 @@ export function CapCard({ statLine, title, body }: { statLine?: string; title: s
 
 export function CapGrid({ children }: { children: React.ReactNode }) {
   return (
-    <div className="grid grid-cols-4 gap-px overflow-hidden rounded-sv-lg border border-sv-border bg-sv-border max-[1100px]:grid-cols-2 max-[560px]:grid-cols-1">
+    <div className="mt-12 grid grid-cols-4 gap-px overflow-hidden rounded-sv-lg border border-sv-border bg-sv-border max-[1100px]:grid-cols-2 max-[560px]:grid-cols-1">
       {children}
     </div>
   )

@@ -1,0 +1,214 @@
+@import "tailwindcss";
+
+/*
+  Tokens sourced from "SportVot Design system v1.0" (Figma).
+  Dark OTT canvas is a deliberate choice (matches live sportvot.ai/sportvot.com),
+  layered with the system's actual brand primary (indigo), action colors, and
+  Inter-only type family — replacing the cowork prototype's invented mint/Manrope look.
+*/
+@theme {
+  /* Canvas / surfaces — near-black elevation scale, brand's "Black" base */
+  --color-sv-black: #050607;
+  --color-sv-black-soft: #0b0e10;
+  --color-sv-surface: #12161a;
+  --color-sv-surface-2: #1a1f24;
+
+  /* Neutral White ramp (opacity-on-dark) — from the design system's Neutral White stops */
+  --color-sv-border: rgba(255, 255, 255, 0.10);
+  --color-sv-border-strong: rgba(255, 255, 255, 0.20);
+  --color-sv-white: #ffffff;
+  --color-sv-text: rgba(255, 255, 255, 0.92);
+  --color-sv-text-muted: rgba(255, 255, 255, 0.60);
+  --color-sv-text-faint: rgba(255, 255, 255, 0.40);
+
+  /* Brand primary — "Hero" indigo #1D1C8C, with a lightened tint for on-dark text/icon accents */
+  --color-sv-primary: #1d1c8c;
+  --color-sv-primary-light: #7877e0;
+  --color-sv-primary-dim: rgba(29, 28, 140, 0.22);
+  --color-sv-primary-border: rgba(120, 119, 224, 0.4);
+
+  /* Action colors */
+  --color-sv-green: #00ba57;
+  --color-sv-green-dim: rgba(0, 186, 87, 0.16);
+  --color-sv-live: #ff0043;
+  --color-sv-live-dim: rgba(255, 0, 67, 0.14);
+  --color-sv-gold: #fbc02d;
+  --color-sv-svod: #694b00;
+
+  /* Jersey colors — sport/team tagging accents */
+  --color-sv-jersey-red: #c13e46;
+  --color-sv-jersey-blue: #306ed1;
+  --color-sv-jersey-green: #1ca25b;
+  --color-sv-jersey-light-gray: #c6ccd8;
+  --color-sv-jersey-dark-gray: #586075;
+  --color-sv-jersey-dark-blue: #18273c;
+  --color-sv-jersey-gold: #be9529;
+  --color-sv-jersey-orange: #ca6127;
+  --color-sv-jersey-purple: #894bd2;
+  --color-sv-jersey-pink: #bf4188;
+
+  --font-display: "Inter", ui-sans-serif, system-ui, sans-serif;
+  --font-body: "Inter", ui-sans-serif, system-ui, sans-serif;
+
+  /* Radius — snapped to the design system's Spacing & Radius scale */
+  --radius-sv-sm: 8px;
+  --radius-sv-md: 12px;
+  --radius-sv-lg: 20px;
+  --radius-sv-xl: 32px;
+
+  --ease-sv-out: cubic-bezier(.16,1,.3,1);
+  --ease-sv-soft: cubic-bezier(.4,0,.2,1);
+}
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+html {
+  background: var(--color-sv-black);
+}
+body {
+  margin: 0;
+  background: var(--color-sv-black);
+  color: var(--color-sv-text);
+  font-family: var(--font-body);
+  font-size: 16px;
+  line-height: 1.6;
+  -webkit-font-smoothing: antialiased;
+  overflow-x: hidden;
+}
+img,
+video {
+  max-width: 100%;
+  display: block;
+}
+a {
+  color: inherit;
+  text-decoration: none;
+}
+h1,
+h2,
+h3,
+h4 {
+  font-family: var(--font-display);
+  font-weight: 800;
+  line-height: 1.02;
+  letter-spacing: -0.02em;
+  margin: 0;
+  color: var(--color-sv-white);
+}
+p {
+  margin: 0;
+}
+button {
+  font-family: inherit;
+}
+::selection {
+  background: var(--color-sv-primary-light);
+  color: #06051f;
+}
+
+/* Reveal-on-scroll base state (JS/GSAP adds .is-visible via ScrollTrigger) */
+[data-reveal] {
+  opacity: 0;
+  transform: translateY(36px);
+}
+[data-reveal].is-visible {
+  opacity: 1;
+  transform: none;
+  transition: opacity 0.9s var(--ease-sv-out), transform 0.9s var(--ease-sv-out);
+}
+[data-reveal-scale] {
+  opacity: 0;
+  transform: scale(0.92);
+}
+[data-reveal-scale].is-visible {
+  opacity: 1;
+  transform: scale(1);
+  transition: opacity 1s var(--ease-sv-out), transform 1s var(--ease-sv-out);
+}
+
+@keyframes sv-pulse {
+  0% {
+    box-shadow: 0 0 0 0 rgba(255, 0, 67, 0.5);
+  }
+  70% {
+    box-shadow: 0 0 0 9px rgba(255, 0, 67, 0);
+  }
+  100% {
+    box-shadow: 0 0 0 0 rgba(255, 0, 67, 0);
+  }
+}
+@keyframes sv-hero-drift {
+  from {
+    background-position: 0% 0%, 100% 0%, 0 0;
+  }
+  to {
+    background-position: 20% 30%, 70% 40%, 0 0;
+  }
+}
+@keyframes sv-cue {
+  0% {
+    transform: scaleY(0);
+    transform-origin: top;
+  }
+  50% {
+    transform: scaleY(1);
+    transform-origin: top;
+  }
+  51% {
+    transform-origin: bottom;
+  }
+  100% {
+    transform: scaleY(0);
+    transform-origin: bottom;
+  }
+}
+@keyframes sv-marquee {
+  from {
+    transform: translateX(0);
+  }
+  to {
+    transform: translateX(-50%);
+  }
+}
+
+.cursor-dot {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: var(--color-sv-primary-light);
+  pointer-events: none;
+  z-index: 9999;
+  transform: translate(-50%, -50%);
+  opacity: 0;
+  transition: opacity 0.3s, width 0.25s, height 0.25s;
+  mix-blend-mode: difference;
+}
+@media (hover: hover) and (pointer: fine) {
+  .cursor-dot {
+    opacity: 0.85;
+  }
+}
+.cursor-dot.grow {
+  width: 32px;
+  height: 32px;
+}
+
+::-webkit-scrollbar {
+  width: 10px;
+}
+::-webkit-scrollbar-track {
+  background: var(--color-sv-black);
+}
+::-webkit-scrollbar-thumb {
+  background: var(--color-sv-surface-2);
+  border-radius: 6px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: var(--color-sv-primary-dim);
+}

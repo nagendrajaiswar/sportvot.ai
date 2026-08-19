@@ -34,7 +34,7 @@ export function ForkCard({
         variant === 'green' && 'bg-[linear-gradient(165deg,rgba(0,186,87,.20),var(--color-sv-surface)_55%)]',
       )}
     >
-      <span className="font-display text-xs font-bold uppercase tracking-[0.1em] text-sv-primary-light">{tag}</span>
+      <span className="font-display text-xs font-bold uppercase tracking-[0.1em] text-sv-primary">{tag}</span>
       <h3 className="mt-4 font-display text-[clamp(26px,3.4vw,38px)] font-extrabold text-sv-white">{title}</h3>
       <p className="mt-3 text-sm text-sv-text-muted">{audience}</p>
       <p className="mt-5 max-w-[440px] flex-1 text-[17px] text-sv-text-muted">{body}</p>
@@ -50,7 +50,7 @@ export function ForkCard({
 export function CapCard({ statLine, title, body }: { statLine?: string; title: string; body: string }) {
   return (
     <div className="bg-sv-surface p-8 transition-colors duration-300 hover:bg-sv-surface-2">
-      {statLine && <div className="font-display text-sm font-extrabold text-sv-primary-light">{statLine}</div>}
+      {statLine && <div className="font-display text-sm font-extrabold text-sv-primary">{statLine}</div>}
       <h4 className={cn('text-lg text-sv-white', statLine ? 'mt-2.5' : '')}>{title}</h4>
       <p className="mt-2.5 text-sm text-sv-text-muted">{body}</p>
     </div>
@@ -97,10 +97,10 @@ export function CaseCard({
       </div>
       <div className="p-6">
         <div className="text-xs uppercase tracking-[0.06em] text-sv-text-muted">{meta}</div>
-        {metric && <div className="mt-2 font-display text-[38px] font-black text-sv-primary-light">{metric}</div>}
+        {metric && <div className="mt-2 font-display text-[38px] font-black text-sv-primary">{metric}</div>}
         {metricLabel && <div className="text-[13px] text-sv-text-muted">{metricLabel}</div>}
         {title && <h4 className="mt-2 text-[17px] text-sv-white">{title}</h4>}
-        <Link to={href} className="mt-4 inline-block text-sm font-bold text-sv-primary-light">
+        <Link to={href} className="mt-4 inline-block text-sm font-bold text-sv-primary">
           {readLabel}
         </Link>
       </div>
@@ -123,7 +123,7 @@ export function PlayCard({ icon, title, body, cta }: { icon: React.ReactNode; ti
       onMouseLeave={onMouseLeave}
       className="rounded-sv-lg border border-sv-border bg-sv-surface p-8 text-center transition-[transform,border-color] duration-300 hover:-translate-y-1.5 hover:border-sv-primary-border"
     >
-      <div className="mx-auto flex h-[60px] w-[60px] items-center justify-center rounded-full border border-sv-primary-border bg-sv-primary-dim text-sv-primary-light">
+      <div className="mx-auto flex h-[60px] w-[60px] items-center justify-center rounded-full border border-sv-primary-border bg-sv-primary-dim text-sv-primary">
         {icon}
       </div>
       <h3 className="mt-4 text-[19px] text-sv-white">{title}</h3>
@@ -138,11 +138,11 @@ export function PlayCard({ icon, title, body, cta }: { icon: React.ReactNode; ti
 export function TeamCard({ initials, name, role, body }: { initials: string; name: string; role: string; body: string }) {
   return (
     <div className="rounded-sv-lg border border-sv-border bg-sv-surface p-8 text-center">
-      <span className="mx-auto flex h-[88px] w-[88px] items-center justify-center rounded-full border border-sv-primary-border bg-sv-primary-dim font-display text-[28px] font-extrabold text-sv-primary-light">
+      <span className="mx-auto flex h-[88px] w-[88px] items-center justify-center rounded-full border border-sv-primary-border bg-sv-primary-dim font-display text-[28px] font-extrabold text-sv-primary">
         {initials}
       </span>
       <h3 className="mt-4 text-[19px] text-sv-white">{name}</h3>
-      <p className="mt-1 text-[13px] font-bold text-sv-primary-light">{role}</p>
+      <p className="mt-1 text-[13px] font-bold text-sv-primary">{role}</p>
       <p className="mt-3 text-sm text-sv-text-muted">{body}</p>
     </div>
   )
@@ -159,9 +159,9 @@ export function TestimonialCard({ quote, initials, name, role }: { quote: string
       onMouseLeave={onMouseLeave}
       className="rounded-sv-lg border border-sv-border bg-sv-surface p-8 transition-[transform,border-color] duration-300 hover:-translate-y-1.5 hover:border-sv-primary-border"
     >
-      <p className="text-[17px] text-sv-text before:mr-1 before:text-[34px] before:leading-[0] before:text-sv-primary-light before:content-['“']">{quote}</p>
+      <p className="text-[17px] text-sv-text before:mr-1 before:text-[34px] before:leading-[0] before:text-sv-primary before:content-['“']">{quote}</p>
       <div className="mt-6 flex items-center gap-3">
-        <span className="flex h-11 w-11 shrink-0 items-center justify-center rounded-full border border-sv-primary-border bg-sv-primary-dim font-display font-extrabold text-sv-primary-light">
+        <span className="flex h-11 w-11 shrink-0 items-center justify-center rounded-full border border-sv-primary-border bg-sv-primary-dim font-display font-extrabold text-sv-primary">
           {initials}
         </span>
         <span>
@@ -190,7 +190,7 @@ export function MatchCard({ sport, title, dur, live }: { sport: string; title: s
             LIVE
           </span>
         )}
-        <span className="relative z-10 flex h-11 w-11 items-center justify-center rounded-full border border-white/30 bg-white/12 transition-[transform,background-color,color] duration-300 group-hover:scale-110 group-hover:bg-sv-primary-light group-hover:text-white">
+        <span className="relative z-10 flex h-11 w-11 items-center justify-center rounded-full border border-white/30 bg-white/12 transition-[transform,background-color,color] duration-300 group-hover:scale-110 group-hover:bg-sv-primary group-hover:text-white">
           ▶
         </span>
         {dur && (
@@ -200,7 +200,7 @@ export function MatchCard({ sport, title, dur, live }: { sport: string; title: s
         )}
       </div>
       <div className="px-4 py-3">
-        <div className="text-[11px] font-bold uppercase tracking-[0.05em] text-sv-primary-light">{sport}</div>
+        <div className="text-[11px] font-bold uppercase tracking-[0.05em] text-sv-primary">{sport}</div>
         <div className="mt-1 text-sm font-bold leading-[1.35] text-sv-white">{title}</div>
       </div>
     </div>

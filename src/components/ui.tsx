@@ -34,12 +34,12 @@ export function Eyebrow({ center, className, children }: { center?: boolean; cla
   return (
     <p
       className={cn(
-        'inline-flex items-center gap-2.5 font-display text-xs font-bold tracking-[0.16em] uppercase text-sv-primary-light',
+        'inline-flex items-center gap-2.5 font-display text-xs font-bold tracking-[0.16em] uppercase text-sv-primary',
         center && 'justify-center',
         className,
       )}
     >
-      <span className="h-0.5 w-[22px] shrink-0 bg-sv-primary-light" aria-hidden="true" />
+      <span className="h-0.5 w-[22px] shrink-0 bg-sv-primary" aria-hidden="true" />
       {children}
     </p>
   )
@@ -57,7 +57,7 @@ export function SectionHead({
   children: React.ReactNode
 }) {
   return (
-    <Reveal className={cn('max-w-[760px]', center && 'mx-auto text-center', className)}>
+    <Reveal className={cn('max-w-[1040px]', center && 'mx-auto text-center', className)}>
       <Eyebrow center={center}>{eyebrow}</Eyebrow>
       {children}
     </Reveal>
@@ -88,11 +88,11 @@ export function PageHero({
         <Reveal>
           <Eyebrow>{eyebrow}</Eyebrow>
         </Reveal>
-        <Reveal as="h1" className="mt-5 max-w-[980px] text-balance font-display text-[clamp(36px,6.5vw,68px)] font-extrabold tracking-[-0.02em] text-sv-white">
+        <Reveal as="h1" className="mt-5 max-w-[1180px] text-balance font-display text-[clamp(36px,5.2vw,58px)] font-extrabold tracking-[-0.02em] text-sv-white">
           {title}
         </Reveal>
         {subtitle && (
-          <Reveal as="p" className="mt-5 max-w-[640px] text-[19px] text-sv-text-muted">
+          <Reveal as="p" className="mt-5 max-w-[880px] text-[19px] text-sv-text-muted">
             {subtitle}
           </Reveal>
         )}
@@ -145,7 +145,7 @@ export function CTAStrip({
     >
       {eyebrow && <Eyebrow center>{eyebrow}</Eyebrow>}
       <h2 className="mt-3 text-balance font-display text-[clamp(28px,4vw,46px)] font-extrabold text-sv-white">{title}</h2>
-      {body && <p className="mx-auto mt-3 max-w-[560px] text-center text-sv-text-muted">{body}</p>}
+      {body && <p className="mx-auto mt-3 max-w-[760px] text-center text-sv-text-muted">{body}</p>}
       {children && <div className="mt-8 flex flex-wrap items-center justify-center gap-4">{children}</div>}
     </Reveal>
   )
@@ -153,7 +153,7 @@ export function CTAStrip({
 
 export function Tag({ children }: { children: React.ReactNode }) {
   return (
-    <span className="rounded-full border border-sv-border-strong px-3.5 py-1.5 text-xs font-bold text-sv-text-muted transition-colors hover:border-sv-primary-light hover:text-sv-primary-light">
+    <span className="rounded-full border border-sv-border-strong px-3.5 py-1.5 text-xs font-bold text-sv-text-muted transition-colors hover:border-sv-primary hover:text-sv-primary">
       {children}
     </span>
   )
@@ -164,7 +164,7 @@ export function TrustList({ items }: { items: string[] }) {
     <ul className="mt-6 flex flex-col gap-3">
       {items.map((item) => (
         <li key={item} className="flex items-start gap-2.5 text-[15px] text-sv-text-muted">
-          <span className="font-extrabold text-sv-primary-light">✓</span>
+          <span className="font-extrabold text-sv-primary">✓</span>
           {item}
         </li>
       ))}
@@ -177,7 +177,7 @@ export function ListCheck({ items }: { items: string[] }) {
     <ul className="mt-6 flex flex-col gap-3">
       {items.map((item) => (
         <li key={item} className="flex items-start gap-2.5 text-sv-text-muted">
-          <span className="font-extrabold text-sv-primary-light">✓</span>
+          <span className="font-extrabold text-sv-primary">✓</span>
           {item}
         </li>
       ))}

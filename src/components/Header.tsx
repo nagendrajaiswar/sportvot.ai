@@ -15,7 +15,7 @@ const LINKS = [
 
 const navLinkClasses = ({ isActive }: { isActive: boolean }) =>
   cn(
-    'relative py-1 font-display text-sm font-semibold text-sv-text-muted transition-colors after:absolute after:-bottom-0.5 after:left-0 after:h-px after:bg-sv-primary-light after:transition-[width] after:duration-300 hover:text-sv-white hover:after:w-full max-[960px]:text-[22px]',
+    'relative py-1 font-display text-sm font-semibold text-sv-text-muted transition-colors after:absolute after:-bottom-0.5 after:left-0 after:h-px after:bg-sv-primary after:transition-[width] after:duration-300 hover:text-sv-white hover:after:w-full max-[960px]:text-[22px]',
     isActive ? 'text-sv-white after:w-full' : 'after:w-0',
   )
 
@@ -50,8 +50,8 @@ export default function Header() {
       )}
     >
       <div className="mx-auto flex max-w-7xl items-center justify-between gap-8 px-6 py-[18px] max-[640px]:px-4">
-        <NavLink to="/" className="flex items-center gap-2 font-display text-[22px] font-black tracking-[-0.02em] text-sv-white mr-4">
-          Sport<span className="text-sv-primary-light">Vot</span>
+        <NavLink to="/" className="mr-6 flex items-center">
+          <img src="/sportvot-logo.svg" alt="SportVot" className="h-11 w-auto" />
         </NavLink>
 
         <nav className="flex items-center gap-8 max-[960px]:hidden">

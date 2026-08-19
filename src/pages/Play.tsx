@@ -17,17 +17,17 @@ export default function Play() {
   return (
     <>
       <section
-        className="border-b border-sv-border pt-[180px] pb-12"
+        className="border-b border-sv-border pt-[180px] pb-20"
         style={{ background: 'radial-gradient(90% 90% at 85% 0%, rgba(120,119,224,.24), transparent 50%)' }}
       >
         <Container>
           <Reveal>
             <Eyebrow>SportVot Play — The Future of Casual Sports</Eyebrow>
           </Reveal>
-          <Reveal as="h1" className="mt-4 max-w-[900px] font-display text-[clamp(36px,6.5vw,68px)] font-extrabold tracking-[-0.02em] text-sv-white">
+          <Reveal as="h1" className="mt-5 max-w-[1180px] text-balance font-display text-[clamp(36px,5.2vw,58px)] font-extrabold tracking-[-0.02em] text-sv-white">
             Play with passion. Get it live-streamed.
           </Reveal>
-          <Reveal as="p" className="mt-4 max-w-[640px] text-[19px] text-sv-text-muted">
+          <Reveal as="p" className="mt-5 max-w-[880px] text-[19px] text-sv-text-muted">
             Book a streaming-enabled turf in Mumbai or Delhi NCR. Join an open match, or host a fully managed corporate sports event. Every game is
             live-streamed. Every player walks away with a highlight reel.
           </Reveal>
@@ -61,7 +61,7 @@ export default function Play() {
               Your highlight reel.
             </ColMedia>
             <Reveal>
-              <p className="font-display text-xs font-bold uppercase tracking-[0.16em] text-sv-primary-light">How SportVot Play Works</p>
+              <p className="font-display text-xs font-bold uppercase tracking-[0.16em] text-sv-primary">How SportVot Play Works</p>
               <h2 className="mt-4 font-display text-[clamp(28px,4.5vw,40px)] font-extrabold text-sv-white">From kickoff to highlight reel, in one booking.</h2>
               <ListCheck
                 items={[

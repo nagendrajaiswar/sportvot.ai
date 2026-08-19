@@ -20,17 +20,17 @@ export default function LiveTV() {
   return (
     <>
       <section
-        className="border-b border-sv-border pt-[180px] pb-12"
+        className="border-b border-sv-border pt-[180px] pb-20"
         style={{ background: 'radial-gradient(90% 90% at 50% 0%, rgba(255,0,67,.18), transparent 50%)' }}
       >
         <Container>
           <Reveal className="mb-4 inline-flex items-center gap-[7px] rounded-full border border-[rgba(255,0,67,0.4)] bg-sv-live-dim px-3.5 py-1.5 text-xs font-extrabold tracking-[0.06em] text-white before:h-[7px] before:w-[7px] before:animate-[sv-pulse_1.6s_infinite] before:rounded-full before:bg-sv-live">
             Live Now
           </Reveal>
-          <Reveal as="h1" className="mt-4 max-w-[900px] font-display text-[clamp(36px,6.5vw,68px)] font-extrabold tracking-[-0.02em] text-sv-white">
+          <Reveal as="h1" className="mt-5 max-w-[1180px] text-balance font-display text-[clamp(36px,5.2vw,58px)] font-extrabold tracking-[-0.02em] text-sv-white">
             SportVot OTT — every sport, every level, live.
           </Reveal>
-          <Reveal as="p" className="mt-4 max-w-[640px] text-[19px] text-sv-text-muted">
+          <Reveal as="p" className="mt-5 max-w-[880px] text-[19px] text-sv-text-muted">
             Grassroots to national championships across 15+ sports — live matches, full replays, and highlight reels updated daily on SportVot's streaming
             platform.
           </Reveal>

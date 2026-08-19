@@ -75,10 +75,10 @@ export default function ForOrganisations() {
         <Container>
           <TwoCol>
             <Reveal>
-              <p className="font-display text-xs font-bold uppercase tracking-[0.16em] text-sv-primary-light">The Problem</p>
+              <p className="font-display text-xs font-bold uppercase tracking-[0.16em] text-sv-primary">The Problem</p>
               <h2 className="mt-4 font-display text-[clamp(28px,4.5vw,42px)] font-extrabold text-sv-white">99% of sports have no form of broadcast coverage.</h2>
               <p className="mt-5 text-[17px] text-sv-text-muted">Not because the games aren't good enough. Because broadcast was never built for them.</p>
-              <p className="mt-4 font-display text-[22px] font-extrabold text-sv-primary-light">SportVot changes that.</p>
+              <p className="mt-4 font-display text-[22px] font-extrabold text-sv-primary">SportVot changes that.</p>
             </Reveal>
             <ColMedia>
               Real productions.
@@ -93,7 +93,7 @@ export default function ForOrganisations() {
         <Container>
           <SectionHead eyebrow="How It Works" center className="mx-auto mb-16">
             <h2 className="mt-3 text-balance font-display text-[clamp(32px,5vw,56px)] font-extrabold text-sv-white">Live in 5 minutes. From any camera.</h2>
-            <p className="mx-auto mt-4 max-w-[600px] text-center text-[19px] text-sv-text-muted">Three steps. One platform. A professional broadcast, every time.</p>
+            <p className="mx-auto mt-4 max-w-[820px] text-center text-[19px] text-sv-text-muted">Three steps. One platform. A professional broadcast, every time.</p>
           </SectionHead>
           <PinSteps steps={STEPS} />
           <CTAStrip
@@ -112,7 +112,7 @@ export default function ForOrganisations() {
         <Container>
           <SectionHead eyebrow="SportVot Cloud Studio" center className="mx-auto">
             <h2 className="mt-3 text-balance font-display text-[clamp(32px,5vw,56px)] font-extrabold text-sv-white">Everything your broadcast needs.</h2>
-            <p className="mx-auto mt-4 max-w-[600px] text-center text-[19px] text-sv-text-muted">No add-ons. No extra hires. No compromise.</p>
+            <p className="mx-auto mt-4 max-w-[820px] text-center text-[19px] text-sv-text-muted">No add-ons. No extra hires. No compromise.</p>
           </SectionHead>
           <CapGrid>
             {CAPABILITIES.map((c) => (
@@ -126,7 +126,7 @@ export default function ForOrganisations() {
         <Container>
           <SectionHead eyebrow="Trusted Globally" center className="mx-auto">
             <h2 className="mt-3 text-balance font-display text-[clamp(32px,5vw,56px)] font-extrabold text-sv-white">Who's already using SportVot.</h2>
-            <p className="mx-auto mt-4 max-w-[600px] text-center text-[19px] text-sv-text-muted">From district leagues to international federations — across 30+ countries.</p>
+            <p className="mx-auto mt-4 max-w-[820px] text-center text-[19px] text-sv-text-muted">From district leagues to international federations — across 30+ countries.</p>
           </SectionHead>
           <RevealGroup className="mt-12 grid grid-cols-3 gap-6 max-[900px]:grid-cols-1">
             {CASES.map((c) => (
@@ -158,7 +158,7 @@ export default function ForOrganisations() {
         <Container>
           <TwoCol>
             <Reveal>
-              <p className="font-display text-xs font-bold uppercase tracking-[0.16em] text-sv-primary-light">Get a Proposal</p>
+              <p className="font-display text-xs font-bold uppercase tracking-[0.16em] text-sv-primary">Get a Proposal</p>
               <h2 className="mt-4 font-display text-[clamp(28px,4.5vw,42px)] font-extrabold text-sv-white">Ready to take your sport to the world?</h2>
               <p className="mt-4 text-[17px] text-sv-text-muted">No fixed packages. No pricing pressure. Just a plan built around your event — within 24 hours.</p>
               <TrustList

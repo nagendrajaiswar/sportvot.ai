@@ -82,7 +82,7 @@ export default function HomeHero() {
               </span>
             </span>
             <span className="block overflow-hidden">
-              <span ref={line3} className="block text-sv-primary-light">
+              <span ref={line3} className="block text-sv-primary">
                 LIVE.
               </span>
             </span>
@@ -93,7 +93,7 @@ export default function HomeHero() {
           <div ref={pipelineRef} className="mt-8 flex flex-wrap gap-2.5 font-display text-sm font-bold">
             {['Capture', 'Produce', 'Stream', 'Distribute'].map((step, i, arr) => (
               <span key={step} className="flex items-center gap-2.5">
-                <b className="text-sv-primary-light">{step}</b>
+                <b className="text-sv-primary">{step}</b>
                 {i < arr.length - 1 && <span className="text-sv-text-faint">／</span>}
               </span>
             ))}

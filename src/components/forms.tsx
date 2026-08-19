@@ -2,7 +2,7 @@ import { useState } from 'react'
 import { cn } from '../lib/utils'
 
 const fieldClasses =
-  'rounded-sv-md border border-sv-border-strong bg-sv-black-soft px-[15px] py-[13px] font-body text-[15px] text-sv-white transition-colors focus:border-sv-primary-light focus:outline-none'
+  'rounded-sv-md border border-sv-border-strong bg-sv-black-soft px-[15px] py-[13px] font-body text-[15px] text-sv-white transition-colors focus:border-sv-primary focus:outline-none'
 
 export function FormGrid({ className, children }: { className?: string; children: React.ReactNode }) {
   return <div className={cn('grid grid-cols-2 gap-4 max-[640px]:grid-cols-1', className)}>{children}</div>

@@ -23,10 +23,10 @@ export default function Footer() {
       <Container>
         <div className="grid grid-cols-[1.4fr_1fr_1fr_1fr] gap-8 max-[900px]:grid-cols-2 max-[560px]:grid-cols-1">
           <div>
-            <Link to="/" className="flex items-center gap-2 font-display text-[22px] font-black tracking-[-0.02em] text-sv-white">
-              Sport<span className="text-sv-primary-light">Vot</span>
+            <Link to="/" className="flex items-center">
+              <img src="/sportvot-logo.svg" alt="SportVot" className="h-10 w-auto" />
             </Link>
-            <p className="mt-6 max-w-[280px] text-sm text-sv-text-muted">
+            <p className="mt-7 max-w-[280px] text-sm text-sv-text-muted">
               The global sports production platform — live production, streaming and analytics for every level of the game.
             </p>
             <div className="mt-5 flex gap-3">
@@ -35,7 +35,7 @@ export default function Footer() {
                   key={s}
                   href="#"
                   aria-label={s}
-                  className="flex h-[38px] w-[38px] items-center justify-center rounded-full border border-sv-border-strong text-sm transition-all duration-300 hover:-translate-y-[3px] hover:border-sv-primary-light hover:text-sv-primary-light"
+                  className="flex h-[38px] w-[38px] items-center justify-center rounded-full border border-sv-border-strong text-sm transition-all duration-300 hover:-translate-y-[3px] hover:border-sv-primary hover:text-sv-primary"
                 >
                   {s}
                 </a>
@@ -48,7 +48,7 @@ export default function Footer() {
             <ul className="flex flex-col gap-2.5">
               {PRODUCT.map((l) => (
                 <li key={l.to}>
-                  <Link to={l.to} className="text-sm text-sv-text-muted transition-colors hover:text-sv-primary-light">
+                  <Link to={l.to} className="text-sm text-sv-text-muted transition-colors hover:text-sv-primary">
                     {l.label}
                   </Link>
                 </li>
@@ -61,7 +61,7 @@ export default function Footer() {
             <ul className="flex flex-col gap-2.5">
               {COMPANY.map((l) => (
                 <li key={l.to}>
-                  <Link to={l.to} className="text-sm text-sv-text-muted transition-colors hover:text-sv-primary-light">
+                  <Link to={l.to} className="text-sm text-sv-text-muted transition-colors hover:text-sv-primary">
                     {l.label}
                   </Link>
                 </li>
@@ -73,17 +73,17 @@ export default function Footer() {
             <h4 className="mb-4 text-xs uppercase tracking-[0.06em] text-sv-text-faint">Get Started</h4>
             <ul className="flex flex-col gap-2.5">
               <li>
-                <Link to="/for-organisations#proposal" className="text-sm text-sv-text-muted transition-colors hover:text-sv-primary-light">
+                <Link to="/for-organisations#proposal" className="text-sm text-sv-text-muted transition-colors hover:text-sv-primary">
                   Get a Proposal
                 </Link>
               </li>
               <li>
-                <Link to="/live-tv" className="text-sm text-sv-text-muted transition-colors hover:text-sv-primary-light">
+                <Link to="/live-tv" className="text-sm text-sv-text-muted transition-colors hover:text-sv-primary">
                   Watch Live Sports
                 </Link>
               </li>
               <li>
-                <a href="mailto:hello@sportvot.ai" className="text-sm text-sv-text-muted transition-colors hover:text-sv-primary-light">
+                <a href="mailto:hello@sportvot.ai" className="text-sm text-sv-text-muted transition-colors hover:text-sv-primary">
                   hello@sportvot.ai
                 </a>
               </li>

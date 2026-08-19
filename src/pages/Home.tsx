@@ -91,7 +91,7 @@ export default function Home() {
         <Container>
           <SectionHead eyebrow="Scale & Trust" center className="mx-auto">
             <h2 className="mt-3 text-balance font-display text-[clamp(32px,5vw,56px)] font-extrabold text-sv-white">The numbers speak for themselves.</h2>
-            <p className="mx-auto mt-4 max-w-[600px] text-center text-[19px] text-sv-text-muted">
+            <p className="mx-auto mt-4 max-w-[820px] text-center text-[19px] text-sv-text-muted">
               Trusted by clubs, federations, and leagues across 32+ countries, from grassroots tournaments to national championships.
             </p>
           </SectionHead>
@@ -123,7 +123,7 @@ export default function Home() {
             <div className="text-center">
               <Eyebrow center>Get a Proposal</Eyebrow>
               <h2 className="mt-3 font-display text-[clamp(28px,4vw,46px)] font-extrabold text-sv-white">Ready to take your sport to the world?</h2>
-              <p className="mx-auto mt-3 max-w-[560px] text-center text-sv-text-muted">
+              <p className="mx-auto mt-3 max-w-[760px] text-center text-sv-text-muted">
                 Tell us about your tournament, league, or event and we'll put together a production proposal within 24 hours.
               </p>
             </div>

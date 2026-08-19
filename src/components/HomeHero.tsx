@@ -26,28 +26,31 @@ export default function HomeHero() {
 
   // Entrance timeline + scroll parallax on the background video
   useEffect(() => {
-    const lines = [line1.current, line2.current, line3.current].filter(Boolean)
-    gsap.set(lines, { yPercent: 110 })
-    const tl = gsap.timeline({ delay: 0.2 })
-    tl.to(lines, { yPercent: 0, duration: 1.1, stagger: 0.12, ease: 'power4.out' })
-      .from(subRef.current, { opacity: 0, y: 24, duration: 0.8, ease: 'power3.out' }, '-=.6')
-      .from(pipelineRef.current, { opacity: 0, y: 16, duration: 0.7, ease: 'power3.out' }, '-=.5')
-      .from(ctaRef.current ? Array.from(ctaRef.current.children) : [], { opacity: 0, y: 16, duration: 0.6, stagger: 0.1, ease: 'power3.out' }, '-=.4')
+    // gsap.context + revert() (rather than a plain tl.kill()) so React 18 StrictMode's
+    // dev-mode double-invoke (mount -> cleanup -> mount) can't leave elements stuck at
+    // a tween's "from" state — kill() alone doesn't undo inline styles already applied.
+    const ctx = gsap.context(() => {
+      const lines = [line1.current, line2.current, line3.current].filter(Boolean)
+      gsap.set(lines, { yPercent: 110 })
+      gsap
+        .timeline({ delay: 0.2 })
+        .to(lines, { yPercent: 0, duration: 1.1, stagger: 0.12, ease: 'power4.out' })
+        .from(subRef.current, { opacity: 0, y: 24, duration: 0.8, ease: 'power3.out' }, '-=.6')
+        .from(pipelineRef.current, { opacity: 0, y: 16, duration: 0.7, ease: 'power3.out' }, '-=.5')
+        .from(ctaRef.current ? Array.from(ctaRef.current.children) : [], { opacity: 0, y: 16, duration: 0.6, stagger: 0.1, ease: 'power3.out' }, '-=.4')
 
-    let st: ScrollTrigger | undefined
-    if (sectionRef.current && videoRef.current) {
-      st = ScrollTrigger.create({
-        trigger: sectionRef.current,
-        start: 'top top',
-        end: 'bottom top',
-        scrub: true,
-        onUpdate: (self) => gsap.set(videoRef.current, { yPercent: self.progress * 18 }),
-      })
-    }
-    return () => {
-      tl.kill()
-      st?.kill()
-    }
+      if (sectionRef.current && videoRef.current) {
+        ScrollTrigger.create({
+          trigger: sectionRef.current,
+          start: 'top top',
+          end: 'bottom top',
+          scrub: true,
+          onUpdate: (self) => gsap.set(videoRef.current, { yPercent: self.progress * 18 }),
+        })
+      }
+    }, sectionRef)
+
+    return () => ctx.revert()
   }, [])
 
   // Cursor-follow spotlight — punches a soft hole in the dark scrim so the

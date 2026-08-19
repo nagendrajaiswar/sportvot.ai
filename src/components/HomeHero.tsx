@@ -72,6 +72,14 @@ export default function HomeHero() {
     }
     raf = requestAnimationFrame(loop)
 
+    const onEnter = (e: PointerEvent) => {
+      const r = section.getBoundingClientRect()
+      // Snap immediately (no easing) to wherever the pointer entered — otherwise the
+      // spotlight eases in from its last position (or the -9999 off-screen park spot),
+      // which reads as the torch flying in from a fixed corner instead of just appearing.
+      target.x = current.x = e.clientX - r.left
+      target.y = current.y = e.clientY - r.top
+    }
     const onMove = (e: PointerEvent) => {
       const r = section.getBoundingClientRect()
       target.x = e.clientX - r.left
@@ -82,10 +90,12 @@ export default function HomeHero() {
       target.y = -9999
     }
 
+    section.addEventListener('pointerenter', onEnter)
     section.addEventListener('pointermove', onMove)
     section.addEventListener('pointerleave', onLeave)
     return () => {
       cancelAnimationFrame(raf)
+      section.removeEventListener('pointerenter', onEnter)
       section.removeEventListener('pointermove', onMove)
       section.removeEventListener('pointerleave', onLeave)
     }

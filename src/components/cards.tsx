@@ -21,11 +21,12 @@ export function ForkCard({
   body: string
   cta: string
 }) {
-  const { ref, onMouseMove, onMouseLeave } = useTilt<HTMLAnchorElement>()
+  const { ref, onMouseEnter, onMouseMove, onMouseLeave } = useTilt<HTMLAnchorElement>()
   return (
     <Link
       ref={ref}
       to={to}
+      onMouseEnter={onMouseEnter}
       onMouseMove={onMouseMove}
       onMouseLeave={onMouseLeave}
       className={cn(
@@ -84,10 +85,11 @@ export function CaseCard({
   readLabel: string
   href?: string
 }) {
-  const { ref, onMouseMove, onMouseLeave } = useTilt<HTMLDivElement>()
+  const { ref, onMouseEnter, onMouseMove, onMouseLeave } = useTilt<HTMLDivElement>()
   return (
     <div
       ref={ref}
+      onMouseEnter={onMouseEnter}
       onMouseMove={onMouseMove}
       onMouseLeave={onMouseLeave}
       className="stroke-run overflow-hidden rounded-sv-lg border border-sv-border bg-sv-surface transition-[transform,border-color,box-shadow] duration-300 hover:-translate-y-1.5 hover:border-sv-primary-border hover:shadow-[0_20px_50px_-12px_rgba(0,0,0,.5)]"
@@ -115,10 +117,11 @@ export function CardGrid3({ children }: { children: React.ReactNode }) {
 /* ---------- Play / feature card ---------- */
 
 export function PlayCard({ icon, title, body, cta }: { icon: React.ReactNode; title: string; body: string; cta?: React.ReactNode }) {
-  const { ref, onMouseMove, onMouseLeave } = useTilt<HTMLDivElement>()
+  const { ref, onMouseEnter, onMouseMove, onMouseLeave } = useTilt<HTMLDivElement>()
   return (
     <div
       ref={ref}
+      onMouseEnter={onMouseEnter}
       onMouseMove={onMouseMove}
       onMouseLeave={onMouseLeave}
       className="stroke-run rounded-sv-lg border border-sv-border bg-sv-surface p-8 text-center transition-[transform,border-color,box-shadow] duration-300 hover:-translate-y-1.5 hover:border-sv-primary-border hover:shadow-[0_20px_50px_-12px_rgba(0,0,0,.5)]"
@@ -151,10 +154,11 @@ export function TeamCard({ initials, name, role, body }: { initials: string; nam
 /* ---------- Testimonial card ---------- */
 
 export function TestimonialCard({ quote, initials, name, role }: { quote: string; initials: string; name: string; role: string }) {
-  const { ref, onMouseMove, onMouseLeave } = useTilt<HTMLDivElement>()
+  const { ref, onMouseEnter, onMouseMove, onMouseLeave } = useTilt<HTMLDivElement>()
   return (
     <div
       ref={ref}
+      onMouseEnter={onMouseEnter}
       onMouseMove={onMouseMove}
       onMouseLeave={onMouseLeave}
       className="stroke-run rounded-sv-lg border border-sv-border bg-sv-surface p-8 transition-[transform,border-color,box-shadow] duration-300 hover:-translate-y-1.5 hover:border-sv-primary-border hover:shadow-[0_20px_50px_-12px_rgba(0,0,0,.5)]"
@@ -176,10 +180,11 @@ export function TestimonialCard({ quote, initials, name, role }: { quote: string
 /* ---------- Match / live card ---------- */
 
 export function MatchCard({ sport, title, dur, live }: { sport: string; title: string; dur?: string; live?: boolean }) {
-  const { ref, onMouseMove, onMouseLeave } = useTilt<HTMLDivElement>()
+  const { ref, onMouseEnter, onMouseMove, onMouseLeave } = useTilt<HTMLDivElement>()
   return (
     <div
       ref={ref}
+      onMouseEnter={onMouseEnter}
       onMouseMove={onMouseMove}
       onMouseLeave={onMouseLeave}
       className="stroke-run group overflow-hidden rounded-sv-md border border-sv-border bg-sv-surface transition-[transform,border-color,box-shadow] duration-300 hover:-translate-y-1.5 hover:border-sv-primary-border hover:shadow-[0_20px_50px_-12px_rgba(0,0,0,.5)]"

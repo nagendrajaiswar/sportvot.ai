@@ -49,8 +49,8 @@ export default function Header() {
         scrolled && 'shadow-[0_10px_40px_rgba(0,0,0,.35)]',
       )}
     >
-      <div className="mx-auto flex max-w-7xl items-center justify-between gap-6 px-6 py-[18px] max-[640px]:px-4">
-        <NavLink to="/" className="flex items-center gap-2 font-display text-[22px] font-black tracking-[-0.02em] text-sv-white">
+      <div className="mx-auto flex max-w-7xl items-center justify-between gap-8 px-6 py-[18px] max-[640px]:px-4">
+        <NavLink to="/" className="flex items-center gap-2 font-display text-[22px] font-black tracking-[-0.02em] text-sv-white mr-4">
           Sport<span className="text-sv-primary-light">Vot</span>
         </NavLink>
 
@@ -61,7 +61,7 @@ export default function Header() {
             </NavLink>
           ))}
           <NavLink to="/live-tv" className={liveLinkClasses}>
-            ● Live TV
+            Live TV
           </NavLink>
         </nav>
 
@@ -99,7 +99,7 @@ export default function Header() {
             </NavLink>
           ))}
           <NavLink to="/live-tv" onClick={close} className={liveLinkClasses}>
-            ● Live TV
+            Live TV
           </NavLink>
           <div className="mt-4 flex w-full flex-col gap-3">
             <Btn to="/contact" variant="outline" block onClick={close} magnetic={false}>

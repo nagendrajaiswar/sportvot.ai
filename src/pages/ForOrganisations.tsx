@@ -92,8 +92,8 @@ export default function ForOrganisations() {
       <Section dark>
         <Container>
           <SectionHead eyebrow="How It Works" center className="mx-auto mb-16">
-            <h2 className="mt-3 font-display text-[clamp(32px,5vw,56px)] font-extrabold text-sv-white">Live in 5 minutes. From any camera.</h2>
-            <p className="mx-auto mt-4 max-w-[600px] text-[19px] text-sv-text-muted">Three steps. One platform. A professional broadcast, every time.</p>
+            <h2 className="mt-3 text-balance font-display text-[clamp(32px,5vw,56px)] font-extrabold text-sv-white">Live in 5 minutes. From any camera.</h2>
+            <p className="mx-auto mt-4 max-w-[600px] text-center text-[19px] text-sv-text-muted">Three steps. One platform. A professional broadcast, every time.</p>
           </SectionHead>
           <PinSteps steps={STEPS} />
           <CTAStrip
@@ -111,8 +111,8 @@ export default function ForOrganisations() {
       <Section>
         <Container>
           <SectionHead eyebrow="SportVot Cloud Studio" center className="mx-auto">
-            <h2 className="mt-3 font-display text-[clamp(32px,5vw,56px)] font-extrabold text-sv-white">Everything your broadcast needs.</h2>
-            <p className="mx-auto mt-4 max-w-[600px] text-[19px] text-sv-text-muted">No add-ons. No extra hires. No compromise.</p>
+            <h2 className="mt-3 text-balance font-display text-[clamp(32px,5vw,56px)] font-extrabold text-sv-white">Everything your broadcast needs.</h2>
+            <p className="mx-auto mt-4 max-w-[600px] text-center text-[19px] text-sv-text-muted">No add-ons. No extra hires. No compromise.</p>
           </SectionHead>
           <CapGrid>
             {CAPABILITIES.map((c) => (
@@ -125,8 +125,8 @@ export default function ForOrganisations() {
       <Section dark>
         <Container>
           <SectionHead eyebrow="Trusted Globally" center className="mx-auto">
-            <h2 className="mt-3 font-display text-[clamp(32px,5vw,56px)] font-extrabold text-sv-white">Who's already using SportVot.</h2>
-            <p className="mx-auto mt-4 max-w-[600px] text-[19px] text-sv-text-muted">From district leagues to international federations — across 30+ countries.</p>
+            <h2 className="mt-3 text-balance font-display text-[clamp(32px,5vw,56px)] font-extrabold text-sv-white">Who's already using SportVot.</h2>
+            <p className="mx-auto mt-4 max-w-[600px] text-center text-[19px] text-sv-text-muted">From district leagues to international federations — across 30+ countries.</p>
           </SectionHead>
           <RevealGroup className="mt-12 grid grid-cols-3 gap-6 max-[900px]:grid-cols-1">
             {CASES.map((c) => (

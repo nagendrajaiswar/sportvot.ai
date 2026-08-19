@@ -34,13 +34,13 @@ const sizeClasses: Record<Size, string> = {
 }
 
 const variantClasses: Record<Variant, string> = {
-  primary: 'bg-sv-primary text-white hover:shadow-[0_12px_40px_rgba(120,119,224,.45)]',
+  primary: 'bg-sv-primary text-white hover:bg-[#2b2aa6] hover:shadow-[0_12px_40px_rgba(120,119,224,.45)]',
   outline: 'bg-transparent text-sv-white border-sv-border-strong hover:border-sv-primary-light hover:text-sv-primary-light',
   live: 'bg-sv-live text-white hover:shadow-[0_12px_40px_rgba(255,0,67,.35)]',
 }
 
 export default function Btn(props: BtnProps) {
-  const { variant = 'primary', size = 'md', block, magnetic = true, className = '', children } = props
+  const { variant = 'primary', size = 'md', block, magnetic = false, className = '', children } = props
   const classes = cn(base, sizeClasses[size], variantClasses[variant], block && 'w-full', className)
   const inner = <span className="relative z-10">{children}</span>
 

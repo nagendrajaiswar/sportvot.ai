@@ -1,6 +1,6 @@
 import HomeHero from '../components/HomeHero'
 import Marquee from '../components/Marquee'
-import { Container, Section, SectionHead, CTAStrip } from '../components/ui'
+import { Container, Section, SectionHead, Eyebrow } from '../components/ui'
 import { RevealGroup, Reveal } from '../components/Reveal'
 import { ForkCard, TestimonialCard } from '../components/cards'
 import { StatsGrid } from '../components/StatCounter'
@@ -60,11 +60,11 @@ export default function Home() {
       <Section>
         <Container>
           <SectionHead eyebrow="What Brings You Here?" center className="mx-auto mb-14">
-            <h2 className="mt-3 font-display text-[clamp(32px,5vw,56px)] font-extrabold text-sv-white">
+            <h2 className="mt-3 text-balance font-display text-[clamp(32px,5vw,56px)] font-extrabold text-sv-white">
               Whether you run tournaments or want to play in one — SportVot has a world built for you.
             </h2>
           </SectionHead>
-          <RevealGroup className="grid grid-cols-[1.1fr_.9fr] gap-6 max-[900px]:grid-cols-1">
+          <RevealGroup className="grid grid-cols-[1.1fr_.9fr] items-stretch gap-6 max-[900px]:grid-cols-1">
             <ForkCard
               to="/for-organisations"
               variant="blue"
@@ -90,8 +90,8 @@ export default function Home() {
       <Section dark>
         <Container>
           <SectionHead eyebrow="Scale & Trust" center className="mx-auto">
-            <h2 className="mt-3 font-display text-[clamp(32px,5vw,56px)] font-extrabold text-sv-white">The numbers speak for themselves.</h2>
-            <p className="mx-auto mt-4 max-w-[600px] text-[19px] text-sv-text-muted">
+            <h2 className="mt-3 text-balance font-display text-[clamp(32px,5vw,56px)] font-extrabold text-sv-white">The numbers speak for themselves.</h2>
+            <p className="mx-auto mt-4 max-w-[600px] text-center text-[19px] text-sv-text-muted">
               Trusted by clubs, federations, and leagues across 32+ countries, from grassroots tournaments to national championships.
             </p>
           </SectionHead>
@@ -112,13 +112,22 @@ export default function Home() {
 
       <Section id="proposal">
         <Container>
-          <CTAStrip
-            eyebrow="Get a Proposal"
-            title="Ready to take your sport to the world?"
-            body="Tell us about your tournament, league, or event and we'll put together a production proposal within 24 hours."
-          />
-          <Reveal className="relative z-2 mx-auto -mt-10 max-w-[840px]">
-            <div className="rounded-sv-xl border border-sv-border bg-sv-surface p-12 max-[900px]:p-6">
+          <Reveal
+            scale
+            className="relative overflow-hidden rounded-sv-xl border border-sv-border p-[72px] max-[900px]:p-9"
+            style={{
+              background:
+                'radial-gradient(120% 140% at 20% 0%, rgba(29,28,140,.30), transparent 55%), radial-gradient(90% 90% at 85% 100%, rgba(120,119,224,.18), transparent 55%), var(--color-sv-black-soft)',
+            }}
+          >
+            <div className="text-center">
+              <Eyebrow center>Get a Proposal</Eyebrow>
+              <h2 className="mt-3 font-display text-[clamp(28px,4vw,46px)] font-extrabold text-sv-white">Ready to take your sport to the world?</h2>
+              <p className="mx-auto mt-3 max-w-[560px] text-center text-sv-text-muted">
+                Tell us about your tournament, league, or event and we'll put together a production proposal within 24 hours.
+              </p>
+            </div>
+            <div className="mx-auto mt-10 max-w-[760px]">
               <DemoForm submitLabel="Get a Proposal">
                 <FormGrid>
                   <Field label="Name *">

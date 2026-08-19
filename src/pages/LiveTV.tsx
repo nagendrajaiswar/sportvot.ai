@@ -25,7 +25,7 @@ export default function LiveTV() {
       >
         <Container>
           <Reveal className="mb-4 inline-flex items-center gap-[7px] rounded-full border border-[rgba(255,0,67,0.4)] bg-sv-live-dim px-3.5 py-1.5 text-xs font-extrabold tracking-[0.06em] text-white before:h-[7px] before:w-[7px] before:animate-[sv-pulse_1.6s_infinite] before:rounded-full before:bg-sv-live">
-            ● Live Now
+            Live Now
           </Reveal>
           <Reveal as="h1" className="mt-4 max-w-[900px] font-display text-[clamp(36px,6.5vw,68px)] font-extrabold tracking-[-0.02em] text-sv-white">
             SportVot OTT — every sport, every level, live.
@@ -34,7 +34,7 @@ export default function LiveTV() {
             Grassroots to national championships across 15+ sports — live matches, full replays, and highlight reels updated daily on SportVot's streaming
             platform.
           </Reveal>
-          <Reveal className="mt-8 flex flex-wrap gap-4">
+          <Reveal className="mt-8 flex flex-wrap gap-5">
             <Btn href="https://sportvot.com/tv" target="_blank" rel="noopener" variant="live">
               ▶ Watch on SportVot OTT
             </Btn>
@@ -56,7 +56,7 @@ export default function LiveTV() {
               <MatchCard key={i} {...m} />
             ))}
           </RevealGroup>
-          <p className="mt-12 text-center">
+          <p className="mt-14 text-center">
             <Btn href="https://sportvot.com/tv" target="_blank" rel="noopener" variant="primary">
               See Everything Live on SportVot OTT →
             </Btn>

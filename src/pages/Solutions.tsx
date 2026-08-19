@@ -48,7 +48,7 @@ export default function Solutions() {
       <Section>
         <Container>
           <SectionHead eyebrow="Versatile Production Solutions" center className="mx-auto">
-            <h2 className="mt-3 font-display text-[clamp(32px,5vw,56px)] font-extrabold text-sv-white">Capture with whatever's on hand.</h2>
+            <h2 className="mt-3 text-balance font-display text-[clamp(32px,5vw,56px)] font-extrabold text-sv-white">Capture with whatever's on hand.</h2>
           </SectionHead>
           <RevealGroup className="mt-12 grid grid-cols-3 gap-6 max-[900px]:grid-cols-1">
             {CAPTURE_OPTIONS.map((c) => (
@@ -71,7 +71,7 @@ export default function Solutions() {
       <Section dark>
         <Container>
           <SectionHead eyebrow="Enhance Your Pre-Captured Content" center className="mx-auto">
-            <h2 className="mt-3 font-display text-[clamp(32px,5vw,56px)] font-extrabold text-sv-white">Already have footage? We'll make it work harder.</h2>
+            <h2 className="mt-3 text-balance font-display text-[clamp(32px,5vw,56px)] font-extrabold text-sv-white">Already have footage? We'll make it work harder.</h2>
           </SectionHead>
           <CapGrid>
             {ENHANCE.map((c) => (
@@ -84,7 +84,7 @@ export default function Solutions() {
       <Section>
         <Container>
           <SectionHead eyebrow="Technical Detail" center className="mx-auto">
-            <h2 className="mt-3 font-display text-[clamp(32px,5vw,56px)] font-extrabold text-sv-white">For teams who want the specs.</h2>
+            <h2 className="mt-3 text-balance font-display text-[clamp(32px,5vw,56px)] font-extrabold text-sv-white">For teams who want the specs.</h2>
           </SectionHead>
           <CapGrid>
             {TECH_DETAIL.map((c) => (

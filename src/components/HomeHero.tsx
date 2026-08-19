@@ -16,7 +16,6 @@ export default function HomeHero() {
   const subRef = useRef<HTMLParagraphElement | null>(null)
   const pipelineRef = useRef<HTMLDivElement | null>(null)
   const ctaRef = useRef<HTMLDivElement | null>(null)
-  const cueRef = useRef<HTMLDivElement | null>(null)
 
   useEffect(() => {
     const lines = [line1.current, line2.current, line3.current].filter(Boolean)
@@ -26,7 +25,6 @@ export default function HomeHero() {
       .from(subRef.current, { opacity: 0, y: 24, duration: 0.8, ease: 'power3.out' }, '-=.6')
       .from(pipelineRef.current, { opacity: 0, y: 16, duration: 0.7, ease: 'power3.out' }, '-=.5')
       .from(ctaRef.current ? Array.from(ctaRef.current.children) : [], { opacity: 0, y: 16, duration: 0.6, stagger: 0.1, ease: 'power3.out' }, '-=.4')
-      .from(cueRef.current, { opacity: 0, duration: 0.6 }, '-=.3')
 
     let st: ScrollTrigger | undefined
     if (sectionRef.current && videoRef.current) {
@@ -109,11 +107,6 @@ export default function HomeHero() {
             </Btn>
           </div>
         </Container>
-      </div>
-
-      <div ref={cueRef} className="absolute bottom-9 left-1/2 z-2 flex -translate-x-1/2 flex-col items-center gap-2.5 font-display text-[11px] uppercase tracking-[.14em] text-sv-text-faint">
-        <span>Scroll</span>
-        <span className="h-9 w-px animate-[sv-cue_1.8s_infinite] bg-[linear-gradient(var(--color-sv-primary-light),transparent)]" />
       </div>
     </section>
   )

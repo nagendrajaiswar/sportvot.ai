@@ -56,7 +56,7 @@ export default function About() {
       <Section dark>
         <Container>
           <SectionHead eyebrow="Core Offerings" center className="mx-auto">
-            <h2 className="mt-3 font-display text-[clamp(32px,5vw,56px)] font-extrabold text-sv-white">Three products. One mission.</h2>
+            <h2 className="mt-3 text-balance font-display text-[clamp(32px,5vw,56px)] font-extrabold text-sv-white">Three products. One mission.</h2>
           </SectionHead>
           <RevealGroup className="mt-12 grid grid-cols-3 gap-6 max-[900px]:grid-cols-1">
             {OFFERINGS.map((o) => (
@@ -69,7 +69,7 @@ export default function About() {
       <Section>
         <Container>
           <SectionHead eyebrow="Leadership" center className="mx-auto">
-            <h2 className="mt-3 font-display text-[clamp(32px,5vw,56px)] font-extrabold text-sv-white">About Our Founders</h2>
+            <h2 className="mt-3 text-balance font-display text-[clamp(32px,5vw,56px)] font-extrabold text-sv-white">About Our Founders</h2>
           </SectionHead>
           <RevealGroup className="mt-12 grid grid-cols-3 gap-6 max-[900px]:grid-cols-1">
             {TEAM.map((t) => (

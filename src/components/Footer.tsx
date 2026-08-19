@@ -26,7 +26,7 @@ export default function Footer() {
             <Link to="/" className="flex items-center gap-2 font-display text-[22px] font-black tracking-[-0.02em] text-sv-white">
               Sport<span className="text-sv-primary-light">Vot</span>
             </Link>
-            <p className="mt-4 max-w-[280px] text-sm text-sv-text-muted">
+            <p className="mt-6 max-w-[280px] text-sm text-sv-text-muted">
               The global sports production platform — live production, streaming and analytics for every level of the game.
             </p>
             <div className="mt-5 flex gap-3">

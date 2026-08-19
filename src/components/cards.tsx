@@ -29,7 +29,7 @@ export function ForkCard({
       onMouseMove={onMouseMove}
       onMouseLeave={onMouseLeave}
       className={cn(
-        'flex min-h-[460px] flex-col overflow-hidden rounded-sv-xl border border-sv-border p-[72px] max-[640px]:p-9 transition-[transform,border-color] duration-400 hover:-translate-y-2 hover:border-sv-primary-border',
+        'flex h-full min-h-[460px] flex-col overflow-hidden rounded-sv-xl border border-sv-border p-[72px] max-[640px]:p-9 transition-[transform,border-color] duration-400 hover:-translate-y-2 hover:border-sv-primary-border',
         variant === 'blue' && 'bg-[linear-gradient(165deg,rgba(29,28,140,.45),var(--color-sv-surface)_55%)]',
         variant === 'green' && 'bg-[linear-gradient(165deg,rgba(0,186,87,.20),var(--color-sv-surface)_55%)]',
       )}

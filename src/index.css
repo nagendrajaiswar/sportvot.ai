@@ -60,53 +60,60 @@
   --ease-sv-soft: cubic-bezier(.4,0,.2,1);
 }
 
-*,
-*::before,
-*::after {
-  box-sizing: border-box;
-}
-html {
-  background: var(--color-sv-black);
-}
-body {
-  margin: 0;
-  background: var(--color-sv-black);
-  color: var(--color-sv-text);
-  font-family: var(--font-body);
-  font-size: 16px;
-  line-height: 1.6;
-  -webkit-font-smoothing: antialiased;
-  overflow-x: hidden;
-}
-img,
-video {
-  max-width: 100%;
-  display: block;
-}
-a {
-  color: inherit;
-  text-decoration: none;
-}
-h1,
-h2,
-h3,
-h4 {
-  font-family: var(--font-display);
-  font-weight: 800;
-  line-height: 1.02;
-  letter-spacing: -0.02em;
-  margin: 0;
-  color: var(--color-sv-white);
-}
-p {
-  margin: 0;
-}
-button {
-  font-family: inherit;
-}
-::selection {
-  background: var(--color-sv-primary-light);
-  color: #06051f;
+/* Layered (not left as plain unlayered CSS) so Tailwind utilities — which Tailwind
+   itself emits inside @layer utilities — can still override these resets. Unlayered
+   CSS always wins over ANY layered CSS regardless of specificity, so without this,
+   things like `mt-5` or `mx-auto` on a <p>/<h1-4> would silently no-op against the
+   plain `margin: 0` resets below. */
+@layer base {
+  *,
+  *::before,
+  *::after {
+    box-sizing: border-box;
+  }
+  html {
+    background: var(--color-sv-black);
+  }
+  body {
+    margin: 0;
+    background: var(--color-sv-black);
+    color: var(--color-sv-text);
+    font-family: var(--font-body);
+    font-size: 16px;
+    line-height: 1.6;
+    -webkit-font-smoothing: antialiased;
+    overflow-x: hidden;
+  }
+  img,
+  video {
+    max-width: 100%;
+    display: block;
+  }
+  a {
+    color: inherit;
+    text-decoration: none;
+  }
+  h1,
+  h2,
+  h3,
+  h4 {
+    font-family: var(--font-display);
+    font-weight: 800;
+    line-height: 1.02;
+    letter-spacing: -0.02em;
+    margin: 0;
+    color: var(--color-sv-white);
+  }
+  p {
+    margin: 0;
+  }
+  button {
+    font-family: inherit;
+  }
+  ::selection {
+    background: var(--color-sv-primary-light);
+    color: #06051f;
+  }
 }
 
 /* Reveal-on-scroll base state (JS/GSAP adds .is-visible via ScrollTrigger) */
@@ -179,7 +186,9 @@ button {
    The gradient has a wide, slow falloff on purpose so the reveal reads as a soft
    glow rather than a hard-edged circle. */
 .hero-video-scrim {
-  background: linear-gradient(180deg, rgba(5, 6, 7, 0.78) 0%, rgba(5, 6, 7, 0.88) 55%, var(--color-sv-black) 100%);
+  background:
+    linear-gradient(90deg, rgba(5, 6, 7, 0.82) 0%, rgba(5, 6, 7, 0.5) 32%, transparent 62%),
+    linear-gradient(180deg, rgba(5, 6, 7, 0.78) 0%, rgba(5, 6, 7, 0.88) 55%, var(--color-sv-black) 100%);
   -webkit-mask-image: radial-gradient(
     circle 340px at var(--x, -9999px) var(--y, -9999px),
     transparent 0%,

@@ -90,7 +90,7 @@ export function CaseCard({
       ref={ref}
       onMouseMove={onMouseMove}
       onMouseLeave={onMouseLeave}
-      className="overflow-hidden rounded-sv-lg border border-sv-border bg-sv-surface transition-[transform,border-color] duration-300 hover:-translate-y-1.5 hover:border-sv-primary-border"
+      className="stroke-run overflow-hidden rounded-sv-lg border border-sv-border bg-sv-surface transition-[transform,border-color,box-shadow] duration-300 hover:-translate-y-1.5 hover:border-sv-primary-border hover:shadow-[0_20px_50px_-12px_rgba(0,0,0,.5)]"
     >
       <div className="flex h-[170px] items-center justify-center bg-[linear-gradient(160deg,rgba(120,119,224,.16),rgba(29,28,140,.20))] text-center font-display font-extrabold text-sv-text-faint">
         {thumb}
@@ -121,7 +121,7 @@ export function PlayCard({ icon, title, body, cta }: { icon: React.ReactNode; ti
       ref={ref}
       onMouseMove={onMouseMove}
       onMouseLeave={onMouseLeave}
-      className="rounded-sv-lg border border-sv-border bg-sv-surface p-8 text-center transition-[transform,border-color] duration-300 hover:-translate-y-1.5 hover:border-sv-primary-border"
+      className="stroke-run rounded-sv-lg border border-sv-border bg-sv-surface p-8 text-center transition-[transform,border-color,box-shadow] duration-300 hover:-translate-y-1.5 hover:border-sv-primary-border hover:shadow-[0_20px_50px_-12px_rgba(0,0,0,.5)]"
     >
       <div className="mx-auto flex h-[60px] w-[60px] items-center justify-center rounded-full border border-sv-primary-border bg-sv-primary-dim text-sv-primary-light">
         {icon}
@@ -157,7 +157,7 @@ export function TestimonialCard({ quote, initials, name, role }: { quote: string
       ref={ref}
       onMouseMove={onMouseMove}
       onMouseLeave={onMouseLeave}
-      className="rounded-sv-lg border border-sv-border bg-sv-surface p-8 transition-[transform,border-color] duration-300 hover:-translate-y-1.5 hover:border-sv-primary-border"
+      className="stroke-run rounded-sv-lg border border-sv-border bg-sv-surface p-8 transition-[transform,border-color,box-shadow] duration-300 hover:-translate-y-1.5 hover:border-sv-primary-border hover:shadow-[0_20px_50px_-12px_rgba(0,0,0,.5)]"
     >
       <p className="text-[17px] text-sv-text before:mr-1 before:text-[34px] before:leading-[0] before:text-sv-primary-light before:content-['“']">{quote}</p>
       <div className="mt-6 flex items-center gap-3">
@@ -182,7 +182,7 @@ export function MatchCard({ sport, title, dur, live }: { sport: string; title: s
       ref={ref}
       onMouseMove={onMouseMove}
       onMouseLeave={onMouseLeave}
-      className="group overflow-hidden rounded-sv-md border border-sv-border bg-sv-surface transition-[transform,border-color] duration-300 hover:-translate-y-1.5 hover:border-sv-primary-border"
+      className="stroke-run group overflow-hidden rounded-sv-md border border-sv-border bg-sv-surface transition-[transform,border-color,box-shadow] duration-300 hover:-translate-y-1.5 hover:border-sv-primary-border hover:shadow-[0_20px_50px_-12px_rgba(0,0,0,.5)]"
     >
       <div className="relative flex aspect-16/10 items-center justify-center overflow-hidden bg-[linear-gradient(160deg,rgba(120,119,224,.18),rgba(29,28,140,.18))] after:absolute after:inset-0 after:bg-[linear-gradient(180deg,transparent_60%,rgba(0,0,0,.5))]">
         {live && (

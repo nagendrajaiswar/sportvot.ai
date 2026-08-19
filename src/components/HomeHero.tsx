@@ -121,6 +121,11 @@ export default function HomeHero() {
       style={{
         backgroundImage:
           'radial-gradient(60% 60% at 20% 20%, rgba(29,28,140,.45), transparent 60%), radial-gradient(50% 50% at 85% 15%, rgba(120,119,224,.28), transparent 60%)',
+        // Belt-and-suspenders clip: GPU-composited <video> layers can visually escape a
+        // plain overflow:hidden under transform in some browsers — clip-path doesn't have
+        // that gap, and it's what actually stopped the parallax video from spilling into
+        // the marquee below.
+        clipPath: 'inset(0)',
       }}
     >
       <video

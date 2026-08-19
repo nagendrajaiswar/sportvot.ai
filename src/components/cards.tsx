@@ -21,7 +21,7 @@ export function ForkCard({
   body: string
   cta: string
 }) {
-  const { ref, onMouseEnter, onMouseMove, onMouseLeave } = useTilt<HTMLAnchorElement>()
+  const { ref, onMouseEnter, onMouseMove, onMouseLeave } = useTilt<HTMLAnchorElement>(8)
   return (
     <Link
       ref={ref}
@@ -30,7 +30,7 @@ export function ForkCard({
       onMouseMove={onMouseMove}
       onMouseLeave={onMouseLeave}
       className={cn(
-        'stroke-run group flex h-full min-h-[460px] flex-col overflow-hidden rounded-sv-xl border border-sv-border p-[72px] max-[640px]:p-9 transition-[transform,border-color,box-shadow] duration-400 hover:-translate-y-2 hover:border-sv-primary-border hover:shadow-[0_24px_60px_-12px_rgba(0,0,0,.5)]',
+        'stroke-run group flex h-full min-h-[460px] flex-col overflow-hidden rounded-sv-xl border border-sv-border p-[72px] max-[640px]:p-9 transition-[border-color,box-shadow] duration-400 hover:border-sv-primary-border hover:shadow-[0_24px_60px_-12px_rgba(0,0,0,.5)]',
         variant === 'blue' && 'bg-[linear-gradient(165deg,rgba(29,28,140,.45),var(--color-sv-surface)_55%)]',
         variant === 'green' && 'bg-[linear-gradient(165deg,rgba(0,186,87,.20),var(--color-sv-surface)_55%)]',
       )}
@@ -92,7 +92,7 @@ export function CaseCard({
       onMouseEnter={onMouseEnter}
       onMouseMove={onMouseMove}
       onMouseLeave={onMouseLeave}
-      className="stroke-run overflow-hidden rounded-sv-lg border border-sv-border bg-sv-surface transition-[transform,border-color,box-shadow] duration-300 hover:-translate-y-1.5 hover:border-sv-primary-border hover:shadow-[0_20px_50px_-12px_rgba(0,0,0,.5)]"
+      className="stroke-run overflow-hidden rounded-sv-lg border border-sv-border bg-sv-surface transition-[border-color,box-shadow] duration-300 hover:border-sv-primary-border hover:shadow-[0_20px_50px_-12px_rgba(0,0,0,.5)]"
     >
       <div className="flex h-[170px] items-center justify-center bg-[linear-gradient(160deg,rgba(120,119,224,.16),rgba(29,28,140,.20))] text-center font-display font-extrabold text-sv-text-faint">
         {thumb}
@@ -124,7 +124,7 @@ export function PlayCard({ icon, title, body, cta }: { icon: React.ReactNode; ti
       onMouseEnter={onMouseEnter}
       onMouseMove={onMouseMove}
       onMouseLeave={onMouseLeave}
-      className="stroke-run rounded-sv-lg border border-sv-border bg-sv-surface p-8 text-center transition-[transform,border-color,box-shadow] duration-300 hover:-translate-y-1.5 hover:border-sv-primary-border hover:shadow-[0_20px_50px_-12px_rgba(0,0,0,.5)]"
+      className="stroke-run rounded-sv-lg border border-sv-border bg-sv-surface p-8 text-center transition-[border-color,box-shadow] duration-300 hover:border-sv-primary-border hover:shadow-[0_20px_50px_-12px_rgba(0,0,0,.5)]"
     >
       <div className="mx-auto flex h-[60px] w-[60px] items-center justify-center rounded-full border border-sv-primary-border bg-sv-primary-dim text-sv-primary-light">
         {icon}
@@ -161,7 +161,7 @@ export function TestimonialCard({ quote, initials, name, role }: { quote: string
       onMouseEnter={onMouseEnter}
       onMouseMove={onMouseMove}
       onMouseLeave={onMouseLeave}
-      className="stroke-run rounded-sv-lg border border-sv-border bg-sv-surface p-8 transition-[transform,border-color,box-shadow] duration-300 hover:-translate-y-1.5 hover:border-sv-primary-border hover:shadow-[0_20px_50px_-12px_rgba(0,0,0,.5)]"
+      className="stroke-run rounded-sv-lg border border-sv-border bg-sv-surface p-8 transition-[border-color,box-shadow] duration-300 hover:border-sv-primary-border hover:shadow-[0_20px_50px_-12px_rgba(0,0,0,.5)]"
     >
       <p className="text-[17px] text-sv-text before:mr-1 before:text-[34px] before:leading-[0] before:text-sv-primary-light before:content-['“']">{quote}</p>
       <div className="mt-6 flex items-center gap-3">
@@ -187,7 +187,7 @@ export function MatchCard({ sport, title, dur, live }: { sport: string; title: s
       onMouseEnter={onMouseEnter}
       onMouseMove={onMouseMove}
       onMouseLeave={onMouseLeave}
-      className="stroke-run group overflow-hidden rounded-sv-md border border-sv-border bg-sv-surface transition-[transform,border-color,box-shadow] duration-300 hover:-translate-y-1.5 hover:border-sv-primary-border hover:shadow-[0_20px_50px_-12px_rgba(0,0,0,.5)]"
+      className="stroke-run group overflow-hidden rounded-sv-md border border-sv-border bg-sv-surface transition-[border-color,box-shadow] duration-300 hover:border-sv-primary-border hover:shadow-[0_20px_50px_-12px_rgba(0,0,0,.5)]"
     >
       <div className="relative flex aspect-16/10 items-center justify-center overflow-hidden bg-[linear-gradient(160deg,rgba(120,119,224,.18),rgba(29,28,140,.18))] after:absolute after:inset-0 after:bg-[linear-gradient(180deg,transparent_60%,rgba(0,0,0,.5))]">
         {live && (

@@ -26,7 +26,7 @@ type ButtonElProps = BaseProps & {
 export type BtnProps = LinkProps | AnchorProps | ButtonElProps
 
 const base =
-  'relative inline-flex items-center justify-center gap-2.5 font-display font-bold rounded-full border border-transparent cursor-pointer overflow-hidden isolate transition-[transform,box-shadow,border-color,color] duration-300 will-change-transform'
+  'relative inline-flex items-center justify-center gap-2.5 whitespace-nowrap font-display font-bold rounded-full border border-transparent cursor-pointer overflow-hidden isolate transition-[transform,box-shadow,border-color,color] duration-300 will-change-transform'
 
 const sizeClasses: Record<Size, string> = {
   md: 'text-[15px] px-8 py-4',
@@ -42,7 +42,7 @@ const variantClasses: Record<Variant, string> = {
 export default function Btn(props: BtnProps) {
   const { variant = 'primary', size = 'md', block, magnetic = false, className = '', children } = props
   const classes = cn(base, sizeClasses[size], variantClasses[variant], block && 'w-full', className)
-  const inner = <span className="relative z-10">{children}</span>
+  const inner = <span className="relative z-10 inline-flex items-center gap-2">{children}</span>
 
   let el: React.ReactElement
   if ('to' in props && props.to !== undefined) {

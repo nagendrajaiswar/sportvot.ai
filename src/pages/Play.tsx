@@ -1,12 +1,12 @@
 import { useMemo, useState } from 'react'
-import { Phone, Buildings } from '@phosphor-icons/react'
+import { Buildings } from '@phosphor-icons/react'
 import { Container, Section, SectionHead, Eyebrow } from '../components/ui'
 import { Reveal, RevealGroup } from '../components/Reveal'
 import { ServiceCard, TestimonialCard, VenueCard, BlogCard } from '../components/cards'
 import { StatsGrid } from '../components/StatCounter'
 import { cn } from '../lib/utils'
 import Marquee from '../components/Marquee'
-import Btn from '../components/Btn'
+import PlayHero from '../components/PlayHero'
 import { DemoForm, Field, TextInput, SelectInput } from '../components/forms'
 import { BLOG_POSTS } from '../data/blog'
 
@@ -22,6 +22,19 @@ const STATS = [
   { target: 100, suffix: '+', label: 'Corporate Clients' },
   { target: 5, suffix: '+', label: 'Years Experience' },
   { target: 24, suffix: '/7', label: 'Dedicated Support' },
+]
+
+const HERO_MARQUEE = [
+  'Corporate Events',
+  '300+ Events Executed',
+  'Live Streaming',
+  'Sports Tournaments',
+  '100+ Happy Clients',
+  'Team Building',
+  'Thematic Galas',
+  '24/7 Dedicated Support',
+  'Production & AV',
+  'Celebrity Coordination',
 ]
 
 const SERVICES = [
@@ -105,33 +118,8 @@ export default function Play() {
 
   return (
     <>
-      <section
-        className="border-b border-sv-border pt-[180px] pb-20"
-        style={{ background: 'radial-gradient(90% 90% at 85% 0%, rgba(120,119,224,.24), transparent 50%)' }}
-      >
-        <Container>
-          <Reveal>
-            <Eyebrow>SportVot Play — Corporate & Sports Events</Eyebrow>
-          </Reveal>
-          <Reveal as="h1" className="mt-5 max-w-[1180px] text-balance font-display text-[clamp(36px,5.2vw,58px)] font-extrabold tracking-[-0.02em] text-sv-white">
-            India's Leading Event Experts.
-          </Reveal>
-          <Reveal as="p" className="mt-5 max-w-[880px] text-[19px] text-sv-text-muted">
-            From concept to curtain call — strategic planning, flawless production, live streaming, and end-to-end event management.
-          </Reveal>
-          <Reveal className="mt-8 flex flex-wrap gap-4">
-            <Btn to="#proposal" variant="primary">
-              Book a Consultation
-            </Btn>
-            <Btn href="tel:+917738698820" variant="outline">
-              <Phone size={16} weight="bold" /> Call Now
-            </Btn>
-          </Reveal>
-          <Reveal className="mt-16">
-            <StatsGrid stats={STATS} />
-          </Reveal>
-        </Container>
-      </section>
+      <PlayHero />
+      <Marquee items={HERO_MARQUEE} dot />
 
       <Section>
         <Container>
@@ -143,6 +131,9 @@ export default function Play() {
               From concept to curtain call, every detail is precision-engineered to exceed expectations.
             </p>
           </SectionHead>
+          <Reveal className="mt-14">
+            <StatsGrid stats={STATS} />
+          </Reveal>
         </Container>
       </Section>
 

@@ -38,7 +38,7 @@ export default function LiveTV() {
             <Btn href="https://sportvot.com/tv" target="_blank" rel="noopener" variant="live">
               ▶ Watch on SportVot OTT
             </Btn>
-            <Btn to="/for-organisations#proposal" variant="outline">
+            <Btn to="/live-production#proposal" variant="outline">
               Stream Your Own Tournament
             </Btn>
           </Reveal>

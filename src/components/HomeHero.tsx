@@ -189,19 +189,19 @@ export default function HomeHero() {
           <p ref={subRef} className="mt-6 max-w-[600px] text-[clamp(16px,2vw,21px)] text-sv-text-muted">
             Professional sports broadcasting for clubs, academies, leagues, and federations — in 5 minutes, from any camera, anywhere in the world.
           </p>
-          <div ref={pipelineRef} className="mt-8 flex flex-wrap gap-2.5 font-display text-sm font-bold">
+          <div ref={pipelineRef} className="mt-8 flex flex-wrap items-center gap-2.5 font-display text-sm font-bold">
             {['Capture', 'Produce', 'Stream', 'Distribute'].map((step, i, arr) => (
               <span key={step} className="flex items-center gap-2.5">
                 <b className="text-sv-primary-light">{step}</b>
-                {i < arr.length - 1 && <span className="text-sv-text-faint">／</span>}
+                {i < arr.length - 1 && <span className="h-1.5 w-1.5 rounded-full bg-sv-text-faint" aria-hidden="true" />}
               </span>
             ))}
           </div>
           <div ref={ctaRef} className="pointer-events-auto mt-[72px] flex flex-wrap gap-4">
-            <Btn to="/for-organisations#proposal" variant="primary">
+            <Btn to="#proposal" variant="primary">
               Get a Proposal
             </Btn>
-            <Btn to="/live-tv" variant="outline">
+            <Btn href="https://sportvot.com" target="_blank" rel="noopener" variant="outline">
               ▶ Watch Live Sports
             </Btn>
           </div>

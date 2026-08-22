@@ -2,10 +2,9 @@ import { Link } from 'react-router-dom'
 import { Container } from './ui'
 
 const PRODUCT = [
-  { to: '/for-organisations', label: 'For Organisations' },
+  { to: '/live-production', label: 'SportVot Live Production' },
   { to: '/play', label: 'SportVot Play' },
-  { to: '/live-tv', label: 'SportVot OTT — Live TV' },
-  { to: '/solutions', label: 'Cloud Studio & Capabilities' },
+  { to: '/live-tv', label: 'SportVot OTT' },
 ]
 
 const COMPANY = [
@@ -73,7 +72,7 @@ export default function Footer() {
             <h4 className="mb-4 text-xs uppercase tracking-[0.06em] text-sv-text-faint">Get Started</h4>
             <ul className="flex flex-col gap-2.5">
               <li>
-                <Link to="/for-organisations#proposal" className="text-sm text-sv-text-muted transition-colors hover:text-sv-primary-light">
+                <Link to="/live-production#proposal" className="text-sm text-sv-text-muted transition-colors hover:text-sv-primary-light">
                   Get a Proposal
                 </Link>
               </li>

@@ -6,9 +6,8 @@ import { cn } from '../lib/utils'
 
 const LINKS = [
   { to: '/', label: 'Home' },
-  { to: '/for-organisations', label: 'For Organisations' },
+  { to: '/live-production', label: 'SportVot Live Production' },
   { to: '/play', label: 'SportVot Play' },
-  { to: '/solutions', label: 'Solutions' },
   { to: '/news', label: 'News' },
   { to: '/about', label: 'About Us' },
 ]
@@ -69,7 +68,7 @@ export default function Header() {
           <Btn to="/contact" variant="outline" size="sm" className="max-[960px]:hidden">
             Get in Touch
           </Btn>
-          <Btn to="/for-organisations#proposal" variant="primary" size="sm" className="max-[960px]:hidden">
+          <Btn to="/live-production#proposal" variant="primary" size="sm" className="max-[960px]:hidden">
             Get a Proposal
           </Btn>
           <button
@@ -105,7 +104,7 @@ export default function Header() {
             <Btn to="/contact" variant="outline" block onClick={close} magnetic={false}>
               Get in Touch
             </Btn>
-            <Btn to="/for-organisations#proposal" variant="primary" block onClick={close} magnetic={false}>
+            <Btn to="/live-production#proposal" variant="primary" block onClick={close} magnetic={false}>
               Get a Proposal
             </Btn>
           </div>

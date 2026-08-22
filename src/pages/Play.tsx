@@ -1,16 +1,77 @@
-import { Trophy, VideoCamera, Handshake, ChartBar, MapPin, Buildings } from '@phosphor-icons/react'
-import { Container, Section, Eyebrow, TwoCol, ColMedia, CTAStrip, ListCheck } from '../components/ui'
+import { Trophy, RocketLaunch, SoccerBall, Mountains, ForkKnife, Confetti, Phone } from '@phosphor-icons/react'
+import { Container, Section, SectionHead, Eyebrow } from '../components/ui'
 import { Reveal, RevealGroup } from '../components/Reveal'
-import { PlayCard } from '../components/cards'
+import { ServiceCard, TestimonialCard } from '../components/cards'
+import { StatsGrid } from '../components/StatCounter'
+import Marquee from '../components/Marquee'
 import Btn from '../components/Btn'
+import { DemoForm, Field, TextInput, SelectInput } from '../components/forms'
 
-const FEATURES = [
-  { icon: <Trophy size={26} weight="bold" />, title: 'Play With Passion', body: 'Experience thrilling gameplay on premium turfs designed for maximum fun.' },
-  { icon: <VideoCamera size={26} weight="bold" />, title: 'Stream Every Moment', body: 'Watch yourself in action — get your games live-streamed and recorded for future playback.' },
-  { icon: <Handshake size={26} weight="bold" />, title: 'Play Together, Play Smart', body: 'Join a community of fellow players, connect, and enjoy the game in good company.' },
-  { icon: <ChartBar size={26} weight="bold" />, title: 'More Than Just Play', body: 'Connect, track, and share every match in a fun, interactive way with personalised player cards.' },
-  { icon: <MapPin size={26} weight="bold" />, title: 'Mumbai & Delhi NCR', body: 'Streaming-enabled turfs across both cities, with more markets opening soon.' },
-  { icon: <Buildings size={26} weight="bold" />, title: 'Corporate Events', body: 'Fully managed corporate sports days — book the venue, we handle production and highlights.' },
+const STATS = [
+  { target: 300, suffix: '+', label: 'Events Executed' },
+  { target: 100, suffix: '+', label: 'Corporate Clients' },
+  { target: 5, suffix: '+', label: 'Years Experience' },
+  { target: 24, suffix: '/7', label: 'Dedicated Support' },
+]
+
+const SERVICES = [
+  {
+    icon: <Trophy size={26} weight="bold" />,
+    title: 'Corporate Events',
+    body: 'Rewards & Recognition ceremonies, leadership summits, annual galas, and award nights — executed with boardroom-level precision.',
+    tags: ['Rewards', 'Recognition', 'Venue', 'Catering'],
+  },
+  {
+    icon: <RocketLaunch size={26} weight="bold" />,
+    title: 'Product Launch',
+    body: 'High-impact brand launches with dramatic staging, live demos, press coordination, and curated experiences.',
+    tags: ['Staging', 'Media', 'Celebrity', 'Streaming'],
+  },
+  {
+    icon: <SoccerBall size={26} weight="bold" />,
+    title: 'Sports Tournament',
+    body: 'Cricket, football, and multi-sport tournaments with live scoring, streaming, umpires, and branded production.',
+    tags: ['Scorers', 'Streaming', 'Merchandise', 'Umpires'],
+  },
+  {
+    icon: <Mountains size={26} weight="bold" />,
+    title: 'Team Offsite',
+    body: 'Curated offsite experiences with team-building activities, adventure sports, and memorable group outings.',
+    tags: ['Team Building', 'Adventure', 'Logistics', 'AV'],
+  },
+  {
+    icon: <ForkKnife size={26} weight="bold" />,
+    title: 'Thematic Team Dinner',
+    body: 'Immersive Bollywood nights, enchanted dinners, and luxury galas with bespoke decor and live entertainment.',
+    tags: ['Decor', 'DJ / Music', 'Anchor', 'Photography'],
+  },
+  {
+    icon: <Confetti size={26} weight="bold" />,
+    title: 'Themed Birthday Party',
+    body: 'A themed birthday party turns a simple space into an immersive experience where every detail comes together to create a truly special celebration.',
+    tags: ['Decor', 'Cake', 'Entertainment', 'Photography'],
+  },
+]
+
+const TESTIMONIAL = {
+  quote: 'We thank SportVot for their support in partnering with us for our Cricket event. Our team enjoyed the spirit of the game. The event was well planned.',
+  initials: 'SM',
+  name: 'Shruti Mody',
+  role: 'Nuvama Asset Management',
+}
+
+const CLIENTS = [
+  'J.P. Morgan', 'Morgan Stanley', 'EY', 'Nuvama Asset Management', 'BSE', 'SBFC', 'Niva Bupa Health Insurance', 'Kalpataru', 'Sleek by Asian Paints',
+]
+
+const CATEGORIES = [
+  'Corporate Events',
+  'Product Launch',
+  'Sports Tournament',
+  'Team Offsite',
+  'Thematic Team Dinner',
+  'Themed Birthday Party',
+  'Not sure — let\'s talk',
 ]
 
 export default function Play() {
@@ -22,76 +83,107 @@ export default function Play() {
       >
         <Container>
           <Reveal>
-            <Eyebrow>SportVot Play — The Future of Casual Sports</Eyebrow>
+            <Eyebrow>SportVot Play — Corporate & Sports Events</Eyebrow>
           </Reveal>
           <Reveal as="h1" className="mt-5 max-w-[1180px] text-balance font-display text-[clamp(36px,5.2vw,58px)] font-extrabold tracking-[-0.02em] text-sv-white">
-            Play with passion. Get it live-streamed.
+            India's Leading Event Experts.
           </Reveal>
           <Reveal as="p" className="mt-5 max-w-[880px] text-[19px] text-sv-text-muted">
-            Book a streaming-enabled turf in Mumbai or Delhi NCR. Join an open match, or host a fully managed corporate sports event. Every game is
-            live-streamed. Every player walks away with a highlight reel.
+            From concept to curtain call — strategic planning, flawless production, live streaming, and end-to-end event management.
           </Reveal>
           <Reveal className="mt-8 flex flex-wrap gap-4">
-            <Btn to="/contact" variant="primary">
-              Book a Turf
+            <Btn to="#proposal" variant="primary">
+              Book a Consultation
             </Btn>
-            <Btn to="/live-tv" variant="outline">
-              ▶ Watch Play Highlights
+            <Btn href="tel:+917738698820" variant="outline">
+              <Phone size={16} weight="bold" /> Call Now
             </Btn>
+          </Reveal>
+          <Reveal className="mt-16">
+            <StatsGrid stats={STATS} />
           </Reveal>
         </Container>
       </section>
 
       <Section>
         <Container>
-          <RevealGroup className="grid grid-cols-3 gap-6 max-[900px]:grid-cols-1">
-            {FEATURES.map((f) => (
-              <PlayCard key={f.title} {...f} />
-            ))}
-          </RevealGroup>
+          <SectionHead eyebrow="Why Choose Us" center className="mx-auto">
+            <h2 className="mt-3 text-balance font-display text-[clamp(32px,5vw,56px)] font-extrabold text-sv-white">
+              We don't just plan events. We engineer memories.
+            </h2>
+            <p className="mx-auto mt-4 max-w-[820px] text-center text-[19px] text-sv-text-muted">
+              From concept to curtain call, every detail is precision-engineered to exceed expectations.
+            </p>
+          </SectionHead>
         </Container>
       </Section>
 
       <Section dark>
         <Container>
-          <TwoCol>
-            <ColMedia reverse>
-              Your match.
-              <br />
-              Your highlight reel.
-            </ColMedia>
-            <Reveal>
-              <p className="font-display text-xs font-bold uppercase tracking-[0.16em] text-sv-primary-light">How SportVot Play Works</p>
-              <h2 className="mt-4 font-display text-[clamp(28px,4.5vw,40px)] font-extrabold text-sv-white">From kickoff to highlight reel, in one booking.</h2>
-              <ListCheck
-                items={[
-                  'Book a streaming-enabled turf online in under two minutes',
-                  "Every match is captured with SportVot's automated multi-camera rig",
-                  'Walk away with a personalised player card and match highlight reel',
-                  'Share instantly to social — no editing required',
-                ]}
-              />
-              <div className="mt-8">
-                <Btn to="/contact" variant="primary">
-                  Book Your Slot →
-                </Btn>
-              </div>
-            </Reveal>
-          </TwoCol>
+          <SectionHead eyebrow="Our Services" center className="mx-auto">
+            <h2 className="mt-3 text-balance font-display text-[clamp(32px,5vw,56px)] font-extrabold text-sv-white">Every event type, handled with excellence.</h2>
+          </SectionHead>
+          <RevealGroup className="mt-14 grid grid-cols-3 gap-6 max-[900px]:grid-cols-1">
+            {SERVICES.map((s) => (
+              <ServiceCard key={s.title} {...s} />
+            ))}
+          </RevealGroup>
         </Container>
       </Section>
 
       <Section>
         <Container>
-          <CTAStrip
-            eyebrow="Corporate & Community Events"
-            title="Hosting a tournament, office league, or fan day?"
-            body="We manage the turf, the production, and the highlight delivery — you just show up and play."
+          <SectionHead eyebrow="Customer Reviews" center className="mx-auto mb-14">
+            <h2 className="mt-3 text-balance font-display text-[clamp(32px,5vw,56px)] font-extrabold text-sv-white">What our clients say.</h2>
+          </SectionHead>
+          <Reveal className="mx-auto max-w-[640px]">
+            <TestimonialCard {...TESTIMONIAL} />
+          </Reveal>
+        </Container>
+      </Section>
+
+      <Marquee items={CLIENTS} label="Brands that trust us" />
+
+      <Section id="proposal">
+        <Container>
+          <Reveal
+            scale
+            className="relative mx-auto max-w-[640px] overflow-hidden rounded-sv-xl border border-sv-border bg-sv-surface p-12 max-[900px]:p-6"
           >
-            <Btn to="/contact" variant="primary">
-              Talk to Our Events Team
-            </Btn>
-          </CTAStrip>
+            <div className="text-center">
+              <Eyebrow center>Get in Touch</Eyebrow>
+              <h2 className="mt-3 font-display text-[clamp(28px,4vw,40px)] font-extrabold text-sv-white">Let's Create Something Extraordinary</h2>
+              <p className="mx-auto mt-3 max-w-[460px] text-sv-text-muted">
+                From concept to curtain call, we handle everything with precision and passion. Let's make your next event unforgettable.
+              </p>
+            </div>
+            <div className="mt-8">
+              <DemoForm submitLabel="Book a Consultation">
+                <Field label="Name *">
+                  <TextInput type="text" required placeholder="Your full name" />
+                </Field>
+                <Field label="Phone Number *">
+                  <TextInput type="tel" required placeholder="10-digit number" />
+                </Field>
+                <Field label="Company Name">
+                  <TextInput type="text" placeholder="Your company" />
+                </Field>
+                <Field label="Category">
+                  <SelectInput defaultValue="">
+                    <option value="" disabled>
+                      Select a category
+                    </option>
+                    {CATEGORIES.map((c) => (
+                      <option key={c}>{c}</option>
+                    ))}
+                  </SelectInput>
+                </Field>
+              </DemoForm>
+            </div>
+            <p className="mt-4 text-center text-xs text-sv-text-faint">
+              +91 77386 98820 · play@sportvot.com
+            </p>
+          </Reveal>
         </Container>
       </Section>
     </>

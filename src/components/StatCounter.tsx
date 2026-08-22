@@ -8,10 +8,8 @@ export type Stat = { target: number; suffix: string; label: string }
 export function StatsGrid({ stats, className }: { stats: Stat[]; className?: string }) {
   return (
     <div
-      className={cn(
-        'grid grid-cols-5 gap-px overflow-hidden rounded-sv-lg border border-sv-border bg-sv-border max-[900px]:grid-cols-2',
-        className,
-      )}
+      className={cn('grid gap-px overflow-hidden rounded-sv-lg border border-sv-border bg-sv-border max-[900px]:!grid-cols-2', className)}
+      style={{ gridTemplateColumns: `repeat(${stats.length}, minmax(0, 1fr))` }}
     >
       {stats.map((s) => (
         <StatCell key={s.label} {...s} />

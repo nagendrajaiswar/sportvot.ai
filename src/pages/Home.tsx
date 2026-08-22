@@ -6,7 +6,9 @@ import { ForkCard, TestimonialCard } from '../components/cards'
 import { StatsGrid } from '../components/StatCounter'
 import { DemoForm, Field, FormGrid, TextInput, SelectInput, TextareaInput } from '../components/forms'
 
-const MARQUEE_ITEMS = ['600,000+ Games Produced', '52+ Sports', '32+ Countries', '75+ Federations', '100Mn+ Digital Viewers']
+const CLIENTS = [
+  'J.P. Morgan', 'Morgan Stanley', 'EY', 'Nuvama Asset Management', 'BSE', 'SBFC', 'Niva Bupa Health Insurance', 'Kalpataru', 'Sleek by Asian Paints',
+]
 
 const STATS = [
   { target: 600000, suffix: '+', label: 'Games Produced' },
@@ -55,7 +57,7 @@ export default function Home() {
   return (
     <>
       <HomeHero />
-      <Marquee items={MARQUEE_ITEMS} />
+      <Marquee items={CLIENTS} label="Trusted by teams at" />
 
       <Section>
         <Container>
@@ -66,9 +68,9 @@ export default function Home() {
           </SectionHead>
           <RevealGroup className="grid grid-cols-2 items-stretch gap-6 max-[900px]:grid-cols-1">
             <ForkCard
-              to="/for-organisations"
+              to="/live-production"
               variant="blue"
-              tag="For Organisations"
+              tag="SportVot Live Production"
               title="I want to stream and produce my sport."
               audience="Clubs · Academies · Leagues · Federations · Associations"
               body="Take your tournaments, matches, and leagues live, with multi-camera capture, broadcast-quality graphics, live scoring, advertisement cues, multi-lingual commentary, and automated highlights. No broadcast crew. No expensive hardware."
@@ -78,9 +80,9 @@ export default function Home() {
               to="/play"
               variant="green"
               tag="SportVot Play"
-              title="I want to play, host an event — and get it live streamed."
-              audience="Players · Teams · Corporate Events"
-              body="Book a streaming-enabled turf in Mumbai or Delhi NCR. Every game is live-streamed. Every player walks away with a highlight reel."
+              title="I want to host a corporate event, or a sports tournament."
+              audience="Corporates · Teams · Brands"
+              body="From concept to curtain call — corporate galas, product launches, sports tournaments, and team offsites, with strategic planning, flawless production, and live streaming built in."
               cta="Explore SportVot Play →"
             />
           </RevealGroup>

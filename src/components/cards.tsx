@@ -66,6 +66,26 @@ export function CapGrid({ children }: { children: React.ReactNode }) {
   )
 }
 
+/* ---------- Feature card (icon-led, room for real media later) ---------- */
+
+export function FeatureCard({ icon, statLine, title, body }: { icon: React.ReactNode; statLine?: string; title: string; body: string }) {
+  const { ref, onMouseEnter, onMouseMove, onMouseLeave } = useTilt<HTMLDivElement>()
+  return (
+    <div
+      ref={ref}
+      onMouseEnter={onMouseEnter}
+      onMouseMove={onMouseMove}
+      onMouseLeave={onMouseLeave}
+      className="stroke-run rounded-sv-lg border border-sv-border bg-sv-surface p-8 transition-[border-color,box-shadow] duration-300 hover:border-sv-primary-border hover:shadow-[0_20px_50px_-12px_rgba(0,0,0,.5)]"
+    >
+      <div className="flex h-14 w-14 items-center justify-center rounded-sv-md border border-sv-primary-border bg-sv-primary-dim text-sv-primary-light">{icon}</div>
+      {statLine && <div className="mt-5 font-display text-xs font-bold uppercase tracking-[0.08em] text-sv-primary-light">{statLine}</div>}
+      <h4 className="mt-2 font-display text-xl font-extrabold text-sv-white">{title}</h4>
+      <p className="mt-2.5 text-sm text-sv-text-muted">{body}</p>
+    </div>
+  )
+}
+
 /* ---------- Case study / news card ---------- */
 
 export function CaseCard({
@@ -132,6 +152,32 @@ export function PlayCard({ icon, title, body, cta }: { icon: React.ReactNode; ti
       <h3 className="mt-4 text-[19px] text-sv-white">{title}</h3>
       <p className="mt-2 text-sm text-sv-text-muted">{body}</p>
       {cta && <div className="mt-5">{cta}</div>}
+    </div>
+  )
+}
+
+/* ---------- Service card (icon + description + tag chips) ---------- */
+
+export function ServiceCard({ icon, title, body, tags }: { icon: React.ReactNode; title: string; body: string; tags: string[] }) {
+  const { ref, onMouseEnter, onMouseMove, onMouseLeave } = useTilt<HTMLDivElement>()
+  return (
+    <div
+      ref={ref}
+      onMouseEnter={onMouseEnter}
+      onMouseMove={onMouseMove}
+      onMouseLeave={onMouseLeave}
+      className="stroke-run rounded-sv-lg border border-sv-border bg-sv-surface p-8 transition-[border-color,box-shadow] duration-300 hover:border-sv-primary-border hover:shadow-[0_20px_50px_-12px_rgba(0,0,0,.5)]"
+    >
+      <div className="flex h-14 w-14 items-center justify-center rounded-sv-md border border-sv-primary-border bg-sv-primary-dim text-sv-primary-light">{icon}</div>
+      <h3 className="mt-5 font-display text-xl font-extrabold text-sv-white">{title}</h3>
+      <p className="mt-2.5 text-sm text-sv-text-muted">{body}</p>
+      <div className="mt-5 flex flex-wrap gap-2">
+        {tags.map((tag) => (
+          <span key={tag} className="rounded-full border border-sv-border-strong px-3 py-1 text-[11px] font-bold uppercase tracking-[0.04em] text-sv-text-muted">
+            {tag}
+          </span>
+        ))}
+      </div>
     </div>
   )
 }

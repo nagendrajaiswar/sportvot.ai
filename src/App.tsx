@@ -3,6 +3,7 @@ import Layout from './components/Layout'
 import Home from './pages/Home'
 import LiveProduction from './pages/LiveProduction'
 import Play from './pages/Play'
+import BlogPost from './pages/BlogPost'
 import About from './pages/About'
 import News from './pages/News'
 import CaseStudies from './pages/CaseStudies'
@@ -16,6 +17,7 @@ function App() {
         <Route path="/" element={<Home />} />
         <Route path="/live-production" element={<LiveProduction />} />
         <Route path="/play" element={<Play />} />
+        <Route path="/play/blog/:slug" element={<BlogPost />} />
         <Route path="/about" element={<About />} />
         <Route path="/news" element={<News />} />
         <Route path="/case-studies" element={<CaseStudies />} />

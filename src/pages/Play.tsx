@@ -8,6 +8,7 @@ import { cn } from '../lib/utils'
 import Marquee from '../components/Marquee'
 import Btn from '../components/Btn'
 import { DemoForm, Field, TextInput, SelectInput } from '../components/forms'
+import { BLOG_POSTS } from '../data/blog'
 
 const serviceCorporateEvents = '/play/service-corporate-events.png'
 const serviceProductLaunch = '/play/service-product-launch.png'
@@ -15,9 +16,6 @@ const serviceSportsTournament = '/play/service-sports-tournament.png'
 const serviceTeamOffsite = '/play/service-team-offsite.png'
 const serviceThematicDinner = '/play/service-thematic-dinner.png'
 const serviceBirthdayParty = '/play/service-birthday-party.jpg'
-const blogCorporateEvents = '/play/blog-corporate-events.png'
-const blogCorporateOffsites = '/play/blog-corporate-offsites.jpeg'
-const blogWhySportvot = '/play/blog-why-sportvot.png'
 
 const STATS = [
   { target: 300, suffix: '+', label: 'Events Executed' },
@@ -62,27 +60,6 @@ const SERVICES = [
     title: 'Themed Birthday Party',
     body: 'A themed birthday party turns a simple space into an immersive experience where every detail comes together to create a truly special celebration.',
     tags: ['Decor', 'Cake', 'Entertainment', 'Photography'],
-  },
-]
-
-const BLOG_POSTS = [
-  {
-    image: blogCorporateEvents,
-    title: 'Top Corporate Event Ideas to Boost Employee Engagement',
-    body: 'Corporate events are no longer just formal gatherings. Today, companies use corporate events as a way to improve employee engagement activities, boost morale, and build stronger teams.',
-    href: 'https://playevents.sportvot.com/blog/corporate-event-ideas-employee-engagement',
-  },
-  {
-    image: blogCorporateOffsites,
-    title: 'Best Corporate Offsites for Team Building and Engagement',
-    body: 'Corporate offsites are becoming one of the most effective ways to improve employee engagement activities. They give employees a break from their routine and create opportunities to connect in a relaxed environment.',
-    href: 'https://playevents.sportvot.com/blog/best-corporate-offsites-team-building',
-  },
-  {
-    image: blogWhySportvot,
-    title: 'Why SportVot is the Right Choice for Your Corporate Events',
-    body: 'When it comes to planning corporate events or corporate offsites, companies are no longer looking for basic venues. They want experiences that drive real employee engagement activities and create lasting impact.',
-    href: 'https://playevents.sportvot.com/blog/why-sportvot-right-choice-corporate-events',
   },
 ]
 
@@ -226,7 +203,7 @@ export default function Play() {
         </Container>
       </Section>
 
-      <Section dark>
+      <Section dark id="blog">
         <Container>
           <SectionHead eyebrow="Insights" center className="mx-auto mb-14">
             <h2 className="mt-3 text-balance font-display text-[clamp(32px,5vw,56px)] font-extrabold text-sv-white">Our Blog</h2>
@@ -236,7 +213,7 @@ export default function Play() {
           </SectionHead>
           <RevealGroup className="grid grid-cols-3 gap-6 max-[900px]:grid-cols-1">
             {BLOG_POSTS.map((post) => (
-              <BlogCard key={post.title} {...post} />
+              <BlogCard key={post.slug} image={post.image} title={post.title} body={post.excerpt} to={`/play/blog/${post.slug}`} />
             ))}
           </RevealGroup>
         </Container>

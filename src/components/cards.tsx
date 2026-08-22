@@ -188,7 +188,7 @@ export function ServiceCard({ image, title, body, tags }: { image: string; title
 
 /* ---------- Blog card (image + title + excerpt + read more) ---------- */
 
-export function BlogCard({ image, title, body, href }: { image: string; title: string; body: string; href: string }) {
+export function BlogCard({ image, title, body, to }: { image: string; title: string; body: string; to: string }) {
   const { ref, onMouseEnter, onMouseMove, onMouseLeave } = useTilt<HTMLDivElement>()
   return (
     <div
@@ -204,9 +204,9 @@ export function BlogCard({ image, title, body, href }: { image: string; title: s
       <div className="p-6">
         <h3 className="font-display text-lg font-extrabold leading-snug text-sv-white">{title}</h3>
         <p className="mt-3 line-clamp-3 text-sm text-sv-text-muted">{body}</p>
-        <a href={href} target="_blank" rel="noopener" className="mt-4 inline-flex items-center gap-1.5 text-sm font-bold text-sv-primary-light">
+        <Link to={to} className="mt-4 inline-flex items-center gap-1.5 text-sm font-bold text-sv-primary-light">
           Read More →
-        </a>
+        </Link>
       </div>
     </div>
   )

@@ -156,9 +156,9 @@ export function PlayCard({ icon, title, body, cta }: { icon: React.ReactNode; ti
   )
 }
 
-/* ---------- Service card (icon + description + tag chips) ---------- */
+/* ---------- Service card (image-led + description + tag chips) ---------- */
 
-export function ServiceCard({ icon, title, body, tags }: { icon: React.ReactNode; title: string; body: string; tags: string[] }) {
+export function ServiceCard({ image, title, body, tags }: { image: string; title: string; body: string; tags: string[] }) {
   const { ref, onMouseEnter, onMouseMove, onMouseLeave } = useTilt<HTMLDivElement>()
   return (
     <div
@@ -166,17 +166,47 @@ export function ServiceCard({ icon, title, body, tags }: { icon: React.ReactNode
       onMouseEnter={onMouseEnter}
       onMouseMove={onMouseMove}
       onMouseLeave={onMouseLeave}
-      className="stroke-run rounded-sv-lg border border-sv-border bg-sv-surface p-8 transition-[border-color,box-shadow] duration-300 hover:border-sv-primary-border hover:shadow-[0_20px_50px_-12px_rgba(0,0,0,.5)]"
+      className="stroke-run group overflow-hidden rounded-sv-lg border border-sv-border bg-sv-surface transition-[border-color,box-shadow] duration-300 hover:border-sv-primary-border hover:shadow-[0_20px_50px_-12px_rgba(0,0,0,.5)]"
     >
-      <div className="flex h-14 w-14 items-center justify-center rounded-sv-md border border-sv-primary-border bg-sv-primary-dim text-sv-primary-light">{icon}</div>
-      <h3 className="mt-5 font-display text-xl font-extrabold text-sv-white">{title}</h3>
-      <p className="mt-2.5 text-sm text-sv-text-muted">{body}</p>
-      <div className="mt-5 flex flex-wrap gap-2">
-        {tags.map((tag) => (
-          <span key={tag} className="rounded-full border border-sv-border-strong px-3 py-1 text-[11px] font-bold uppercase tracking-[0.04em] text-sv-text-muted">
-            {tag}
-          </span>
-        ))}
+      <div className="aspect-3/2 overflow-hidden">
+        <img src={image} alt={title} className="h-full w-full object-cover transition-transform duration-500 group-hover:scale-105" loading="lazy" />
+      </div>
+      <div className="p-8">
+        <h3 className="font-display text-xl font-extrabold text-sv-white">{title}</h3>
+        <p className="mt-2.5 text-sm text-sv-text-muted">{body}</p>
+        <div className="mt-5 flex flex-wrap gap-2">
+          {tags.map((tag) => (
+            <span key={tag} className="rounded-full border border-sv-border-strong px-3 py-1 text-[11px] font-bold uppercase tracking-[0.04em] text-sv-text-muted">
+              {tag}
+            </span>
+          ))}
+        </div>
+      </div>
+    </div>
+  )
+}
+
+/* ---------- Blog card (image + title + excerpt + read more) ---------- */
+
+export function BlogCard({ image, title, body, href }: { image: string; title: string; body: string; href: string }) {
+  const { ref, onMouseEnter, onMouseMove, onMouseLeave } = useTilt<HTMLDivElement>()
+  return (
+    <div
+      ref={ref}
+      onMouseEnter={onMouseEnter}
+      onMouseMove={onMouseMove}
+      onMouseLeave={onMouseLeave}
+      className="stroke-run group overflow-hidden rounded-sv-lg border border-sv-border bg-sv-surface transition-[border-color,box-shadow] duration-300 hover:border-sv-primary-border hover:shadow-[0_20px_50px_-12px_rgba(0,0,0,.5)]"
+    >
+      <div className="aspect-3/2 overflow-hidden">
+        <img src={image} alt={title} className="h-full w-full object-cover transition-transform duration-500 group-hover:scale-105" loading="lazy" />
+      </div>
+      <div className="p-6">
+        <h3 className="font-display text-lg font-extrabold leading-snug text-sv-white">{title}</h3>
+        <p className="mt-3 line-clamp-3 text-sm text-sv-text-muted">{body}</p>
+        <a href={href} target="_blank" rel="noopener" className="mt-4 inline-flex items-center gap-1.5 text-sm font-bold text-sv-primary-light">
+          Read More →
+        </a>
       </div>
     </div>
   )

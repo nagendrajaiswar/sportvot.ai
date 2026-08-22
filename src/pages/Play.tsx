@@ -1,13 +1,23 @@
 import { useMemo, useState } from 'react'
-import { Trophy, RocketLaunch, SoccerBall, Mountains, ForkKnife, Confetti, Phone, Buildings } from '@phosphor-icons/react'
+import { Phone, Buildings } from '@phosphor-icons/react'
 import { Container, Section, SectionHead, Eyebrow } from '../components/ui'
 import { Reveal, RevealGroup } from '../components/Reveal'
-import { ServiceCard, TestimonialCard, VenueCard } from '../components/cards'
+import { ServiceCard, TestimonialCard, VenueCard, BlogCard } from '../components/cards'
 import { StatsGrid } from '../components/StatCounter'
 import { cn } from '../lib/utils'
 import Marquee from '../components/Marquee'
 import Btn from '../components/Btn'
 import { DemoForm, Field, TextInput, SelectInput } from '../components/forms'
+
+const serviceCorporateEvents = '/play/service-corporate-events.png'
+const serviceProductLaunch = '/play/service-product-launch.png'
+const serviceSportsTournament = '/play/service-sports-tournament.png'
+const serviceTeamOffsite = '/play/service-team-offsite.png'
+const serviceThematicDinner = '/play/service-thematic-dinner.png'
+const serviceBirthdayParty = '/play/service-birthday-party.jpg'
+const blogCorporateEvents = '/play/blog-corporate-events.png'
+const blogCorporateOffsites = '/play/blog-corporate-offsites.jpeg'
+const blogWhySportvot = '/play/blog-why-sportvot.png'
 
 const STATS = [
   { target: 300, suffix: '+', label: 'Events Executed' },
@@ -18,40 +28,61 @@ const STATS = [
 
 const SERVICES = [
   {
-    icon: <Trophy size={26} weight="bold" />,
+    image: serviceCorporateEvents,
     title: 'Corporate Events',
     body: 'Rewards & Recognition ceremonies, leadership summits, annual galas, and award nights — executed with boardroom-level precision.',
     tags: ['Rewards', 'Recognition', 'Venue', 'Catering'],
   },
   {
-    icon: <RocketLaunch size={26} weight="bold" />,
+    image: serviceProductLaunch,
     title: 'Product Launch',
     body: 'High-impact brand launches with dramatic staging, live demos, press coordination, and curated experiences.',
     tags: ['Staging', 'Media', 'Celebrity', 'Streaming'],
   },
   {
-    icon: <SoccerBall size={26} weight="bold" />,
+    image: serviceSportsTournament,
     title: 'Sports Tournament',
     body: 'Cricket, football, and multi-sport tournaments with live scoring, streaming, umpires, and branded production.',
     tags: ['Scorers', 'Streaming', 'Merchandise', 'Umpires'],
   },
   {
-    icon: <Mountains size={26} weight="bold" />,
+    image: serviceTeamOffsite,
     title: 'Team Offsite',
     body: 'Curated offsite experiences with team-building activities, adventure sports, and memorable group outings.',
     tags: ['Team Building', 'Adventure', 'Logistics', 'AV'],
   },
   {
-    icon: <ForkKnife size={26} weight="bold" />,
+    image: serviceThematicDinner,
     title: 'Thematic Team Dinner',
     body: 'Immersive Bollywood nights, enchanted dinners, and luxury galas with bespoke decor and live entertainment.',
     tags: ['Decor', 'DJ / Music', 'Anchor', 'Photography'],
   },
   {
-    icon: <Confetti size={26} weight="bold" />,
+    image: serviceBirthdayParty,
     title: 'Themed Birthday Party',
     body: 'A themed birthday party turns a simple space into an immersive experience where every detail comes together to create a truly special celebration.',
     tags: ['Decor', 'Cake', 'Entertainment', 'Photography'],
+  },
+]
+
+const BLOG_POSTS = [
+  {
+    image: blogCorporateEvents,
+    title: 'Top Corporate Event Ideas to Boost Employee Engagement',
+    body: 'Corporate events are no longer just formal gatherings. Today, companies use corporate events as a way to improve employee engagement activities, boost morale, and build stronger teams.',
+    href: 'https://playevents.sportvot.com/blog/corporate-event-ideas-employee-engagement',
+  },
+  {
+    image: blogCorporateOffsites,
+    title: 'Best Corporate Offsites for Team Building and Engagement',
+    body: 'Corporate offsites are becoming one of the most effective ways to improve employee engagement activities. They give employees a break from their routine and create opportunities to connect in a relaxed environment.',
+    href: 'https://playevents.sportvot.com/blog/best-corporate-offsites-team-building',
+  },
+  {
+    image: blogWhySportvot,
+    title: 'Why SportVot is the Right Choice for Your Corporate Events',
+    body: 'When it comes to planning corporate events or corporate offsites, companies are no longer looking for basic venues. They want experiences that drive real employee engagement activities and create lasting impact.',
+    href: 'https://playevents.sportvot.com/blog/why-sportvot-right-choice-corporate-events',
   },
 ]
 
@@ -192,6 +223,22 @@ export default function Play() {
           <Reveal className="mx-auto max-w-[640px]">
             <TestimonialCard {...TESTIMONIAL} />
           </Reveal>
+        </Container>
+      </Section>
+
+      <Section dark>
+        <Container>
+          <SectionHead eyebrow="Insights" center className="mx-auto mb-14">
+            <h2 className="mt-3 text-balance font-display text-[clamp(32px,5vw,56px)] font-extrabold text-sv-white">Our Blog</h2>
+            <p className="mx-auto mt-4 max-w-[820px] text-center text-[19px] text-sv-text-muted">
+              Expert perspectives on corporate events, team building, and employee engagement.
+            </p>
+          </SectionHead>
+          <RevealGroup className="grid grid-cols-3 gap-6 max-[900px]:grid-cols-1">
+            {BLOG_POSTS.map((post) => (
+              <BlogCard key={post.title} {...post} />
+            ))}
+          </RevealGroup>
         </Container>
       </Section>
 

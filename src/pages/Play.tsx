@@ -9,6 +9,7 @@ import Marquee from '../components/Marquee'
 import PlayHero from '../components/PlayHero'
 import { DemoForm, Field, TextInput, SelectInput } from '../components/forms'
 import { BLOG_POSTS } from '../data/blog'
+import { CLIENT_LOGOS } from '../data/clients'
 
 const serviceCorporateEvents = '/play/service-corporate-events.png'
 const serviceProductLaunch = '/play/service-product-launch.png'
@@ -82,10 +83,6 @@ const TESTIMONIAL = {
   name: 'Shruti Mody',
   role: 'Nuvama Asset Management',
 }
-
-const CLIENTS = [
-  'J.P. Morgan', 'Morgan Stanley', 'EY', 'Nuvama Asset Management', 'BSE', 'SBFC', 'Niva Bupa Health Insurance', 'Kalpataru', 'Sleek by Asian Paints',
-]
 
 type Venue = { name: string; city: string; type: string; capacity: string }
 
@@ -210,7 +207,7 @@ export default function Play() {
         </Container>
       </Section>
 
-      <Marquee items={CLIENTS} label="Brands that trust us" />
+      <Marquee logos={CLIENT_LOGOS} label="Brands that trust us" />
 
       <Section id="proposal">
         <Container>

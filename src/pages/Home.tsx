@@ -5,10 +5,7 @@ import { RevealGroup, Reveal } from '../components/Reveal'
 import { ForkCard, TestimonialCard } from '../components/cards'
 import { StatsGrid } from '../components/StatCounter'
 import { DemoForm, Field, FormGrid, TextInput, SelectInput, TextareaInput } from '../components/forms'
-
-const CLIENTS = [
-  'J.P. Morgan', 'Morgan Stanley', 'EY', 'Nuvama Asset Management', 'BSE', 'SBFC', 'Niva Bupa Health Insurance', 'Kalpataru', 'Sleek by Asian Paints',
-]
+import { CLIENT_LOGOS } from '../data/clients'
 
 const STATS = [
   { target: 600000, suffix: '+', label: 'Games Produced' },
@@ -57,7 +54,7 @@ export default function Home() {
   return (
     <>
       <HomeHero />
-      <Marquee items={CLIENTS} label="Trusted by teams at" />
+      <Marquee logos={CLIENT_LOGOS} label="Trusted by teams at" />
 
       <Section>
         <Container>

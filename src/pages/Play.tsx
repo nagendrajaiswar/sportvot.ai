@@ -1,8 +1,10 @@
-import { Trophy, RocketLaunch, SoccerBall, Mountains, ForkKnife, Confetti, Phone } from '@phosphor-icons/react'
+import { useMemo, useState } from 'react'
+import { Trophy, RocketLaunch, SoccerBall, Mountains, ForkKnife, Confetti, Phone, Buildings } from '@phosphor-icons/react'
 import { Container, Section, SectionHead, Eyebrow } from '../components/ui'
 import { Reveal, RevealGroup } from '../components/Reveal'
-import { ServiceCard, TestimonialCard } from '../components/cards'
+import { ServiceCard, TestimonialCard, VenueCard } from '../components/cards'
 import { StatsGrid } from '../components/StatCounter'
+import { cn } from '../lib/utils'
 import Marquee from '../components/Marquee'
 import Btn from '../components/Btn'
 import { DemoForm, Field, TextInput, SelectInput } from '../components/forms'
@@ -64,6 +66,21 @@ const CLIENTS = [
   'J.P. Morgan', 'Morgan Stanley', 'EY', 'Nuvama Asset Management', 'BSE', 'SBFC', 'Niva Bupa Health Insurance', 'Kalpataru', 'Sleek by Asian Paints',
 ]
 
+type Venue = { name: string; city: string; type: string; capacity: string }
+
+const VENUES: Venue[] = [
+  { name: 'SkyLine Banquets', city: 'Mumbai', type: 'Banquet Hall', capacity: '200–500 guests' },
+  { name: 'GreenTurf Sports Arena', city: 'Mumbai', type: 'Sports Turf', capacity: 'Up to 22 players' },
+  { name: 'The Grand Convention Centre', city: 'Delhi NCR', type: 'Convention Center', capacity: '500–1000 guests' },
+  { name: 'Emerald Golf Resort', city: 'Delhi NCR', type: 'Resort', capacity: '100–300 guests' },
+  { name: 'Horizon Rooftop Lounge', city: 'Bangalore', type: 'Rooftop Venue', capacity: '80–150 guests' },
+  { name: 'Phoenix Sports Complex', city: 'Bangalore', type: 'Multi-Sport Stadium', capacity: 'Up to 5,000 spectators' },
+  { name: 'Riverside Retreat', city: 'Pune', type: 'Resort', capacity: '150–400 guests' },
+  { name: 'Novotel Convention Hall', city: 'Hyderabad', type: 'Banquet Hall', capacity: '300–600 guests' },
+]
+
+const CITIES = ['All Cities', ...Array.from(new Set(VENUES.map((v) => v.city)))]
+
 const CATEGORIES = [
   'Corporate Events',
   'Product Launch',
@@ -75,6 +92,9 @@ const CATEGORIES = [
 ]
 
 export default function Play() {
+  const [city, setCity] = useState('All Cities')
+  const venues = useMemo(() => (city === 'All Cities' ? VENUES : VENUES.filter((v) => v.city === city)), [city])
+
   return (
     <>
       <section
@@ -126,6 +146,39 @@ export default function Play() {
           <RevealGroup className="mt-14 grid grid-cols-3 gap-6 max-[900px]:grid-cols-1">
             {SERVICES.map((s) => (
               <ServiceCard key={s.title} {...s} />
+            ))}
+          </RevealGroup>
+        </Container>
+      </Section>
+
+      <Section>
+        <Container>
+          <SectionHead eyebrow="Venues" center className="mx-auto mb-10">
+            <h2 className="mt-3 text-balance font-display text-[clamp(32px,5vw,56px)] font-extrabold text-sv-white">Find the right venue for your event.</h2>
+            <p className="mx-auto mt-4 max-w-[820px] text-center text-[19px] text-sv-text-muted">
+              Sample listings shown below — our full venue directory is coming soon.
+            </p>
+          </SectionHead>
+          <div className="flex flex-wrap justify-center gap-3">
+            {CITIES.map((c) => (
+              <button
+                key={c}
+                type="button"
+                onClick={() => setCity(c)}
+                className={cn(
+                  'rounded-full border px-4 py-2 text-xs font-bold uppercase tracking-[0.04em] transition-colors duration-200',
+                  city === c
+                    ? 'border-sv-primary bg-sv-primary text-white'
+                    : 'border-sv-border-strong text-sv-text-muted hover:border-sv-primary-light hover:text-sv-primary-light',
+                )}
+              >
+                {c}
+              </button>
+            ))}
+          </div>
+          <RevealGroup className="mt-10 grid grid-cols-3 gap-6 max-[900px]:grid-cols-1">
+            {venues.map((v) => (
+              <VenueCard key={v.name} icon={<Buildings size={40} weight="duotone" />} name={v.name} city={v.city} type={v.type} capacity={v.capacity} />
             ))}
           </RevealGroup>
         </Container>

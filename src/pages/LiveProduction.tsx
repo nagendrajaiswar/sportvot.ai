@@ -19,6 +19,7 @@ import { FeatureCard, CaseCard, MediaCard } from '../components/cards'
 import { cn } from '../lib/utils'
 import Btn from '../components/Btn'
 import { DemoForm, Field, FormGrid, TextInput, SelectInput, TextareaInput } from '../components/forms'
+import { CASE_STUDIES } from '../data/caseStudies'
 
 type Step = { title: string; intro: string; items: string[]; image: string }
 
@@ -62,8 +63,8 @@ const CLOUD_STUDIO_FEATURES = [
   { icon: <Microphone size={26} weight="bold" />, image: '/play/cloud-remote-commentary.gif', statLine: 'Any language. Any location.', title: 'Remote Commentary', body: 'Commentators join from anywhere, mixed live into your feed.' },
   { icon: <Lightning size={26} weight="bold" />, image: '/play/cloud-auto-highlights.gif', statLine: 'Ready within 5 seconds', title: 'AI Auto Highlights', body: 'Every key moment — clipped and shareable before the crowd settles.' },
   { icon: <Handshake size={26} weight="bold" />, image: '/play/cloud-ad-sponsor.gif', statLine: 'Built into every broadcast', title: 'Ad & Sponsor Integration', body: 'Pre-roll, mid-roll and post-roll ads, overlays, and virtual on-field advertising.' },
-  { icon: <Gauge size={26} weight="bold" />, statLine: 'Less than 5 seconds latency', title: 'Ultra-Low Latency', body: 'Your audience watches as it happens — not 30 seconds behind.' },
-  { icon: <ArrowsClockwise size={26} weight="bold" />, statLine: 'Any angle. Any moment.', title: 'Instant Multi-Angle Replay', body: 'Replay key moments from every active camera — live.' },
+  { icon: <Gauge size={26} weight="bold" />, image: '/play/cloud-ultra-low-latency.svg', statLine: 'Less than 5 seconds latency', title: 'Ultra-Low Latency', body: 'Your audience watches as it happens — not 30 seconds behind.' },
+  { icon: <ArrowsClockwise size={26} weight="bold" />, image: '/play/cloud-multi-angle-replay.svg', statLine: 'Any angle. Any moment.', title: 'Instant Multi-Angle Replay', body: 'Replay key moments from every active camera — live.' },
 ]
 
 const CAMERAS = [
@@ -78,17 +79,6 @@ const ADVANCED_FEATURES = [
   { icon: <Target size={26} weight="bold" />, statLine: 'Multi-sport Ball Tracking', title: 'Follow the play, automatically', body: 'Ball-tracking tuned per sport — cricket, football, padel and more — feeding stats and replay in real time.' },
   { icon: <PersonSimpleRun size={26} weight="bold" />, statLine: 'Player Tracking', title: 'Every player, every movement', body: 'Individual player tracking for heatmaps, distance covered, and performance data.' },
   { icon: <ChartLineUp size={26} weight="bold" />, statLine: 'Analytics', title: 'Numbers that back the story', body: 'Match and season-level analytics for coaches, federations, and broadcasters alike.' },
-]
-
-const CASES = [
-  { thumb: 'Football · India', metric: '2.4Mn', metricLabel: 'views across a single tournament weekend' },
-  { thumb: 'Cricket · UAE', metric: '18', metricLabel: 'matches live streamed in 48 hours' },
-  { thumb: 'Kabaddi · India', metric: '800+', metricLabel: 'player profiles created in one season' },
-  { thumb: 'Football · Nigeria', metric: '3', metricLabel: 'seasons produced end-to-end' },
-  { thumb: 'Badminton · Indonesia', metric: '40+', metricLabel: 'events streamed nationwide' },
-  { thumb: 'Basketball · Kenya', metric: '1', metricLabel: 'national league, fully digitised' },
-  { thumb: 'Hockey · UK', metric: '5+', metricLabel: 'seasons of club-level coverage' },
-  { thumb: 'Volleyball · Philippines', metric: '2', metricLabel: 'leagues produced simultaneously' },
 ]
 
 const SERVICES = [
@@ -195,8 +185,8 @@ export default function LiveProduction() {
             <h2 className="mt-3 text-balance font-display text-[clamp(32px,5vw,56px)] font-extrabold text-sv-white">Who's already using SportVot.</h2>
             <p className="mx-auto mt-4 max-w-[820px] text-center text-[19px] text-sv-text-muted">From district leagues to international federations — across 30+ countries.</p>
           </SectionHead>
-          <div className="-mx-6 mt-12 flex snap-x snap-mandatory gap-5 overflow-x-auto px-6 pb-4 [-webkit-overflow-scrolling:touch] [scrollbar-width:none] [&::-webkit-scrollbar]:hidden">
-            {CASES.map((c) => (
+          <div className="-mx-6 mt-6 flex snap-x snap-mandatory gap-5 overflow-x-auto px-6 pb-6 pt-6 [-webkit-overflow-scrolling:touch] [scrollbar-width:none] [&::-webkit-scrollbar]:hidden">
+            {CASE_STUDIES.map((c) => (
               <div key={c.thumb} className="w-[300px] shrink-0 snap-start">
                 <CaseCard {...c} meta="Client Case Study" readLabel="Read case study →" href="/case-studies" />
               </div>

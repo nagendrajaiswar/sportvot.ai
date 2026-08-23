@@ -26,7 +26,7 @@ type ButtonElProps = BaseProps & {
 export type BtnProps = LinkProps | AnchorProps | ButtonElProps
 
 const base =
-  'relative inline-flex items-center justify-center gap-2.5 whitespace-nowrap font-display font-bold rounded-full border border-transparent cursor-pointer overflow-hidden isolate transition-[transform,box-shadow,border-color,color] duration-300 will-change-transform'
+  'relative inline-flex items-center justify-center gap-2.5 whitespace-nowrap font-display font-bold rounded-full border cursor-pointer overflow-hidden isolate transition-[transform,box-shadow,border-color,background-color,color] duration-300 will-change-transform'
 
 const sizeClasses: Record<Size, string> = {
   md: 'text-[15px] px-8 py-4',
@@ -34,9 +34,9 @@ const sizeClasses: Record<Size, string> = {
 }
 
 const variantClasses: Record<Variant, string> = {
-  primary: 'bg-sv-primary text-white hover:bg-[#2b2aa6] hover:shadow-[0_12px_40px_rgba(120,119,224,.45)]',
-  outline: 'bg-transparent text-sv-white border-sv-border-strong hover:border-sv-primary-light hover:text-sv-primary-light',
-  live: 'bg-sv-live text-white hover:shadow-[0_12px_40px_rgba(255,0,67,.35)]',
+  primary: 'border-transparent bg-sv-primary text-white hover:bg-[#2b2aa6] hover:shadow-[0_12px_40px_rgba(120,119,224,.45)]',
+  outline: 'bg-transparent text-sv-white border-sv-border-strong hover:border-sv-primary hover:bg-sv-primary',
+  live: 'border-transparent bg-sv-live text-white hover:shadow-[0_12px_40px_rgba(255,0,67,.35)]',
 }
 
 export default function Btn(props: BtnProps) {

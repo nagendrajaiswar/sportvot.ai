@@ -1,4 +1,5 @@
 import { useState } from 'react'
+import { CaretDown } from '@phosphor-icons/react'
 import { cn } from '../lib/utils'
 
 const fieldClasses =
@@ -32,7 +33,12 @@ export function TextInput(props: React.InputHTMLAttributes<HTMLInputElement>) {
 }
 
 export function SelectInput(props: React.SelectHTMLAttributes<HTMLSelectElement>) {
-  return <select {...props} className={cn(fieldClasses, props.className)} />
+  return (
+    <div className="relative">
+      <select {...props} className={cn(fieldClasses, 'w-full appearance-none pr-11', props.className)} />
+      <CaretDown size={16} weight="bold" className="pointer-events-none absolute right-4 top-1/2 -translate-y-1/2 text-sv-text-muted" />
+    </div>
+  )
 }
 
 export function TextareaInput(props: React.TextareaHTMLAttributes<HTMLTextAreaElement>) {

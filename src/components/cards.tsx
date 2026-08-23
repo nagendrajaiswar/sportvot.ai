@@ -81,15 +81,8 @@ export function FeatureCard({
   title: string
   body: string
 }) {
-  const { ref, onMouseEnter, onMouseMove, onMouseLeave } = useTilt<HTMLDivElement>()
   return (
-    <div
-      ref={ref}
-      onMouseEnter={onMouseEnter}
-      onMouseMove={onMouseMove}
-      onMouseLeave={onMouseLeave}
-      className="stroke-run overflow-hidden rounded-sv-lg border border-sv-border bg-sv-surface transition-[border-color,box-shadow] duration-300 hover:border-sv-primary-border hover:shadow-[0_20px_50px_-12px_rgba(0,0,0,.5)]"
-    >
+    <div className="overflow-hidden rounded-sv-lg border border-sv-border bg-sv-surface">
       {image && (
         <div className="flex aspect-4/3 items-center justify-center overflow-hidden bg-sv-black-soft p-6">
           <img src={image} alt={title} className="h-full w-full object-contain" loading="lazy" />
@@ -164,28 +157,28 @@ export function CaseCard({
       onMouseEnter={onMouseEnter}
       onMouseMove={onMouseMove}
       onMouseLeave={onMouseLeave}
-      className="stroke-run overflow-hidden rounded-sv-lg border border-sv-border bg-sv-surface transition-[border-color,box-shadow] duration-300 hover:border-sv-primary-border hover:shadow-[0_20px_50px_-12px_rgba(0,0,0,.5)]"
+      className="stroke-run flex h-full flex-col overflow-hidden rounded-sv-lg border border-sv-border bg-sv-surface transition-[border-color,box-shadow] duration-300 hover:border-sv-primary-border hover:shadow-[0_20px_50px_-12px_rgba(0,0,0,.5)]"
     >
       {image ? (
-        <div className="h-[170px] overflow-hidden">
+        <div className="h-[170px] shrink-0 overflow-hidden">
           <img src={image} alt={title ?? ''} className="h-full w-full object-cover" loading="lazy" />
         </div>
       ) : (
-        <div className="flex h-[170px] items-center justify-center bg-[linear-gradient(160deg,rgba(120,119,224,.16),rgba(29,28,140,.20))] text-center font-display font-extrabold text-sv-text-faint">
+        <div className="flex h-[170px] shrink-0 items-center justify-center bg-[linear-gradient(160deg,rgba(120,119,224,.16),rgba(29,28,140,.20))] text-center font-display font-extrabold text-sv-text-faint">
           {thumb}
         </div>
       )}
-      <div className="p-6">
+      <div className="flex flex-1 flex-col p-6">
         <div className="text-xs uppercase tracking-[0.06em] text-sv-text-muted">{meta}</div>
         {metric && <div className="mt-2 font-display text-[38px] font-black text-sv-primary-light">{metric}</div>}
         {metricLabel && <div className="text-[13px] text-sv-text-muted">{metricLabel}</div>}
         {title && <h4 className="mt-2 text-[17px] text-sv-white">{title}</h4>}
         {external ? (
-          <a href={href} target="_blank" rel="noopener" className="mt-4 inline-block text-sm font-bold text-sv-primary-light">
+          <a href={href} target="_blank" rel="noopener" className="mt-auto inline-block pt-4 text-sm font-bold text-sv-primary-light">
             {readLabel}
           </a>
         ) : (
-          <Link to={href} className="mt-4 inline-block text-sm font-bold text-sv-primary-light">
+          <Link to={href} className="mt-auto inline-block pt-4 text-sm font-bold text-sv-primary-light">
             {readLabel}
           </Link>
         )}
@@ -200,40 +193,50 @@ export function CardGrid3({ children }: { children: React.ReactNode }) {
 
 /* ---------- Play / feature card ---------- */
 
-export function PlayCard({ icon, title, body, cta }: { icon: React.ReactNode; title: string; body: string; cta?: React.ReactNode }) {
-  const { ref, onMouseEnter, onMouseMove, onMouseLeave } = useTilt<HTMLDivElement>()
+export function PlayCard({
+  to,
+  icon,
+  title,
+  body,
+  cta,
+}: {
+  to: string
+  icon: React.ReactNode
+  title: string
+  body: string
+  cta?: string
+}) {
+  const { ref, onMouseEnter, onMouseMove, onMouseLeave } = useTilt<HTMLAnchorElement>()
   return (
-    <div
+    <Link
       ref={ref}
+      to={to}
       onMouseEnter={onMouseEnter}
       onMouseMove={onMouseMove}
       onMouseLeave={onMouseLeave}
-      className="stroke-run rounded-sv-lg border border-sv-border bg-sv-surface p-8 text-center transition-[border-color,box-shadow] duration-300 hover:border-sv-primary-border hover:shadow-[0_20px_50px_-12px_rgba(0,0,0,.5)]"
+      className="stroke-run group block rounded-sv-lg border border-sv-border bg-sv-surface p-8 text-center transition-[border-color,box-shadow] duration-300 hover:border-sv-primary-border hover:shadow-[0_20px_50px_-12px_rgba(0,0,0,.5)]"
     >
       <div className="mx-auto flex h-[60px] w-[60px] items-center justify-center rounded-full border border-sv-primary-border bg-sv-primary-dim text-sv-primary-light">
         {icon}
       </div>
       <h3 className="mt-4 text-[19px] text-sv-white">{title}</h3>
       <p className="mt-2 text-sm text-sv-text-muted">{body}</p>
-      {cta && <div className="mt-5">{cta}</div>}
-    </div>
+      {cta && (
+        <span className="mt-5 inline-flex w-fit items-center justify-center rounded-full border border-sv-border-strong px-6 py-3 font-display text-sm font-bold text-sv-white transition-colors duration-300 group-hover:border-sv-primary group-hover:bg-sv-primary">
+          {cta}
+        </span>
+      )}
+    </Link>
   )
 }
 
 /* ---------- Service card (image-led + description + tag chips) ---------- */
 
 export function ServiceCard({ image, title, body, tags }: { image: string; title: string; body: string; tags: string[] }) {
-  const { ref, onMouseEnter, onMouseMove, onMouseLeave } = useTilt<HTMLDivElement>()
   return (
-    <div
-      ref={ref}
-      onMouseEnter={onMouseEnter}
-      onMouseMove={onMouseMove}
-      onMouseLeave={onMouseLeave}
-      className="stroke-run group overflow-hidden rounded-sv-lg border border-sv-border bg-sv-surface transition-[border-color,box-shadow] duration-300 hover:border-sv-primary-border hover:shadow-[0_20px_50px_-12px_rgba(0,0,0,.5)]"
-    >
+    <div className="overflow-hidden rounded-sv-lg border border-sv-border bg-sv-surface">
       <div className="aspect-3/2 overflow-hidden">
-        <img src={image} alt={title} className="h-full w-full object-cover transition-transform duration-500 group-hover:scale-105" loading="lazy" />
+        <img src={image} alt={title} className="h-full w-full object-cover" loading="lazy" />
       </div>
       <div className="p-8">
         <h3 className="font-display text-xl font-extrabold text-sv-white">{title}</h3>
@@ -320,15 +323,8 @@ export function VenueCard({
 /* ---------- Team card ---------- */
 
 export function TeamCard({ initials, image, name, role, body }: { initials: string; image?: string; name: string; role: string; body: string }) {
-  const { ref, onMouseEnter, onMouseMove, onMouseLeave } = useTilt<HTMLDivElement>()
   return (
-    <div
-      ref={ref}
-      onMouseEnter={onMouseEnter}
-      onMouseMove={onMouseMove}
-      onMouseLeave={onMouseLeave}
-      className="stroke-run overflow-hidden rounded-sv-lg border border-sv-border bg-sv-surface transition-[border-color,box-shadow] duration-300 hover:border-sv-primary-border hover:shadow-[0_20px_50px_-12px_rgba(0,0,0,.5)]"
-    >
+    <div className="overflow-hidden rounded-sv-lg border border-sv-border bg-sv-surface">
       <div className="aspect-square overflow-hidden bg-sv-primary-dim">
         {image ? (
           <img src={image} alt={name} className="h-full w-full object-cover" loading="lazy" />
@@ -348,15 +344,8 @@ export function TeamCard({ initials, image, name, role, body }: { initials: stri
 /* ---------- Testimonial card ---------- */
 
 export function TestimonialCard({ quote, initials, name, role }: { quote: string; initials: string; name: string; role: string }) {
-  const { ref, onMouseEnter, onMouseMove, onMouseLeave } = useTilt<HTMLDivElement>()
   return (
-    <div
-      ref={ref}
-      onMouseEnter={onMouseEnter}
-      onMouseMove={onMouseMove}
-      onMouseLeave={onMouseLeave}
-      className="stroke-run rounded-sv-lg border border-sv-border bg-sv-surface p-8 transition-[border-color,box-shadow] duration-300 hover:border-sv-primary-border hover:shadow-[0_20px_50px_-12px_rgba(0,0,0,.5)]"
-    >
+    <div className="rounded-sv-lg border border-sv-border bg-sv-surface p-8">
       <p className="text-[17px] text-sv-text before:mr-1 before:text-[34px] before:leading-[0] before:text-sv-primary-light before:content-['“']">{quote}</p>
       <div className="mt-6 flex items-center gap-3">
         <span className="flex h-11 w-11 shrink-0 items-center justify-center rounded-full border border-sv-primary-border bg-sv-primary-dim font-display font-extrabold text-sv-primary-light">
@@ -374,24 +363,15 @@ export function TestimonialCard({ quote, initials, name, role }: { quote: string
 /* ---------- Match / live card ---------- */
 
 export function MatchCard({ sport, title, dur, live }: { sport: string; title: string; dur?: string; live?: boolean }) {
-  const { ref, onMouseEnter, onMouseMove, onMouseLeave } = useTilt<HTMLDivElement>()
   return (
-    <div
-      ref={ref}
-      onMouseEnter={onMouseEnter}
-      onMouseMove={onMouseMove}
-      onMouseLeave={onMouseLeave}
-      className="stroke-run group overflow-hidden rounded-sv-md border border-sv-border bg-sv-surface transition-[border-color,box-shadow] duration-300 hover:border-sv-primary-border hover:shadow-[0_20px_50px_-12px_rgba(0,0,0,.5)]"
-    >
+    <div className="overflow-hidden rounded-sv-md border border-sv-border bg-sv-surface">
       <div className="relative flex aspect-16/10 items-center justify-center overflow-hidden bg-[linear-gradient(160deg,rgba(120,119,224,.18),rgba(29,28,140,.18))] after:absolute after:inset-0 after:bg-[linear-gradient(180deg,transparent_60%,rgba(0,0,0,.5))]">
         {live && (
           <span className="absolute left-2 top-2 z-10 inline-flex items-center gap-[7px] rounded-full border border-[rgba(255,0,67,0.4)] bg-sv-live-dim px-3.5 py-1.5 text-xs font-extrabold tracking-[0.06em] text-white before:h-[7px] before:w-[7px] before:animate-[sv-pulse_1.6s_infinite] before:rounded-full before:bg-sv-live">
             LIVE
           </span>
         )}
-        <span className="relative z-10 flex h-11 w-11 items-center justify-center rounded-full border border-white/30 bg-white/12 transition-[transform,background-color,color] duration-300 group-hover:scale-110 group-hover:bg-sv-primary-light group-hover:text-white">
-          ▶
-        </span>
+        <span className="relative z-10 flex h-11 w-11 items-center justify-center rounded-full border border-white/30 bg-white/12">▶</span>
         {dur && (
           <span className="absolute bottom-2 right-2 z-10 rounded font-display text-[11px] font-bold bg-black/70 px-[7px] py-[3px] text-white">
             {dur}

@@ -77,12 +77,20 @@ const SERVICES = [
   },
 ]
 
-const TESTIMONIAL = {
-  quote: 'We thank SportVot for their support in partnering with us for our Cricket event. Our team enjoyed the spirit of the game. The event was well planned.',
-  initials: 'SM',
-  name: 'Shruti Mody',
-  role: 'Nuvama Asset Management',
-}
+const TESTIMONIALS = [
+  {
+    quote: 'We thank SportVot for their support in partnering with us for our Cricket event. Our team enjoyed the spirit of the game. The event was well planned.',
+    initials: 'SM',
+    name: 'Shruti Mody',
+    role: 'Nuvama Asset Management',
+  },
+  {
+    quote: 'Thank you @Teamsportvot. It was a wonderful execution. The food was also good. Overall an enriching experience for everyone who participated in today\'s event.',
+    initials: 'VD',
+    name: 'Vaibhav Dave',
+    role: 'Bombay Stock Exchange',
+  },
+]
 
 type Venue = { name: string; city: string; type: string; capacity: string }
 
@@ -185,9 +193,11 @@ export default function Play() {
           <SectionHead eyebrow="Customer Reviews" center className="mx-auto mb-14">
             <h2 className="mt-3 text-balance font-display text-[clamp(32px,5vw,56px)] font-extrabold text-sv-white">What our clients say.</h2>
           </SectionHead>
-          <Reveal className="mx-auto max-w-[640px]">
-            <TestimonialCard {...TESTIMONIAL} />
-          </Reveal>
+          <RevealGroup className="mx-auto grid max-w-[900px] grid-cols-2 gap-6 max-[700px]:grid-cols-1">
+            {TESTIMONIALS.map((t) => (
+              <TestimonialCard key={t.name} {...t} />
+            ))}
+          </RevealGroup>
         </Container>
       </Section>
 

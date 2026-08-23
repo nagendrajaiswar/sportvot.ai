@@ -63,17 +63,7 @@ export default function About() {
           </SectionHead>
           <RevealGroup className="mt-12 grid grid-cols-3 gap-6 max-[900px]:grid-cols-1">
             {OFFERINGS.map((o) => (
-              <PlayCard
-                key={o.title}
-                icon={o.icon}
-                title={o.title}
-                body={o.body}
-                cta={
-                  <Btn to={o.to} variant="outline" size="sm">
-                    Explore →
-                  </Btn>
-                }
-              />
+              <PlayCard key={o.title} to={o.to} icon={o.icon} title={o.title} body={o.body} cta="Explore →" />
             ))}
           </RevealGroup>
         </Container>

@@ -202,6 +202,7 @@
   content: "";
   position: absolute;
   inset: 0;
+  z-index: 1;
   border-radius: inherit;
   padding: 1.5px;
   background: conic-gradient(

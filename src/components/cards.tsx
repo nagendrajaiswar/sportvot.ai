@@ -91,8 +91,8 @@ export function FeatureCard({
       className="stroke-run overflow-hidden rounded-sv-lg border border-sv-border bg-sv-surface transition-[border-color,box-shadow] duration-300 hover:border-sv-primary-border hover:shadow-[0_20px_50px_-12px_rgba(0,0,0,.5)]"
     >
       {image && (
-        <div className="aspect-video overflow-hidden">
-          <img src={image} alt={title} className="h-full w-full object-cover" loading="lazy" />
+        <div className="flex aspect-4/3 items-center justify-center overflow-hidden bg-sv-black-soft p-6">
+          <img src={image} alt={title} className="h-full w-full object-contain" loading="lazy" />
         </div>
       )}
       <div className="p-8">

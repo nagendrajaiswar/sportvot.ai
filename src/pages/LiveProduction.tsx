@@ -123,12 +123,12 @@ export default function LiveProduction() {
               <TwoCol key={step.title} className="gap-16">
                 <Reveal
                   scale
-                  className={cn('relative aspect-4/3 overflow-hidden rounded-sv-xl border border-sv-border', i % 2 === 1 && 'order-2')}
+                  className={cn(
+                    'flex aspect-4/3 items-center justify-center overflow-hidden rounded-sv-xl border border-sv-border bg-sv-surface p-4',
+                    i % 2 === 1 && 'order-2',
+                  )}
                 >
-                  <img src={step.image} alt={step.title} className="h-full w-full object-cover" />
-                  <span className="absolute bottom-3 right-4 font-display text-[80px] font-black leading-none text-white/20">
-                    {String(i + 1).padStart(2, '0')}
-                  </span>
+                  <img src={step.image} alt={step.title} className="h-full w-full object-contain" />
                 </Reveal>
                 <Reveal>
                   <span className="font-display text-[13px] font-extrabold tracking-[0.14em] text-sv-primary-light">STEP {String(i + 1).padStart(2, '0')}</span>

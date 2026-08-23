@@ -117,33 +117,31 @@ export function MediaCard({
   title: string
   body: string
   cta?: string
-  ctaTo?: string
+  ctaTo: string
 }) {
-  const { ref, onMouseEnter, onMouseMove, onMouseLeave } = useTilt<HTMLDivElement>()
+  const { ref, onMouseEnter, onMouseMove, onMouseLeave } = useTilt<HTMLAnchorElement>()
   return (
-    <div
+    <Link
       ref={ref}
+      to={ctaTo}
       onMouseEnter={onMouseEnter}
       onMouseMove={onMouseMove}
       onMouseLeave={onMouseLeave}
-      className="stroke-run group overflow-hidden rounded-sv-lg border border-sv-border bg-sv-surface transition-[border-color,box-shadow] duration-300 hover:border-sv-primary-border hover:shadow-[0_20px_50px_-12px_rgba(0,0,0,.5)]"
+      className="stroke-run group block overflow-hidden rounded-sv-lg border border-sv-border bg-sv-surface transition-[border-color,box-shadow] duration-300 hover:border-sv-primary-border hover:shadow-[0_20px_50px_-12px_rgba(0,0,0,.5)]"
     >
       <div className="aspect-3/4 overflow-hidden">
-        <img src={image} alt={title} className="h-full w-full object-cover" loading="lazy" />
+        <img src={image} alt={title} className="h-full w-full object-cover transition-transform duration-500 group-hover:scale-105" loading="lazy" />
       </div>
       <div className="p-6 text-center">
         <h3 className="font-display text-xl font-extrabold text-sv-white">{title}</h3>
         <p className="mt-2 text-sm text-sv-text-muted">{body}</p>
-        {cta && ctaTo && (
-          <Link
-            to={ctaTo}
-            className="mt-5 inline-flex w-fit items-center justify-center rounded-full border border-sv-border-strong px-6 py-3 font-display text-sm font-bold text-sv-white transition-colors duration-300 group-hover:border-sv-primary group-hover:bg-sv-primary"
-          >
+        {cta && (
+          <span className="mt-5 inline-flex w-fit items-center justify-center rounded-full border border-sv-border-strong px-6 py-3 font-display text-sm font-bold text-sv-white transition-colors duration-300 group-hover:border-sv-primary group-hover:bg-sv-primary">
             {cta}
-          </Link>
+          </span>
         )}
       </div>
-    </div>
+    </Link>
   )
 }
 

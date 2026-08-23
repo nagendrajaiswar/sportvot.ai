@@ -149,19 +149,15 @@ export function CaseCard({
   readLabel: string
   href?: string
 }) {
-  const { ref, onMouseEnter, onMouseMove, onMouseLeave } = useTilt<HTMLDivElement>()
+  const { ref, onMouseEnter, onMouseMove, onMouseLeave } = useTilt<HTMLAnchorElement>()
   const external = /^https?:\/\//.test(href)
-  return (
-    <div
-      ref={ref}
-      onMouseEnter={onMouseEnter}
-      onMouseMove={onMouseMove}
-      onMouseLeave={onMouseLeave}
-      className="stroke-run flex h-full flex-col overflow-hidden rounded-sv-lg border border-sv-border bg-sv-surface transition-[border-color,box-shadow] duration-300 hover:border-sv-primary-border hover:shadow-[0_20px_50px_-12px_rgba(0,0,0,.5)]"
-    >
+  const className =
+    'stroke-run group flex h-full flex-col overflow-hidden rounded-sv-lg border border-sv-border bg-sv-surface transition-[border-color,box-shadow] duration-300 hover:border-sv-primary-border hover:shadow-[0_20px_50px_-12px_rgba(0,0,0,.5)]'
+  const inner = (
+    <>
       {image ? (
         <div className="h-[170px] shrink-0 overflow-hidden">
-          <img src={image} alt={title ?? ''} className="h-full w-full object-cover" loading="lazy" />
+          <img src={image} alt={title ?? ''} className="h-full w-full object-cover transition-transform duration-500 group-hover:scale-105" loading="lazy" />
         </div>
       ) : (
         <div className="flex h-[170px] shrink-0 items-center justify-center bg-[linear-gradient(160deg,rgba(120,119,224,.16),rgba(29,28,140,.20))] text-center font-display font-extrabold text-sv-text-faint">
@@ -173,17 +169,32 @@ export function CaseCard({
         {metric && <div className="mt-2 font-display text-[38px] font-black text-sv-primary-light">{metric}</div>}
         {metricLabel && <div className="text-[13px] text-sv-text-muted">{metricLabel}</div>}
         {title && <h4 className="mt-2 text-[17px] text-sv-white">{title}</h4>}
-        {external ? (
-          <a href={href} target="_blank" rel="noopener" className="mt-auto inline-block pt-4 text-sm font-bold text-sv-primary-light">
-            {readLabel}
-          </a>
-        ) : (
-          <Link to={href} className="mt-auto inline-block pt-4 text-sm font-bold text-sv-primary-light">
-            {readLabel}
-          </Link>
-        )}
+        <span className="mt-auto inline-block pt-4 text-sm font-bold text-sv-primary-light">{readLabel}</span>
       </div>
-    </div>
+    </>
+  )
+
+  if (external) {
+    return (
+      <a
+        ref={ref}
+        href={href}
+        target="_blank"
+        rel="noopener"
+        onMouseEnter={onMouseEnter}
+        onMouseMove={onMouseMove}
+        onMouseLeave={onMouseLeave}
+        className={className}
+      >
+        {inner}
+      </a>
+    )
+  }
+
+  return (
+    <Link ref={ref} to={href} onMouseEnter={onMouseEnter} onMouseMove={onMouseMove} onMouseLeave={onMouseLeave} className={className}>
+      {inner}
+    </Link>
   )
 }
 
@@ -256,14 +267,15 @@ export function ServiceCard({ image, title, body, tags }: { image: string; title
 /* ---------- Blog card (image + title + excerpt + read more) ---------- */
 
 export function BlogCard({ image, title, body, to }: { image: string; title: string; body: string; to: string }) {
-  const { ref, onMouseEnter, onMouseMove, onMouseLeave } = useTilt<HTMLDivElement>()
+  const { ref, onMouseEnter, onMouseMove, onMouseLeave } = useTilt<HTMLAnchorElement>()
   return (
-    <div
+    <Link
       ref={ref}
+      to={to}
       onMouseEnter={onMouseEnter}
       onMouseMove={onMouseMove}
       onMouseLeave={onMouseLeave}
-      className="stroke-run group overflow-hidden rounded-sv-lg border border-sv-border bg-sv-surface transition-[border-color,box-shadow] duration-300 hover:border-sv-primary-border hover:shadow-[0_20px_50px_-12px_rgba(0,0,0,.5)]"
+      className="stroke-run group block overflow-hidden rounded-sv-lg border border-sv-border bg-sv-surface transition-[border-color,box-shadow] duration-300 hover:border-sv-primary-border hover:shadow-[0_20px_50px_-12px_rgba(0,0,0,.5)]"
     >
       <div className="aspect-3/2 overflow-hidden">
         <img src={image} alt={title} className="h-full w-full object-cover transition-transform duration-500 group-hover:scale-105" loading="lazy" />
@@ -271,11 +283,9 @@ export function BlogCard({ image, title, body, to }: { image: string; title: str
       <div className="p-6">
         <h3 className="font-display text-lg font-extrabold leading-snug text-sv-white">{title}</h3>
         <p className="mt-3 line-clamp-3 text-sm text-sv-text-muted">{body}</p>
-        <Link to={to} className="mt-4 inline-flex items-center gap-1.5 text-sm font-bold text-sv-primary-light">
-          Read More →
-        </Link>
+        <span className="mt-4 inline-flex items-center gap-1.5 text-sm font-bold text-sv-primary-light">Read More →</span>
       </div>
-    </div>
+    </Link>
   )
 }
 

@@ -17,7 +17,6 @@ import { Container, Section, SectionHead, PageHero, TwoCol, TrustList } from '..
 import { Reveal, RevealGroup } from '../components/Reveal'
 import { FeatureCard, CaseCard, MediaCard } from '../components/cards'
 import { cn } from '../lib/utils'
-import Btn from '../components/Btn'
 import { DemoForm, Field, FormGrid, TextInput, SelectInput, TextareaInput } from '../components/forms'
 import { CASE_STUDIES } from '../data/caseStudies'
 
@@ -160,7 +159,7 @@ export default function LiveProduction() {
           </SectionHead>
           <RevealGroup className="mt-12 grid grid-cols-3 gap-6 max-[900px]:grid-cols-1">
             {CAMERAS.map((c) => (
-              <MediaCard key={c.title} {...c} cta={<Btn to="#proposal" variant="outline" size="sm">Get a Quote</Btn>} />
+              <MediaCard key={c.title} {...c} cta="Get a Quote" ctaTo="#proposal" />
             ))}
           </RevealGroup>
         </Container>

@@ -18,7 +18,9 @@ export default function Layout() {
       }
     }
     window.scrollTo(0, 0)
-  }, [location.pathname, location.hash])
+    // location.key changes on every navigation (even to an unchanged hash), so a
+    // second click on the same in-page anchor link still re-triggers this scroll.
+  }, [location.pathname, location.hash, location.key])
 
   useEffect(() => {
     ScrollTrigger.refresh()

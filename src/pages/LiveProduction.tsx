@@ -12,23 +12,22 @@ import {
   Target,
   PersonSimpleRun,
   ChartLineUp,
-  Camera,
-  DeviceMobileCamera,
-  VideoCamera,
 } from '@phosphor-icons/react'
-import { Container, Section, SectionHead, PageHero, TwoCol, ColMedia, TrustList } from '../components/ui'
+import { Container, Section, SectionHead, PageHero, TwoCol, TrustList } from '../components/ui'
 import { Reveal, RevealGroup } from '../components/Reveal'
-import { FeatureCard, CaseCard, PlayCard } from '../components/cards'
+import { FeatureCard, CaseCard, MediaCard } from '../components/cards'
+import { cn } from '../lib/utils'
 import Btn from '../components/Btn'
 import { DemoForm, Field, FormGrid, TextInput, SelectInput, TextareaInput } from '../components/forms'
 
-type Step = { title: string; intro: string; items: string[] }
+type Step = { title: string; intro: string; items: string[]; image: string }
 
 const STEPS: Step[] = [
   {
     title: 'Capture',
     intro: 'Compatible with all types of video capturing devices:',
     items: ['Mobile phone', 'Professional video camera', 'Automated smart camera', 'Up to 15 angles simultaneously'],
+    image: '/play/step-capture.png',
   },
   {
     title: 'Produce',
@@ -40,29 +39,37 @@ const STEPS: Step[] = [
       'Automated highlights — within seconds',
       'Sponsor cue integration',
     ],
+    image: '/play/step-produce.png',
   },
   {
     title: 'Distribute',
     intro: 'One stream. Every platform. Your audience, wherever they are:',
     items: ['SportVot OTT', 'YouTube & Facebook', 'Your own website or app', 'All simultaneously'],
+    image: '/play/step-distribute.png',
+  },
+  {
+    title: 'Analyze',
+    intro: 'Every match becomes data. Understand performance, reach, and impact:',
+    items: ['Player & team performance analytics', 'Viewership & engagement dashboards', 'Season-long historical data', 'Exportable reports for federations & sponsors'],
+    image: '/play/step-analyze.png',
   },
 ]
 
 const CLOUD_STUDIO_FEATURES = [
-  { icon: <Aperture size={26} weight="bold" />, statLine: 'Up to 15 camera angles', title: 'Multi-Angle Streaming', body: 'Mix automated and video cameras in a single production. Switch between angles live.' },
-  { icon: <ChartBar size={26} weight="bold" />, statLine: '52+ sports supported', title: 'Live Scoring & Stats', body: 'Real-time detailed scoreboards and player data, on screen.' },
-  { icon: <Sparkle size={26} weight="bold" />, statLine: '100+ customisable overlays', title: 'Animated Graphics', body: 'Your brand. Your colours. Broadcast-quality visuals.' },
-  { icon: <Microphone size={26} weight="bold" />, statLine: 'Any language. Any location.', title: 'Remote Commentary', body: 'Commentators join from anywhere, mixed live into your feed.' },
-  { icon: <Lightning size={26} weight="bold" />, statLine: 'Ready within 5 seconds', title: 'AI Auto Highlights', body: 'Every key moment — clipped and shareable before the crowd settles.' },
-  { icon: <Handshake size={26} weight="bold" />, statLine: 'Built into every broadcast', title: 'Ad & Sponsor Integration', body: 'Pre-roll, mid-roll and post-roll ads, overlays, and virtual on-field advertising.' },
+  { icon: <Aperture size={26} weight="bold" />, image: '/play/cloud-multi-angle.gif', statLine: 'Up to 15 camera angles', title: 'Multi-Angle Streaming', body: 'Mix automated and video cameras in a single production. Switch between angles live.' },
+  { icon: <ChartBar size={26} weight="bold" />, image: '/play/cloud-live-scoring.gif', statLine: '52+ sports supported', title: 'Live Scoring & Stats', body: 'Real-time detailed scoreboards and player data, on screen.' },
+  { icon: <Sparkle size={26} weight="bold" />, image: '/play/cloud-animated-graphics.gif', statLine: '100+ customisable overlays', title: 'Animated Graphics', body: 'Your brand. Your colours. Broadcast-quality visuals.' },
+  { icon: <Microphone size={26} weight="bold" />, image: '/play/cloud-remote-commentary.gif', statLine: 'Any language. Any location.', title: 'Remote Commentary', body: 'Commentators join from anywhere, mixed live into your feed.' },
+  { icon: <Lightning size={26} weight="bold" />, image: '/play/cloud-auto-highlights.gif', statLine: 'Ready within 5 seconds', title: 'AI Auto Highlights', body: 'Every key moment — clipped and shareable before the crowd settles.' },
+  { icon: <Handshake size={26} weight="bold" />, image: '/play/cloud-ad-sponsor.gif', statLine: 'Built into every broadcast', title: 'Ad & Sponsor Integration', body: 'Pre-roll, mid-roll and post-roll ads, overlays, and virtual on-field advertising.' },
   { icon: <Gauge size={26} weight="bold" />, statLine: 'Less than 5 seconds latency', title: 'Ultra-Low Latency', body: 'Your audience watches as it happens — not 30 seconds behind.' },
   { icon: <ArrowsClockwise size={26} weight="bold" />, statLine: 'Any angle. Any moment.', title: 'Instant Multi-Angle Replay', body: 'Replay key moments from every active camera — live.' },
 ]
 
 const CAMERAS = [
-  { icon: <Camera size={26} weight="bold" />, title: 'Automated Cameras', body: 'Hands-free coverage that tracks the action across the field — no cameraperson required.' },
-  { icon: <DeviceMobileCamera size={26} weight="bold" />, title: 'Mobile Cameras', body: 'Quick setup and streaming from a phone — live in minutes, anywhere there’s a connection.' },
-  { icon: <VideoCamera size={26} weight="bold" />, title: 'Video Cameras', body: 'Professional-grade broadcasting for federations and leagues that need the highest production value.' },
+  { image: '/play/camera-automated.jpg', title: 'Automated Cameras', body: 'Hands-free coverage that tracks the action across the field — no cameraperson required.' },
+  { image: '/play/camera-mobile.jpg', title: 'Mobile Cameras', body: 'Quick setup and streaming from a phone — live in minutes, anywhere there’s a connection.' },
+  { image: '/play/camera-video.jpg', title: 'Video Cameras', body: 'Professional-grade broadcasting for federations and leagues that need the highest production value.' },
 ]
 
 const ADVANCED_FEATURES = [
@@ -108,15 +115,21 @@ export default function LiveProduction() {
         <Container>
           <SectionHead eyebrow="How It Works" center className="mx-auto mb-20">
             <h2 className="mt-3 text-balance font-display text-[clamp(32px,5vw,56px)] font-extrabold text-sv-white">Live in 5 minutes. From any camera.</h2>
-            <p className="mx-auto mt-4 max-w-[820px] text-center text-[19px] text-sv-text-muted">Three steps. One platform. A professional broadcast, every time.</p>
+            <p className="mx-auto mt-4 max-w-[820px] text-center text-[19px] text-sv-text-muted">Four steps. One platform. A professional broadcast, every time.</p>
           </SectionHead>
 
           <div className="flex flex-col gap-20">
             {STEPS.map((step, i) => (
               <TwoCol key={step.title} className="gap-16">
-                <ColMedia reverse={i % 2 === 1}>
-                  <span className="font-display text-[100px] font-black text-sv-primary-dim">{String(i + 1).padStart(2, '0')}</span>
-                </ColMedia>
+                <Reveal
+                  scale
+                  className={cn('relative aspect-4/3 overflow-hidden rounded-sv-xl border border-sv-border', i % 2 === 1 && 'order-2')}
+                >
+                  <img src={step.image} alt={step.title} className="h-full w-full object-cover" />
+                  <span className="absolute bottom-3 right-4 font-display text-[80px] font-black leading-none text-white/20">
+                    {String(i + 1).padStart(2, '0')}
+                  </span>
+                </Reveal>
                 <Reveal>
                   <span className="font-display text-[13px] font-extrabold tracking-[0.14em] text-sv-primary-light">STEP {String(i + 1).padStart(2, '0')}</span>
                   <h3 className="mt-3 font-display text-[clamp(30px,4vw,44px)] font-black text-sv-white">{step.title}</h3>
@@ -157,7 +170,7 @@ export default function LiveProduction() {
           </SectionHead>
           <RevealGroup className="mt-12 grid grid-cols-3 gap-6 max-[900px]:grid-cols-1">
             {CAMERAS.map((c) => (
-              <PlayCard key={c.title} {...c} cta={<Btn to="#proposal" variant="outline" size="sm">Get a Quote</Btn>} />
+              <MediaCard key={c.title} {...c} cta={<Btn to="#proposal" variant="outline" size="sm">Get a Quote</Btn>} />
             ))}
           </RevealGroup>
         </Container>

@@ -68,7 +68,19 @@ export function CapGrid({ children }: { children: React.ReactNode }) {
 
 /* ---------- Feature card (icon-led, room for real media later) ---------- */
 
-export function FeatureCard({ icon, statLine, title, body }: { icon: React.ReactNode; statLine?: string; title: string; body: string }) {
+export function FeatureCard({
+  icon,
+  image,
+  statLine,
+  title,
+  body,
+}: {
+  icon: React.ReactNode
+  image?: string
+  statLine?: string
+  title: string
+  body: string
+}) {
   const { ref, onMouseEnter, onMouseMove, onMouseLeave } = useTilt<HTMLDivElement>()
   return (
     <div
@@ -76,12 +88,49 @@ export function FeatureCard({ icon, statLine, title, body }: { icon: React.React
       onMouseEnter={onMouseEnter}
       onMouseMove={onMouseMove}
       onMouseLeave={onMouseLeave}
-      className="stroke-run rounded-sv-lg border border-sv-border bg-sv-surface p-8 transition-[border-color,box-shadow] duration-300 hover:border-sv-primary-border hover:shadow-[0_20px_50px_-12px_rgba(0,0,0,.5)]"
+      className="stroke-run overflow-hidden rounded-sv-lg border border-sv-border bg-sv-surface transition-[border-color,box-shadow] duration-300 hover:border-sv-primary-border hover:shadow-[0_20px_50px_-12px_rgba(0,0,0,.5)]"
     >
-      <div className="flex h-14 w-14 items-center justify-center rounded-sv-md border border-sv-primary-border bg-sv-primary-dim text-sv-primary-light">{icon}</div>
-      {statLine && <div className="mt-5 font-display text-xs font-bold uppercase tracking-[0.08em] text-sv-primary-light">{statLine}</div>}
-      <h4 className="mt-2 font-display text-xl font-extrabold text-sv-white">{title}</h4>
-      <p className="mt-2.5 text-sm text-sv-text-muted">{body}</p>
+      {image && (
+        <div className="aspect-video overflow-hidden">
+          <img src={image} alt={title} className="h-full w-full object-cover" loading="lazy" />
+        </div>
+      )}
+      <div className="p-8">
+        {!image && (
+          <div className="flex h-14 w-14 items-center justify-center rounded-sv-md border border-sv-primary-border bg-sv-primary-dim text-sv-primary-light">
+            {icon}
+          </div>
+        )}
+        {statLine && (
+          <div className={cn('font-display text-xs font-bold uppercase tracking-[0.08em] text-sv-primary-light', !image && 'mt-5')}>{statLine}</div>
+        )}
+        <h4 className="mt-2 font-display text-xl font-extrabold text-sv-white">{title}</h4>
+        <p className="mt-2.5 text-sm text-sv-text-muted">{body}</p>
+      </div>
+    </div>
+  )
+}
+
+/* ---------- Media card (image-led, title + body + optional CTA) ---------- */
+
+export function MediaCard({ image, title, body, cta }: { image: string; title: string; body: string; cta?: React.ReactNode }) {
+  const { ref, onMouseEnter, onMouseMove, onMouseLeave } = useTilt<HTMLDivElement>()
+  return (
+    <div
+      ref={ref}
+      onMouseEnter={onMouseEnter}
+      onMouseMove={onMouseMove}
+      onMouseLeave={onMouseLeave}
+      className="stroke-run overflow-hidden rounded-sv-lg border border-sv-border bg-sv-surface transition-[border-color,box-shadow] duration-300 hover:border-sv-primary-border hover:shadow-[0_20px_50px_-12px_rgba(0,0,0,.5)]"
+    >
+      <div className="aspect-3/4 overflow-hidden">
+        <img src={image} alt={title} className="h-full w-full object-cover" loading="lazy" />
+      </div>
+      <div className="p-6 text-center">
+        <h3 className="font-display text-xl font-extrabold text-sv-white">{title}</h3>
+        <p className="mt-2 text-sm text-sv-text-muted">{body}</p>
+        {cta && <div className="mt-5">{cta}</div>}
+      </div>
     </div>
   )
 }

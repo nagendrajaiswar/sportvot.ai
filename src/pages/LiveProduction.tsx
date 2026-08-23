@@ -148,7 +148,7 @@ export default function LiveProduction() {
         </Container>
       </Section>
 
-      <Section>
+      <Section id="cloud-studio">
         <Container>
           <SectionHead eyebrow="SportVot Cloud Studio" center className="mx-auto">
             <h2 className="mt-3 text-balance font-display text-[clamp(32px,5vw,56px)] font-extrabold text-sv-white">Everything your broadcast needs.</h2>

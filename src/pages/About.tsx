@@ -9,23 +9,26 @@ const OFFERINGS = [
     icon: <Cloud size={26} weight="bold" />,
     title: 'SportVot Cloud Studio',
     body: 'Top-quality live sports production with multi-angle streaming, detailed scoring for 30+ sports, custom graphics, automated highlights, and integrated advertising.',
+    to: '/live-production#cloud-studio',
   },
   {
     icon: <SoccerBall size={26} weight="bold" />,
     title: 'SportVot Play',
     body: 'World-class facilities for pay-and-play sports, with digital experiences like personalised player cards and match highlights.',
+    to: '/play',
   },
   {
     icon: <Television size={26} weight="bold" />,
     title: 'SportVot OTT',
     body: 'A multi-sports streaming platform bringing grassroots talent to the limelight across 15+ sports.',
+    to: '/live-tv',
   },
 ]
 
 const TEAM = [
-  { initials: 'SA', name: 'Siddhant Agarwal', role: 'CEO', body: 'Tech expert with 12+ years of experience building software technology products.' },
-  { initials: 'YB', name: 'Yash Bhagwatkar', role: 'COO', body: 'Management expert with 5+ years of experience spearheading operations across India.' },
-  { initials: 'SG', name: 'Shubhangi Gupta', role: 'CMO', body: 'Digital marketing expert with experience handling 40+ brands.' },
+  { initials: 'SA', image: '/play/founderSid.png', name: 'Siddhant Agarwal', role: 'CEO', body: 'Tech expert with 12+ years of experience building software technology products.' },
+  { initials: 'YB', image: '/play/cooYash.png', name: 'Yash Bhagwatkar', role: 'COO', body: 'Management expert with 5+ years of experience spearheading operations across India.' },
+  { initials: 'SG', image: '/play/Shubhangi.png', name: 'Shubhangi Gupta', role: 'CMO', body: 'Digital marketing expert with experience handling 40+ brands.' },
 ]
 
 export default function About() {
@@ -60,7 +63,17 @@ export default function About() {
           </SectionHead>
           <RevealGroup className="mt-12 grid grid-cols-3 gap-6 max-[900px]:grid-cols-1">
             {OFFERINGS.map((o) => (
-              <PlayCard key={o.title} {...o} />
+              <PlayCard
+                key={o.title}
+                icon={o.icon}
+                title={o.title}
+                body={o.body}
+                cta={
+                  <Btn to={o.to} variant="outline" size="sm">
+                    Explore →
+                  </Btn>
+                }
+              />
             ))}
           </RevealGroup>
         </Container>

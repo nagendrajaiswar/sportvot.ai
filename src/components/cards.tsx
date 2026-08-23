@@ -139,6 +139,7 @@ export function MediaCard({ image, title, body, cta }: { image: string; title: s
 
 export function CaseCard({
   thumb,
+  image,
   meta,
   metric,
   metricLabel,
@@ -146,7 +147,8 @@ export function CaseCard({
   readLabel,
   href = '#',
 }: {
-  thumb: string
+  thumb?: string
+  image?: string
   meta: string
   metric?: string
   metricLabel?: string
@@ -155,6 +157,7 @@ export function CaseCard({
   href?: string
 }) {
   const { ref, onMouseEnter, onMouseMove, onMouseLeave } = useTilt<HTMLDivElement>()
+  const external = /^https?:\/\//.test(href)
   return (
     <div
       ref={ref}
@@ -163,17 +166,29 @@ export function CaseCard({
       onMouseLeave={onMouseLeave}
       className="stroke-run overflow-hidden rounded-sv-lg border border-sv-border bg-sv-surface transition-[border-color,box-shadow] duration-300 hover:border-sv-primary-border hover:shadow-[0_20px_50px_-12px_rgba(0,0,0,.5)]"
     >
-      <div className="flex h-[170px] items-center justify-center bg-[linear-gradient(160deg,rgba(120,119,224,.16),rgba(29,28,140,.20))] text-center font-display font-extrabold text-sv-text-faint">
-        {thumb}
-      </div>
+      {image ? (
+        <div className="h-[170px] overflow-hidden">
+          <img src={image} alt={title ?? ''} className="h-full w-full object-cover" loading="lazy" />
+        </div>
+      ) : (
+        <div className="flex h-[170px] items-center justify-center bg-[linear-gradient(160deg,rgba(120,119,224,.16),rgba(29,28,140,.20))] text-center font-display font-extrabold text-sv-text-faint">
+          {thumb}
+        </div>
+      )}
       <div className="p-6">
         <div className="text-xs uppercase tracking-[0.06em] text-sv-text-muted">{meta}</div>
         {metric && <div className="mt-2 font-display text-[38px] font-black text-sv-primary-light">{metric}</div>}
         {metricLabel && <div className="text-[13px] text-sv-text-muted">{metricLabel}</div>}
         {title && <h4 className="mt-2 text-[17px] text-sv-white">{title}</h4>}
-        <Link to={href} className="mt-4 inline-block text-sm font-bold text-sv-primary-light">
-          {readLabel}
-        </Link>
+        {external ? (
+          <a href={href} target="_blank" rel="noopener" className="mt-4 inline-block text-sm font-bold text-sv-primary-light">
+            {readLabel}
+          </a>
+        ) : (
+          <Link to={href} className="mt-4 inline-block text-sm font-bold text-sv-primary-light">
+            {readLabel}
+          </Link>
+        )}
       </div>
     </div>
   )
@@ -304,15 +319,28 @@ export function VenueCard({
 
 /* ---------- Team card ---------- */
 
-export function TeamCard({ initials, name, role, body }: { initials: string; name: string; role: string; body: string }) {
+export function TeamCard({ initials, image, name, role, body }: { initials: string; image?: string; name: string; role: string; body: string }) {
+  const { ref, onMouseEnter, onMouseMove, onMouseLeave } = useTilt<HTMLDivElement>()
   return (
-    <div className="rounded-sv-lg border border-sv-border bg-sv-surface p-8 text-center">
-      <span className="mx-auto flex h-[88px] w-[88px] items-center justify-center rounded-full border border-sv-primary-border bg-sv-primary-dim font-display text-[28px] font-extrabold text-sv-primary-light">
-        {initials}
-      </span>
-      <h3 className="mt-4 text-[19px] text-sv-white">{name}</h3>
-      <p className="mt-1 text-[13px] font-bold text-sv-primary-light">{role}</p>
-      <p className="mt-3 text-sm text-sv-text-muted">{body}</p>
+    <div
+      ref={ref}
+      onMouseEnter={onMouseEnter}
+      onMouseMove={onMouseMove}
+      onMouseLeave={onMouseLeave}
+      className="stroke-run overflow-hidden rounded-sv-lg border border-sv-border bg-sv-surface transition-[border-color,box-shadow] duration-300 hover:border-sv-primary-border hover:shadow-[0_20px_50px_-12px_rgba(0,0,0,.5)]"
+    >
+      <div className="aspect-square overflow-hidden bg-sv-primary-dim">
+        {image ? (
+          <img src={image} alt={name} className="h-full w-full object-cover" loading="lazy" />
+        ) : (
+          <div className="flex h-full w-full items-center justify-center font-display text-[40px] font-extrabold text-sv-primary-light">{initials}</div>
+        )}
+      </div>
+      <div className="p-6">
+        <h3 className="font-display text-lg font-extrabold text-sv-white">{name}</h3>
+        <p className="mt-1 text-[13px] font-bold text-sv-primary-light">{role}</p>
+        <p className="mt-3 text-sm text-sv-text-muted">{body}</p>
+      </div>
     </div>
   )
 }

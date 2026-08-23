@@ -44,7 +44,10 @@ export default function PlayHero() {
 
       <div
         className="absolute inset-0"
-        style={{ background: 'linear-gradient(180deg, rgba(6,6,10,.75) 0%, rgba(6,6,10,.55) 40%, rgba(6,6,10,.88) 100%)' }}
+        style={{
+          background:
+            'linear-gradient(90deg, rgba(5, 6, 7, 0.82) 0%, rgba(5, 6, 7, 0.5) 32%, transparent 62%), linear-gradient(180deg, rgba(5, 6, 7, 0.78) 0%, rgba(5, 6, 7, 0.88) 55%, var(--color-sv-black) 100%)',
+        }}
       />
 
       <div className="relative z-2 w-full py-[140px] pb-24">

@@ -9,6 +9,7 @@ import News from './pages/News'
 import CaseStudies from './pages/CaseStudies'
 import Contact from './pages/Contact'
 import LiveTV from './pages/LiveTV'
+import NotFound from './pages/NotFound'
 
 function App() {
   return (
@@ -23,6 +24,7 @@ function App() {
         <Route path="/case-studies" element={<CaseStudies />} />
         <Route path="/contact" element={<Contact />} />
         <Route path="/live-tv" element={<LiveTV />} />
+        <Route path="*" element={<NotFound />} />
       </Route>
     </Routes>
   )

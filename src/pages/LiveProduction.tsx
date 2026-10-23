@@ -38,8 +38,8 @@ const CLOUD_STUDIO_FEATURES = [
   { icon: <Microphone size={26} weight="bold" />, image: '/play/cloud-remote-commentary.gif', title: 'Remote Commentary', body: 'Add live commentary in multiple languages, with commentators operating from different locations.' },
   { icon: <Lightning size={26} weight="bold" />, image: '/play/cloud-auto-highlights.gif', title: 'AI Auto Highlights', body: 'Automatically generate clips of key match moments for faster sharing and distribution.' },
   { icon: <Handshake size={26} weight="bold" />, image: '/play/cloud-ad-sponsor.gif', title: 'Ad & Sponsor Integration', body: 'Integrate sponsor branding, advertising cues and commercial inventory into the live feed.' },
-  { icon: <Gauge size={26} weight="bold" />, image: '/play/cloud-ultra-low-latency.svg', title: 'Ultra-Low Latency', body: 'Deliver live coverage with minimal delay through optimised streaming workflows.' },
-  { icon: <ArrowsClockwise size={26} weight="bold" />, image: '/play/cloud-multi-angle-replay.svg', title: 'Instant Multi-Angle Replay', body: 'Review and replay key moments from available camera angles during live production.' },
+  { icon: <Gauge size={26} weight="bold" />, image: '/play/cloud-ultra-low-latency.gif', title: 'Ultra-Low Latency', body: 'Deliver live coverage with minimal delay through optimised streaming workflows.' },
+  { icon: <ArrowsClockwise size={26} weight="bold" />, image: '/play/cloud-multi-angle-replay.gif', title: 'Instant Multi-Angle Replay', body: 'Review and replay key moments from available camera angles during live production.' },
 ]
 
 const CAMERAS = [

@@ -52,11 +52,11 @@ const CAMERAS = [
 // DRS, Virtual Advertising and Ball Tracking descriptions are carried over from the previous build
 // and still need sign-off against actual deliverables.
 const ADVANCED_FEATURES = [
-  { image: '/play/advanced-drs.svg', title: 'DRS & Ball Review', body: 'Multi-angle review tooling for grassroots and semi-pro tournaments previously priced out of DRS.' },
-  { image: '/play/advanced-virtual-ads.svg', title: 'Virtual Advertising', body: 'Insert sponsor boards and pitch-side branding digitally — visible only on the stream.' },
-  { image: '/play/advanced-ball-tracking.svg', title: 'Multi-Sport Ball Tracking', body: 'Ball tracking tuned per sport — cricket, football, padel and more — feeding stats and replay in real time.' },
-  { image: '/play/advanced-player-tracking.svg', title: 'Player Tracking', body: 'Track player movement, distance covered and positioning to generate detailed performance insights.' },
-  { image: '/play/advanced-analytics.svg', title: 'Performance Analytics', body: 'Access detailed player, team and match-level insights, supported by performance data and corresponding video.' },
+  { image: '/play/advanced-drs.gif', title: 'DRS & Ball Review', body: 'Multi-angle review tooling for grassroots and semi-pro tournaments previously priced out of DRS.' },
+  { image: '/play/advanced-virtual-ads.gif', title: 'Virtual Advertising', body: 'Insert sponsor boards and pitch-side branding digitally — visible only on the stream.' },
+  { image: '/play/advanced-ball-tracking.gif', title: 'Multi-Sport Ball Tracking', body: 'Ball tracking tuned per sport — cricket, football, padel and more — feeding stats and replay in real time.' },
+  { image: '/play/advanced-player-tracking.gif', title: 'Player Tracking', body: 'Track player movement, distance covered and positioning to generate detailed performance insights.' },
+  { image: '/play/advanced-analytics.gif', title: 'Performance Analytics', body: 'Access detailed player, team and match-level insights, supported by performance data and corresponding video.' },
 ]
 
 const SERVICES = [

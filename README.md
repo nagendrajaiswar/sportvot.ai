@@ -57,4 +57,4 @@ npm run lint       # oxlint
   - **Venue listings** on `/play` (`VENUES` array in `Play.tsx`) — dummy venues, no real inventory yet. A city-filter UI is already wired up around them.
   - **Case study numbers** on `/case-studies` and the Live Production case-study tray (`src/data/caseStudies.ts`) — illustrative metrics, not sourced from real clients.
   - Two of the eight "SportVot Cloud Studio" feature cards (Ultra-Low Latency, Instant Multi-Angle Replay) use generated line-art animated GIFs, styled to match the other six, since no product footage exists for those two yet. Swap in real GIFs at `public/play/cloud-ultra-low-latency.gif` and `cloud-multi-angle-replay.gif` when available.
-  - The five "Advanced Production Features" cards use placeholder line-art SVGs (`public/play/advanced-*.svg`) pending real images/GIFs.
+  - The five "Advanced Production Features" cards use generated line-art animated GIFs (`public/play/advanced-*.gif`) pending real product images/GIFs.

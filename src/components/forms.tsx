@@ -32,11 +32,33 @@ export function TextInput(props: React.InputHTMLAttributes<HTMLInputElement>) {
   return <input {...props} className={cn(fieldClasses, props.className)} />
 }
 
-export function SelectInput(props: React.SelectHTMLAttributes<HTMLSelectElement>) {
+export function SelectInput({ wrapperClassName, ...props }: React.SelectHTMLAttributes<HTMLSelectElement> & { wrapperClassName?: string }) {
   return (
-    <div className="relative">
+    <div className={cn('relative', wrapperClassName)}>
       <select {...props} className={cn(fieldClasses, 'w-full appearance-none pr-11', props.className)} />
       <CaretDown size={16} weight="bold" className="pointer-events-none absolute right-4 top-1/2 -translate-y-1/2 text-sv-text-muted" />
+    </div>
+  )
+}
+
+const COUNTRY_CODES = [
+  ['IN', '+91'], ['US', '+1'], ['GB', '+44'], ['AE', '+971'], ['AU', '+61'], ['CA', '+1'], ['SG', '+65'], ['SA', '+966'],
+  ['QA', '+974'], ['NG', '+234'], ['KE', '+254'], ['ZA', '+27'], ['ID', '+62'], ['PH', '+63'], ['MY', '+60'], ['LK', '+94'],
+  ['BD', '+880'], ['NP', '+977'], ['DE', '+49'], ['FR', '+33'],
+]
+
+/** Phone number input with an international country-code selector. */
+export function PhoneInput({ required, placeholder = 'Phone number' }: { required?: boolean; placeholder?: string }) {
+  return (
+    <div className="flex gap-2">
+      <SelectInput wrapperClassName="w-[116px] shrink-0" defaultValue="+91" aria-label="Country code" className="pr-8 pl-3">
+        {COUNTRY_CODES.map(([iso, code]) => (
+          <option key={iso} value={code}>
+            {iso} {code}
+          </option>
+        ))}
+      </SelectInput>
+      <TextInput type="tel" required={required} placeholder={placeholder} className="min-w-0 flex-1" />
     </div>
   )
 }

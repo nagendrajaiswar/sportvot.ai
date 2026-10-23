@@ -81,12 +81,14 @@ const TESTIMONIALS = [
   {
     quote: 'We thank SportVot for their support in partnering with us for our Cricket event. Our team enjoyed the spirit of the game. The event was well planned.',
     initials: 'SM',
+    logo: '/play/nuvama.jpeg',
     name: 'Shruti Mody',
     role: 'Nuvama Asset Management',
   },
   {
     quote: 'Thank you @Teamsportvot. It was a wonderful execution. The food was also good. Overall an enriching experience for everyone who participated in today\'s event.',
     initials: 'VD',
+    logo: '/play/BSE.png',
     name: 'Vaibhav Dave',
     role: 'Bombay Stock Exchange',
   },

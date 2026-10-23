@@ -51,14 +51,14 @@ export function SectionHead({
   className,
   children,
 }: {
-  eyebrow: string
+  eyebrow?: string
   center?: boolean
   className?: string
   children: React.ReactNode
 }) {
   return (
     <Reveal className={cn('max-w-[1040px]', center && 'mx-auto text-center', className)}>
-      <Eyebrow center={center}>{eyebrow}</Eyebrow>
+      {eyebrow && <Eyebrow center={center}>{eyebrow}</Eyebrow>}
       {children}
     </Reveal>
   )

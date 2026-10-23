@@ -19,7 +19,6 @@ export default function HomeHero() {
   const line2 = useRef<HTMLSpanElement | null>(null)
   const line3 = useRef<HTMLSpanElement | null>(null)
   const subRef = useRef<HTMLParagraphElement | null>(null)
-  const pipelineRef = useRef<HTMLDivElement | null>(null)
   const ctaRef = useRef<HTMLDivElement | null>(null)
   const [lightboxOpen, setLightboxOpen] = useState(false)
 
@@ -35,7 +34,6 @@ export default function HomeHero() {
         .timeline({ delay: 0.2 })
         .to(lines, { yPercent: 0, duration: 1.1, stagger: 0.12, ease: 'power4.out' })
         .from(subRef.current, { opacity: 0, y: 24, duration: 0.8, ease: 'power3.out' }, '-=.6')
-        .from(pipelineRef.current, { opacity: 0, y: 16, duration: 0.7, ease: 'power3.out' }, '-=.5')
         .from(ctaRef.current ? Array.from(ctaRef.current.children) : [], { opacity: 0, y: 16, duration: 0.6, stagger: 0.1, ease: 'power3.out' }, '-=.4')
 
       if (sectionRef.current && videoRef.current) {
@@ -186,18 +184,10 @@ export default function HomeHero() {
               </span>
             </span>
           </h1>
-          <p ref={subRef} className="mt-6 max-w-[600px] text-[clamp(16px,2vw,21px)] text-sv-text-muted">
-            Professional sports broadcasting for clubs, academies, leagues, and federations — in 5 minutes, from any camera, anywhere in the world.
+          <p ref={subRef} className="mt-6 max-w-[640px] text-[clamp(16px,2vw,21px)] text-sv-text-muted">
+            Professional live sports production, powered by flexible capture, cloud-based workflows and intelligent broadcasting technology — from grassroots competitions to international events.
           </p>
-          <div ref={pipelineRef} className="mt-8 flex flex-wrap items-center gap-2.5 font-display text-sm font-bold">
-            {['Capture', 'Produce', 'Stream', 'Distribute'].map((step, i, arr) => (
-              <span key={step} className="flex items-center gap-2.5">
-                <b className="text-sv-primary-light">{step}</b>
-                {i < arr.length - 1 && <span className="h-1.5 w-1.5 rounded-full bg-sv-text-faint" aria-hidden="true" />}
-              </span>
-            ))}
-          </div>
-          <div ref={ctaRef} className="pointer-events-auto mt-[72px] flex flex-wrap gap-4">
+          <div ref={ctaRef} className="pointer-events-auto mt-12 flex flex-wrap gap-4">
             <Btn to="#proposal" variant="primary">
               Get a Proposal
             </Btn>

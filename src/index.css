@@ -234,8 +234,8 @@
    glow rather than a hard-edged circle. */
 .hero-video-scrim {
   background:
-    linear-gradient(90deg, rgba(5, 6, 7, 0.82) 0%, rgba(5, 6, 7, 0.5) 32%, transparent 62%),
-    linear-gradient(180deg, rgba(5, 6, 7, 0.78) 0%, rgba(5, 6, 7, 0.88) 55%, var(--color-sv-black) 100%);
+    linear-gradient(90deg, rgba(5, 6, 7, 0.78) 0%, rgba(5, 6, 7, 0.42) 34%, transparent 64%),
+    linear-gradient(180deg, rgba(5, 6, 7, 0.34) 0%, rgba(5, 6, 7, 0.28) 60%, var(--color-sv-black) 100%);
   -webkit-mask-image: radial-gradient(
     circle 340px at var(--x, -9999px) var(--y, -9999px),
     transparent 0%,

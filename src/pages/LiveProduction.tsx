@@ -149,16 +149,14 @@ export default function LiveProduction() {
 
             <Reveal scale className="relative aspect-[5/4] w-full">
               {[
-                { src: '/play/step-produce.png', label: 'Cloud Production', cls: 'left-[10%] right-0 top-0 h-[68%]' },
-                { src: '/play/step-capture.png', label: 'Capture', cls: 'bottom-0 left-0 h-[40%] w-[46%]' },
-                { src: '/play/step-distribute.png', label: 'Broadcast Output', cls: 'bottom-[4%] right-0 h-[38%] w-[42%]' },
+                { src: '/play/step-produce.png', label: 'Cloud Production', cls: 'left-[8%] right-0 top-0', ratio: 'aspect-[1597/891]' },
+                { src: '/play/step-capture.png', label: 'Capture', cls: 'bottom-0 left-0 w-[46%]', ratio: 'aspect-[400/215]' },
+                { src: '/play/step-distribute.png', label: 'Broadcast Output', cls: 'bottom-[2%] right-0 w-[44%]', ratio: 'aspect-[400/215]' },
               ].map((c) => (
-                <div key={c.label} className={cn('absolute overflow-hidden rounded-sv-lg border border-sv-border-strong bg-sv-surface shadow-[0_24px_60px_-20px_rgba(0,0,0,.7)]', c.cls)}>
-                  <img src={c.src} alt={c.label} className="h-full w-full object-cover" />
-                  <span className="absolute left-3 top-3 rounded-full bg-sv-black/70 px-3 py-1 font-display text-[11px] font-bold uppercase tracking-[0.08em] text-sv-white backdrop-blur">
-                    {c.label}
-                  </span>
-                </div>
+                <figure key={c.label} className={cn('absolute overflow-hidden rounded-sv-lg border border-sv-border-strong bg-sv-surface shadow-[0_24px_60px_-20px_rgba(0,0,0,.7)]', c.cls)}>
+                  <figcaption className="px-3 py-1.5 font-display text-[11px] font-bold uppercase tracking-[0.08em] text-sv-text-muted">{c.label}</figcaption>
+                  <img src={c.src} alt={c.label} className={cn('block w-full object-contain', c.ratio)} />
+                </figure>
               ))}
             </Reveal>
           </div>

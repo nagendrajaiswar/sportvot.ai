@@ -147,16 +147,13 @@ export default function LiveProduction() {
               </Reveal>
             </div>
 
-            <Reveal scale className="relative aspect-[5/4] w-full">
+            <Reveal scale className="relative aspect-[1/0.72] w-full">
               {[
                 { src: '/play/step-produce.png', label: 'Cloud Production', cls: 'left-[8%] right-0 top-0', ratio: 'aspect-[1597/891]' },
                 { src: '/play/step-capture.png', label: 'Capture', cls: 'bottom-0 left-0 w-[46%]', ratio: 'aspect-[400/215]' },
                 { src: '/play/step-distribute.png', label: 'Broadcast Output', cls: 'bottom-[2%] right-0 w-[44%]', ratio: 'aspect-[400/215]' },
               ].map((c) => (
-                <figure key={c.label} className={cn('absolute overflow-hidden rounded-sv-lg border border-sv-border-strong bg-sv-surface shadow-[0_24px_60px_-20px_rgba(0,0,0,.7)]', c.cls)}>
-                  <figcaption className="px-3 py-1.5 font-display text-[11px] font-bold uppercase tracking-[0.08em] text-sv-text-muted">{c.label}</figcaption>
-                  <img src={c.src} alt={c.label} className={cn('block w-full object-contain', c.ratio)} />
-                </figure>
+                <img key={c.label} src={c.src} alt={c.label} className={cn('absolute block object-contain', c.cls, c.ratio)} />
               ))}
             </Reveal>
           </div>

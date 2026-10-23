@@ -13,7 +13,7 @@ export default function Marquee({ items, logos, label, dot, bare }: MarqueeProps
     ? [...logos, ...logos].map((logo, i) => (
         <span
           key={i}
-          className="flex h-[70px] w-[150px] shrink-0 items-center justify-center rounded-sv-md border border-white/10 bg-[#E4E2DC] p-3 transition-transform duration-300 hover:scale-105"
+          className="flex h-[70px] w-[150px] shrink-0 items-center justify-center rounded-sv-md border border-white/10 bg-[#C2C0B9] hover:bg-[#D4D2CB] p-3 transition duration-300 hover:scale-105"
         >
           <img src={logo.src} alt={logo.alt} className="max-h-full max-w-full object-contain mix-blend-multiply" loading="lazy" />
         </span>

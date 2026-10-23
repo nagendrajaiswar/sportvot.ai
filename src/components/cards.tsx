@@ -395,7 +395,7 @@ export function TestimonialCard({ quote, initials, logo, name, role }: { quote: 
       <p className="text-[17px] text-sv-text before:mr-1 before:text-[34px] before:leading-[0] before:text-sv-primary-light before:content-['“']">{quote}</p>
       <div className="mt-6 flex items-center gap-3">
         {logo ? (
-          <span className="flex h-11 w-[72px] shrink-0 items-center justify-center overflow-hidden rounded-sv-sm bg-[#ECEAE4] p-1">
+          <span className="flex h-11 w-[72px] shrink-0 items-center justify-center overflow-hidden rounded-sv-sm bg-[#C2C0B9] p-1">
             <img src={logo} alt={role} className="max-h-full max-w-full object-contain mix-blend-multiply" loading="lazy" />
           </span>
         ) : (

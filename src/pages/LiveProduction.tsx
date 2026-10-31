@@ -5,29 +5,29 @@ import { Reveal, RevealGroup } from '../components/Reveal'
 import { FeatureCard, CaseCard, MediaCard, SpecCard } from '../components/cards'
 import Btn from '../components/Btn'
 import { cn } from '../lib/utils'
-import { DemoForm, Field, FormGrid, TextInput, SelectInput, TextareaInput, PhoneInput } from '../components/forms'
-import { CASE_STUDIES } from '../data/caseStudies'
+import { CASE_STUDIES, FEATURED_CASE_SLUGS } from '../data/caseStudies'
+import EnquiryForm from '../components/EnquiryForm'
 
 const STEPS = [
   {
     title: 'Capture',
     body: 'Flexible capture solutions for every production scale. Mobile cameras, automated cameras, professional multi-camera setups and up to 15 simultaneous angles.',
-    image: '/play/step-capture.png',
+    image: '/play/step-capture.webp',
   },
   {
     title: 'Produce',
     body: 'Turn live feeds into professional broadcasts through SportVot Cloud Studio, with remote production, live graphics, scoring, commentary and automated workflows.',
-    image: '/play/step-produce.png',
+    image: '/play/step-produce.webp',
   },
   {
     title: 'Distribute',
-    body: 'Deliver live and on-demand coverage across OTT platforms, connected TV apps, satellite television, broadcasters, social channels and owned digital destinations.',
-    image: '/play/step-distribute.png',
+    body: 'Deliver live and on-demand coverage across OTT platforms, white-label OTT, connected TV apps, satellite television and owned digital destinations.',
+    image: '/play/step-distribute.webp',
   },
   {
     title: 'Analyze',
     body: 'Turn every game into actionable insights with detailed player and team performance analytics, video-supported analysis and sponsor advertising reports.',
-    image: '/play/step-analyze.png',
+    image: '/play/step-analyze.webp',
   },
 ]
 
@@ -48,26 +48,14 @@ const CAMERAS = [
   { image: '/play/camera-video.jpg', title: 'Video Cameras', body: 'Professional-grade broadcasting for federations and leagues that need the highest production value.' },
 ]
 
-// Images are placeholder line-art graphics until real SportVot footage/GIFs are supplied.
-// DRS, Virtual Advertising and Ball Tracking descriptions are carried over from the previous build
-// and still need sign-off against actual deliverables.
+// Real production stills supplied by SportVot (public/play/advanced-*.webp). The brief says the copy stays as is,
+// except Player Tracking and Performance Analytics, which carry the final wording.
 const ADVANCED_FEATURES = [
-  { image: '/play/advanced-drs.gif', title: 'DRS & Ball Review', body: 'Multi-angle review tooling for grassroots and semi-pro tournaments previously priced out of DRS.' },
-  { image: '/play/advanced-virtual-ads.gif', title: 'Virtual Advertising', body: 'Insert sponsor boards and pitch-side branding digitally — visible only on the stream.' },
-  { image: '/play/advanced-ball-tracking.gif', title: 'Multi-Sport Ball Tracking', body: 'Ball tracking tuned per sport — cricket, football, padel and more — feeding stats and replay in real time.' },
-  { image: '/play/advanced-player-tracking.gif', title: 'Player Tracking', body: 'Track player movement, distance covered and positioning to generate detailed performance insights.' },
-  { image: '/play/advanced-analytics.gif', title: 'Performance Analytics', body: 'Access detailed player, team and match-level insights, supported by performance data and corresponding video.' },
-]
-
-const SERVICES = [
-  'Live streaming & production',
-  'Post-production & highlights',
-  'Player profiling & analytics',
-  'Multi-platform distribution',
-  'Sponsor & ad integration',
-  'Commentary services',
-  'Full-season production partnership',
-  'Not sure — I need a consultation',
+  { image: '/play/advanced-drs.webp', title: 'DRS & Ball Review', body: 'Multi-angle review tooling for grassroots and semi-pro tournaments previously priced out of DRS.' },
+  { image: '/play/advanced-virtual-ads.webp', title: 'Virtual Advertising', body: 'Insert sponsor boards and pitch-side branding digitally — visible only on the stream.' },
+  { image: '/play/advanced-ball-tracking.webp', title: 'Multi-Sport Ball Tracking', body: 'Ball tracking tuned per sport — cricket, football, padel and more — feeding stats and replay in real time.' },
+  { image: '/play/advanced-player-tracking.webp', title: 'Player Tracking', body: 'Track player movement, distance covered and positioning to generate detailed performance insights.' },
+  { image: '/play/advanced-analytics.webp', title: 'Performance Analytics', body: 'Access detailed player, team and match-level insights, supported by performance data and corresponding video.' },
 ]
 
 /** Horizontal four-stage workflow: stage tabs on top, one shared visual/text panel below. */
@@ -149,9 +137,9 @@ export default function LiveProduction() {
 
             <Reveal scale className="relative aspect-[1/0.72] w-full">
               {[
-                { src: '/play/step-produce.png', label: 'Cloud Production', cls: 'left-[8%] right-0 top-0', ratio: 'aspect-[1597/891]' },
-                { src: '/play/step-capture.png', label: 'Capture', cls: 'bottom-0 left-0 w-[46%]', ratio: 'aspect-[400/215]' },
-                { src: '/play/step-distribute.png', label: 'Broadcast Output', cls: 'bottom-[2%] right-0 w-[44%]', ratio: 'aspect-[400/215]' },
+                { src: '/play/studio.webp', label: 'Cloud Production', cls: 'left-[8%] right-0 top-0', ratio: 'aspect-video' },
+                { src: '/play/step-capture.webp', label: 'Capture', cls: 'bottom-0 left-0 w-[46%]', ratio: 'aspect-[550/404]' },
+                { src: '/play/step-distribute.webp', label: 'Broadcast Output', cls: 'bottom-[2%] right-0 w-[44%]', ratio: 'aspect-[1400/1028]' },
               ].map((c) => (
                 <img key={c.label} src={c.src} alt={c.label} className={cn('absolute block object-contain', c.cls, c.ratio)} />
               ))}
@@ -220,10 +208,25 @@ export default function LiveProduction() {
             <h2 className="mt-3 text-balance font-display text-[clamp(32px,5vw,56px)] font-extrabold text-sv-white">Who&rsquo;s already using SportVot.</h2>
           </SectionHead>
           <RevealGroup className="mt-14 grid grid-cols-2 items-stretch gap-6 max-[800px]:grid-cols-1">
-            {CASE_STUDIES.slice(0, 4).map((c) => (
-              <CaseCard key={c.thumb} {...c} large meta="Client Case Study" readLabel="Read case study →" href="/case-studies" />
+            {FEATURED_CASE_SLUGS.map((slug) => CASE_STUDIES.find((c) => c.slug === slug)!).map((c) => (
+              <CaseCard
+                key={c.slug}
+                image={c.image}
+                meta={c.tag}
+                metric={c.metric}
+                metricLabel={c.metricLabel}
+                title={c.client}
+                large
+                readLabel="Read case study →"
+                href={`/case-studies/${c.slug}`}
+              />
             ))}
           </RevealGroup>
+          <Reveal className="mt-10 text-center">
+            <Btn to="/case-studies" variant="outline">
+              View All Case Studies
+            </Btn>
+          </Reveal>
         </Container>
       </Section>
 
@@ -238,37 +241,7 @@ export default function LiveProduction() {
               </p>
             </Reveal>
             <Reveal className="rounded-sv-xl border border-sv-border bg-sv-surface p-12 max-[900px]:p-6">
-              <DemoForm submitLabel="Send Enquiry →">
-                <Field label="Your Name *">
-                  <TextInput type="text" required placeholder="Full name" />
-                </Field>
-                <Field label="Organisation *">
-                  <TextInput type="text" required placeholder="Club, federation or academy" />
-                </Field>
-                <FormGrid>
-                  <Field label="City & Country *">
-                    <TextInput type="text" required placeholder="Dubai, UAE" />
-                  </Field>
-                  <Field label="Phone Number (optional)">
-                    <PhoneInput placeholder="Phone number" />
-                  </Field>
-                </FormGrid>
-                <Field label="Email Address *">
-                  <TextInput type="email" required placeholder="you@organisation.com" />
-                </Field>
-                <Field label="Services">
-                  <SelectInput defaultValue="">
-                    <option value="">Select a service</option>
-                    {SERVICES.map((x) => (
-                      <option key={x}>{x}</option>
-                    ))}
-                  </SelectInput>
-                </Field>
-                <Field label="Message">
-                  <TextareaInput placeholder="Sport, number of matches, location, dates — anything that helps us understand your event." />
-                </Field>
-                <p className="mb-4 text-xs text-sv-text-faint">By submitting you agree to SportVot&rsquo;s Privacy Policy.</p>
-              </DemoForm>
+              <EnquiryForm fixedTopic="production" />
             </Reveal>
           </TwoCol>
         </Container>

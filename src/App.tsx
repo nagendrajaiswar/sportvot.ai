@@ -7,6 +7,7 @@ import BlogPost from './pages/BlogPost'
 import About from './pages/About'
 import News from './pages/News'
 import CaseStudies from './pages/CaseStudies'
+import CaseStudyDetail from './pages/CaseStudyDetail'
 import Contact from './pages/Contact'
 import LiveTV from './pages/LiveTV'
 import NotFound from './pages/NotFound'
@@ -22,6 +23,7 @@ function App() {
         <Route path="/about" element={<About />} />
         <Route path="/news" element={<News />} />
         <Route path="/case-studies" element={<CaseStudies />} />
+        <Route path="/case-studies/:slug" element={<CaseStudyDetail />} />
         <Route path="/contact" element={<Contact />} />
         <Route path="/live-tv" element={<LiveTV />} />
         <Route path="*" element={<NotFound />} />

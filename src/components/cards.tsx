@@ -84,8 +84,8 @@ export function FeatureCard({
   return (
     <div className="overflow-hidden rounded-sv-lg border border-sv-border bg-sv-surface">
       {image && (
-        <div className="flex aspect-4/3 items-center justify-center overflow-hidden bg-sv-black-soft p-6">
-          <img src={image} alt={title} className="h-full w-full object-contain" loading="lazy" />
+        <div className="aspect-video overflow-hidden bg-sv-black-soft">
+          <img src={image} alt={title} className="h-full w-full object-cover" loading="lazy" />
         </div>
       )}
       <div className="p-8">
@@ -314,8 +314,8 @@ export function BlogCard({ image, title, body, to }: { image: string; title: str
 export function SpecCard({ image, title, body }: { image: string; title: string; body: string }) {
   return (
     <div className="h-full overflow-hidden rounded-sv-lg border border-sv-border bg-sv-surface">
-      <div className="flex aspect-video items-center justify-center bg-sv-black-soft p-6">
-        <img src={image} alt={title} className="h-full w-full object-contain" loading="lazy" />
+      <div className="aspect-video overflow-hidden bg-sv-black-soft">
+        <img src={image} alt={title} className="h-full w-full object-cover" loading="lazy" />
       </div>
       <div className="p-7">
         <h4 className="font-display text-xl font-extrabold text-sv-white">{title}</h4>
@@ -391,9 +391,9 @@ export function TeamCard({ initials, image, name, role, body }: { initials: stri
 
 export function TestimonialCard({ quote, initials, logo, name, role }: { quote: string; initials: string; logo?: string; name: string; role: string }) {
   return (
-    <div className="rounded-sv-lg border border-sv-border bg-sv-surface p-8">
+    <div className="flex h-full flex-col rounded-sv-lg border border-sv-border bg-sv-surface p-8">
       <p className="text-[17px] text-sv-text before:mr-1 before:text-[34px] before:leading-[0] before:text-sv-primary-light before:content-['“']">{quote}</p>
-      <div className="mt-6 flex items-center gap-3">
+      <div className="mt-auto flex items-center gap-3 pt-6">
         {logo ? (
           <span className="flex h-11 w-[72px] shrink-0 items-center justify-center overflow-hidden rounded-sv-sm bg-[#C2C0B9] p-1">
             <img src={logo} alt={role} className="max-h-full max-w-full object-contain mix-blend-multiply" loading="lazy" />

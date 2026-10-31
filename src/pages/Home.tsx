@@ -1,11 +1,10 @@
-import { useState } from 'react'
 import HomeHero from '../components/HomeHero'
 import Marquee from '../components/Marquee'
 import { Container, Section, SectionHead, Eyebrow } from '../components/ui'
 import { RevealGroup, Reveal } from '../components/Reveal'
 import { ForkCard, TestimonialCard } from '../components/cards'
 import { StatsGrid } from '../components/StatCounter'
-import { DemoForm, Field, FormGrid, TextInput, SelectInput, TextareaInput, PhoneInput } from '../components/forms'
+import EnquiryForm from '../components/EnquiryForm'
 import { CLIENT_LOGOS } from '../data/clients'
 
 const STATS = [
@@ -16,57 +15,33 @@ const STATS = [
   { target: 100, suffix: 'Mn+', label: 'Digital Viewership' },
 ]
 
-// Real client quotes, sourced from playevents.sportvot.com. The brief calls for 3 approved
-// premium-client testimonials — add the third here once the quote and logo are supplied.
+// Approved testimonials from SportVot's premium clients (supplied 31 Oct 2026). No client logos were
+// supplied yet, so the cards fall back to initials — pass a `logo` once they arrive.
 const TESTIMONIALS = [
   {
-    quote: 'We thank SportVot for their support in partnering with us for our Cricket event. Our team enjoyed the spirit of the game. The event was well planned.',
-    initials: 'SM',
-    logo: '/play/nuvama.jpeg',
-    name: 'Shruti Mody',
-    role: 'Nuvama Asset Management',
+    quote:
+      'We chose SportVot because we wanted to significantly scale up the broadcast production of Table Tennis Australia events without increasing our production budget or compromising on quality. This is a tough brief, however the SportVot team didn’t just meet our expectations, they exceeded them. From seamlessly capturing and producing large amounts of live content and post game highlights, to managing the complexity of having multiple matches on air simultaneously, they were flawless. And so well priced! What impressed us most was how SportVot took care of everything behind the scenes—both in Australia and India. They gave us exactly what we needed to make sure our event broadcasts were delivered smoothly and looked professional to our growing audience.',
+    initials: 'WE',
+    name: 'Wade Edwards',
+    role: 'Head of Commercial and Strategy, Table Tennis Australia',
   },
   {
-    quote: "Thank you @Teamsportvot. It was a wonderful execution. The food was also good. Overall an enriching experience for everyone who participated in today's event.",
-    initials: 'VD',
-    logo: '/play/BSE.png',
-    name: 'Vaibhav Dave',
-    role: 'Bombay Stock Exchange',
+    quote:
+      'Working with SportVot has been a real eye-opener for us at Badminton Australia. We hadn’t really heard about remote broadcast production, or know how it worked. But the way the SportVot team can take a live camera feed from Australia, produce content in India, then deliver a live broadcast globally in seconds is genuinely impressive. As is the price! What stood out the most was their ability to handle real-time challenges. Having their team available in both Australia and India at any time of the day to deal with any last-minute issues made a world of difference. Everything flowed like clockwork, and we didn’t have to worry about a thing!',
+    initials: 'TW',
+    name: 'Tjitte (TJ) Weistra',
+    role: 'Chief Executive Officer, Badminton Australia',
   },
-]
-
-const SPORTS = [
-  'Multi-sport', 'Football / Soccer', 'Cricket', 'Padel', 'Pickleball', 'Badminton', 'Tennis',
-  'Table Tennis', 'Hockey', 'Rugby', 'Kabaddi', 'AFL', 'Baseball', 'Basketball', 'Netball',
-]
-
-const SOLUTIONS = [
-  'SportVot End-to-End Live Sports Production Solution',
-  'SportVot Automated Cameras',
-  'SportVot Analytics',
-  'SportVot Highlights',
-  'SportVot OTT',
-  "I don't know / Looking for something else",
-]
-
-const EVENT_TYPES = [
-  'Corporate Events',
-  'Product Launch',
-  'Sports Tournament',
-  'Team Offsite',
-  'Thematic Team Dinner',
-  'Themed Birthday Party',
-]
-
-const TOPICS = [
-  { value: 'production', label: 'Live Sports Production & Broadcasting' },
-  { value: 'events', label: 'Corporate Events & Sports Tournaments' },
-  { value: 'general', label: 'General Enquiry / Partnership' },
+  {
+    quote:
+      'To be honest, we didn’t know something like this could happen. We needed a production team that could deliver from multi courts, in different venues, in different states, all at the same time. And SportVot nailed it! They handled the entire process, from receiving camera feeds in Mumbai from Melbourne, Sydney and Brisbane, simultaneously producing 10 streams via 13 cameras and then delivering the live broadcast to the world. All within a matter of seconds! It’s amazing how smoothly they made this all work together. It’s not just the speed, it’s the whole package—from start to finish, they were on top of everything. We couldn’t have asked for a better team behind the scenes.',
+    initials: 'RS',
+    name: 'Ron Shell',
+    role: 'Chief Executive Officer, National Pickleball League',
+  },
 ]
 
 export default function Home() {
-  const [topic, setTopic] = useState('')
-
   return (
     <>
       <HomeHero />
@@ -110,7 +85,7 @@ export default function Home() {
             <Reveal as="h3" className="text-center font-display text-[22px] font-bold text-sv-text-muted">
               What our clients say.
             </Reveal>
-            <RevealGroup className="mx-auto mt-8 grid max-w-[1000px] grid-cols-[repeat(auto-fit,minmax(300px,1fr))] gap-6">
+            <RevealGroup className="mx-auto mt-8 grid max-w-[1200px] grid-cols-3 items-stretch gap-6 max-[1000px]:grid-cols-1">
               {TESTIMONIALS.map((t) => (
                 <TestimonialCard key={t.name} {...t} />
               ))}
@@ -138,85 +113,7 @@ export default function Home() {
               <p className="mx-auto mt-2 text-center text-sm font-bold text-sv-primary-light">Production proposals within 24 hours.</p>
             </div>
             <div className="mx-auto mt-10 max-w-[760px]">
-              <DemoForm submitLabel="Send Enquiry →">
-                <Field label="What can we help you with? *">
-                  <SelectInput required value={topic} onChange={(e) => setTopic(e.target.value)}>
-                    <option value="" disabled>
-                      Select an option
-                    </option>
-                    {TOPICS.map((t) => (
-                      <option key={t.value} value={t.value}>
-                        {t.label}
-                      </option>
-                    ))}
-                  </SelectInput>
-                </Field>
-                <FormGrid>
-                  <Field label="Name *">
-                    <TextInput type="text" required placeholder="Your full name" />
-                  </Field>
-                  <Field label="Email ID *">
-                    <TextInput type="email" required placeholder="you@organisation.com" />
-                  </Field>
-                  <Field label="Phone Number">
-                    <PhoneInput placeholder="Phone number" />
-                  </Field>
-                  <Field label="Location *">
-                    <TextInput type="text" required placeholder="City, Country" />
-                  </Field>
-
-                  {topic === 'production' && (
-                    <>
-                      <Field label="Sport *">
-                        <SelectInput required defaultValue="">
-                          <option value="" disabled>
-                            Select a sport
-                          </option>
-                          {SPORTS.map((x) => (
-                            <option key={x}>{x}</option>
-                          ))}
-                        </SelectInput>
-                      </Field>
-                      <Field label="Production / Solution Interest *">
-                        <SelectInput required defaultValue="">
-                          <option value="" disabled>
-                            Select an option
-                          </option>
-                          {SOLUTIONS.map((x) => (
-                            <option key={x}>{x}</option>
-                          ))}
-                        </SelectInput>
-                      </Field>
-                    </>
-                  )}
-                  {topic === 'events' && (
-                    <>
-                      <Field label="Event Type *">
-                        <SelectInput required defaultValue="">
-                          <option value="" disabled>
-                            Select an event type
-                          </option>
-                          {EVENT_TYPES.map((x) => (
-                            <option key={x}>{x}</option>
-                          ))}
-                        </SelectInput>
-                      </Field>
-                      <Field label="Company Name">
-                        <TextInput type="text" placeholder="Your company" />
-                      </Field>
-                    </>
-                  )}
-                  {topic === 'general' && (
-                    <Field label="Organisation" full>
-                      <TextInput type="text" placeholder="Your organisation" />
-                    </Field>
-                  )}
-
-                  <Field label="Message" full>
-                    <TextareaInput placeholder="Tell us a little about what you have in mind..." />
-                  </Field>
-                </FormGrid>
-              </DemoForm>
+              <EnquiryForm />
             </div>
           </Reveal>
         </Container>

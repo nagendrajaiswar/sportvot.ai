@@ -1,6 +1,7 @@
 import { useState } from 'react'
 import { CaretDown } from '@phosphor-icons/react'
 import { cn } from '../lib/utils'
+import { COUNTRIES } from '../data/countries'
 
 const fieldClasses =
   'rounded-sv-md border border-sv-border-strong bg-sv-black-soft px-[15px] py-[13px] font-body text-[15px] text-sv-white transition-colors focus:border-sv-primary-light focus:outline-none'
@@ -41,25 +42,50 @@ export function SelectInput({ wrapperClassName, ...props }: React.SelectHTMLAttr
   )
 }
 
-const COUNTRY_CODES = [
-  ['IN', '+91'], ['US', '+1'], ['GB', '+44'], ['AE', '+971'], ['AU', '+61'], ['CA', '+1'], ['SG', '+65'], ['SA', '+966'],
-  ['QA', '+974'], ['NG', '+234'], ['KE', '+254'], ['ZA', '+27'], ['ID', '+62'], ['PH', '+63'], ['MY', '+60'], ['LK', '+94'],
-  ['BD', '+880'], ['NP', '+977'], ['DE', '+49'], ['FR', '+33'],
-]
-
-/** Phone number input with an international country-code selector. */
-export function PhoneInput({ required, placeholder = 'Phone number' }: { required?: boolean; placeholder?: string }) {
+/** Phone number input with a scrollable international country-code selector. */
+export function PhoneInput({
+  required,
+  placeholder,
+  dial,
+  onDialChange,
+}: {
+  required?: boolean
+  placeholder?: string
+  dial?: string
+  onDialChange?: (dial: string) => void
+}) {
+  const dialProps = dial === undefined ? { defaultValue: '+91' } : { value: dial, onChange: (e: React.ChangeEvent<HTMLSelectElement>) => onDialChange?.(e.target.value) }
   return (
     <div className="flex gap-2">
-      <SelectInput wrapperClassName="w-[116px] shrink-0" defaultValue="+91" aria-label="Country code" className="pr-8 pl-3">
-        {COUNTRY_CODES.map(([iso, code]) => (
+      <SelectInput wrapperClassName="w-[116px] shrink-0" name="dialCode" aria-label="Country code" className="pr-8 pl-3" {...dialProps}>
+        {COUNTRIES.map(([, iso, code]) => (
           <option key={iso} value={code}>
             {iso} {code}
           </option>
         ))}
       </SelectInput>
-      <TextInput type="tel" required={required} placeholder={placeholder} className="min-w-0 flex-1" />
+      <TextInput type="tel" name="phone" required={required} placeholder={placeholder} className="min-w-0 flex-1" />
     </div>
+  )
+}
+
+/** A set of checkboxes sharing one name; read the selection with FormData.getAll(name). */
+export function CheckboxGroup({ name, options, legend }: { name: string; options: string[]; legend: string }) {
+  return (
+    <fieldset className="mb-4 col-span-full">
+      <legend className="mb-2 text-[13px] font-semibold text-sv-text-muted">{legend}</legend>
+      <div className="grid grid-cols-2 gap-2.5 max-[640px]:grid-cols-1">
+        {options.map((o) => (
+          <label
+            key={o}
+            className="flex cursor-pointer items-center gap-2.5 rounded-sv-md border border-sv-border-strong bg-sv-black-soft px-4 py-3 text-[14px] text-sv-text transition-colors has-checked:border-sv-primary-border has-checked:bg-sv-primary-dim"
+          >
+            <input type="checkbox" name={name} value={o} className="h-4 w-4 shrink-0 accent-[#7877e0]" />
+            {o}
+          </label>
+        ))}
+      </div>
+    </fieldset>
   )
 }
 
@@ -71,21 +97,31 @@ export function DemoForm({
   className,
   submitLabel,
   block = true,
+  onSubmitData,
   children,
 }: {
   className?: string
   submitLabel: string
   block?: boolean
+  /** Receives the submitted fields; reject to show an error instead of the success state. */
+  onSubmitData?: (data: FormData) => void | Promise<void>
   children: React.ReactNode
 }) {
-  const [sent, setSent] = useState(false)
+  const [state, setState] = useState<'idle' | 'sending' | 'sent' | 'error'>('idle')
 
-  const onSubmit = (e: React.FormEvent<HTMLFormElement>) => {
+  const onSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault()
-    setSent(true)
     const form = e.currentTarget
+    setState('sending')
+    try {
+      await onSubmitData?.(new FormData(form))
+    } catch {
+      setState('error')
+      return
+    }
+    setState('sent')
     setTimeout(() => {
-      setSent(false)
+      setState('idle')
       form.reset()
     }, 2600)
   }
@@ -95,14 +131,19 @@ export function DemoForm({
       {children}
       <button
         type="submit"
-        disabled={sent}
+        disabled={state === 'sending' || state === 'sent'}
         className={cn(
           'mt-2 inline-flex items-center justify-center gap-2.5 rounded-full bg-sv-primary px-8 py-4 font-display text-[15px] font-bold text-white transition-shadow hover:shadow-[0_12px_40px_rgba(120,119,224,.45)] disabled:opacity-80',
           block && 'w-full',
         )}
       >
-        {sent ? "Sent — we'll be in touch →" : submitLabel}
+        {state === 'sent' ? "Sent — we'll be in touch →" : state === 'sending' ? 'Sending…' : submitLabel}
       </button>
+      {state === 'error' && (
+        <p role="alert" className="mt-3 text-center text-sm text-sv-live">
+          Something went wrong sending your enquiry. Please try again.
+        </p>
+      )}
     </form>
   )
 }

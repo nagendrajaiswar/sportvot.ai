@@ -3,15 +3,18 @@ import { Reveal, RevealGroup } from '../components/Reveal'
 import { MatchCard } from '../components/cards'
 import Btn from '../components/Btn'
 
+const WATCH = 'https://sportvot.com/video/'
+
+// Highlights picked from sportvot.com/tv — each links to its watch page. Thumbnails are saved in public/tv/.
 const MATCHES = [
-  { sport: 'Cricket', title: 'GSL Frankfurt | Match 4 | FC Alsbach vs MSC Frankfurt', dur: '8:41', live: true },
-  { sport: 'Kabaddi', title: 'Mumbai Kabaddi Masters | Semi Final 2 | Ambika SC vs Jolly KM', dur: '10:38', live: true },
-  { sport: 'Football', title: 'Club Friendlies 2026 | Real Betis vs Olympique Lyon', dur: '5:48' },
-  { sport: 'Basketball', title: 'NSU Summer Heat Clash | ICS vs MTG', dur: '1:54' },
-  { sport: 'Kabaddi', title: 'Premier League Kabaddi 2026 | Glasgow Unicorns vs Wolverhampton', dur: '6:03' },
-  { sport: 'Cricket', title: 'Century Champions League Brisbane | Grand Final | Rockets vs Marlins', dur: '9:45' },
-  { sport: 'Football', title: 'Assam Youth League U17 | Bodoland FC vs Eleven Stars', dur: '5:23' },
-  { sport: 'Boxing', title: 'BFL Street V 2026 | Fight Night Highlights', dur: '3:11' },
+  { sport: 'Cricket', title: 'Match 1 | Rays vs Sailors | Century Champions League | Full Match Highlights', dur: '9:26', image: '/tv/cricket-ccl.webp', href: WATCH + '6a6d6c2a24aa9a0001d35329' },
+  { sport: 'Kabaddi', title: 'A Commanding Victory | Ambika Sports Club vs Jolly Krida Mandal | Semi Final 2', dur: '10:38', image: '/tv/kabaddi-semi.webp', href: WATCH + '6a77604b24aa9a0001251650' },
+  { sport: 'Football', title: 'NVFC vs SO | Group B | Match Highlights', dur: '4:54', image: '/tv/football-nvfc.webp', href: WATCH + '6ae4831e24aa9a000163ebad' },
+  { sport: 'Padel', title: 'Coello & Sanchez vs Tapia & Sainz | Epic padel showdown', dur: '4:31', image: '/tv/padel-coello.webp', href: WATCH + '6a9483fd24aa9a00015eab70' },
+  { sport: 'Cricket', title: 'Rising Stars All Out for 48! Men in Blue Seal a Perfect 10-Wicket Win | JCL T10', dur: '3:52', image: '/tv/cricket-jcl.webp', href: WATCH + '6a64a91c24aa9a00010b3671' },
+  { sport: 'Boxing', title: 'Naman Joshi Ready for War | ISF 2.0', dur: '8:56', image: '/tv/boxing-isf.webp', href: WATCH + '6acbc2c924aa9a000122fd7d' },
+  { sport: 'Kabaddi', title: 'The Raid King Is Here! | Aslam Inamdar', dur: '2:12', image: '/tv/kabaddi-raid.webp', href: WATCH + '6abcb25b24aa9a0001a88a5d' },
+  { sport: 'Football', title: 'UKSC vs SAG Highlights', dur: '3:24', image: '/tv/football-uksc.webp', href: WATCH + '6ae1ec8524aa9a0001991e72' },
 ]
 
 const SPORT_TAGS = ['Cricket', 'Football', 'Kabaddi', 'Basketball', 'Badminton', 'Boxing', 'Tennis', 'Padel', 'Rugby', '+15 more sports']
@@ -48,8 +51,8 @@ export default function LiveTV() {
       <Section>
         <Container>
           <Reveal>
-            <Eyebrow>Trending Events</Eyebrow>
-            <h2 className="mt-3 font-display text-[30px] font-extrabold text-sv-white">Nail-biting events, live right now.</h2>
+            <Eyebrow>Latest Highlights</Eyebrow>
+            <h2 className="mt-3 font-display text-[30px] font-extrabold text-sv-white">Nail-biting moments, from every sport.</h2>
           </Reveal>
           <RevealGroup className="mt-10 grid grid-cols-4 gap-4 max-[1000px]:grid-cols-2 max-[560px]:grid-cols-1">
             {MATCHES.map((m, i) => (

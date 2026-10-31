@@ -2,7 +2,8 @@ import HomeHero from '../components/HomeHero'
 import Marquee from '../components/Marquee'
 import { Container, Section, SectionHead, Eyebrow } from '../components/ui'
 import { RevealGroup, Reveal } from '../components/Reveal'
-import { ForkCard, TestimonialCard } from '../components/cards'
+import { ForkCard } from '../components/cards'
+import TestimonialCarousel from '../components/TestimonialCarousel'
 import { StatsGrid } from '../components/StatCounter'
 import EnquiryForm from '../components/EnquiryForm'
 import { CLIENT_LOGOS } from '../data/clients'
@@ -85,11 +86,9 @@ export default function Home() {
             <Reveal as="h3" className="text-center font-display text-[22px] font-bold text-sv-text-muted">
               What our clients say.
             </Reveal>
-            <RevealGroup className="mx-auto mt-8 grid max-w-[1200px] grid-cols-3 items-stretch gap-6 max-[1000px]:grid-cols-1">
-              {TESTIMONIALS.map((t) => (
-                <TestimonialCard key={t.name} {...t} />
-              ))}
-            </RevealGroup>
+            <Reveal className="mx-auto mt-8 max-w-[1200px]">
+              <TestimonialCarousel items={TESTIMONIALS} />
+            </Reveal>
           </div>
         </Container>
       </Section>

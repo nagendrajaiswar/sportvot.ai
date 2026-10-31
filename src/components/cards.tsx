@@ -414,16 +414,34 @@ export function TestimonialCard({ quote, initials, logo, name, role }: { quote: 
 
 /* ---------- Match / live card ---------- */
 
-export function MatchCard({ sport, title, dur, live }: { sport: string; title: string; dur?: string; live?: boolean }) {
-  return (
-    <div className="overflow-hidden rounded-sv-md border border-sv-border bg-sv-surface">
-      <div className="relative flex aspect-16/10 items-center justify-center overflow-hidden bg-[linear-gradient(160deg,rgba(120,119,224,.18),rgba(29,28,140,.18))] after:absolute after:inset-0 after:bg-[linear-gradient(180deg,transparent_60%,rgba(0,0,0,.5))]">
+export function MatchCard({
+  sport,
+  title,
+  dur,
+  live,
+  image,
+  href,
+}: {
+  sport: string
+  title: string
+  dur?: string
+  live?: boolean
+  image?: string
+  /** External watch-page URL; the whole card becomes a link when set. */
+  href?: string
+}) {
+  const className =
+    'group block h-full overflow-hidden rounded-sv-md border border-sv-border bg-sv-surface transition-[border-color,transform] duration-300 hover:-translate-y-1 hover:border-sv-primary-border'
+  const inner = (
+    <>
+      <div className="relative flex aspect-video items-center justify-center overflow-hidden bg-[linear-gradient(160deg,rgba(120,119,224,.18),rgba(29,28,140,.18))] after:absolute after:inset-0 after:bg-[linear-gradient(180deg,transparent_60%,rgba(0,0,0,.5))]">
+        {image && <img src={image} alt={title} className="absolute inset-0 h-full w-full object-cover transition-transform duration-500 group-hover:scale-105" loading="lazy" />}
         {live && (
           <span className="absolute left-2 top-2 z-10 inline-flex items-center gap-[7px] rounded-full border border-[rgba(255,0,67,0.4)] bg-sv-live-dim px-3.5 py-1.5 text-xs font-extrabold tracking-[0.06em] text-white before:h-[7px] before:w-[7px] before:animate-[sv-pulse_1.6s_infinite] before:rounded-full before:bg-sv-live">
             LIVE
           </span>
         )}
-        <span className="relative z-10 flex h-11 w-11 items-center justify-center rounded-full border border-white/30 bg-white/12">▶</span>
+        <span className="relative z-10 flex h-11 w-11 items-center justify-center rounded-full border border-white/30 bg-black/35 backdrop-blur-sm">▶</span>
         {dur && (
           <span className="absolute bottom-2 right-2 z-10 rounded font-display text-[11px] font-bold bg-black/70 px-[7px] py-[3px] text-white">
             {dur}
@@ -434,6 +452,13 @@ export function MatchCard({ sport, title, dur, live }: { sport: string; title: s
         <div className="text-[11px] font-bold uppercase tracking-[0.05em] text-sv-primary-light">{sport}</div>
         <div className="mt-1 text-sm font-bold leading-[1.35] text-sv-white">{title}</div>
       </div>
-    </div>
+    </>
+  )
+  return href ? (
+    <a href={href} target="_blank" rel="noopener" className={className}>
+      {inner}
+    </a>
+  ) : (
+    <div className={className}>{inner}</div>
   )
 }

@@ -82,8 +82,8 @@ export default function Home() {
           </SectionHead>
           <StatsGrid stats={STATS} featureFirst className="mt-14" />
 
-          <div className="mt-28 max-[900px]:mt-20">
-            <SectionHead eyebrow="Client Voices" center className="mx-auto mb-12">
+          <div className="mt-28 max-[900px]:mt-16">
+            <SectionHead eyebrow="Client Voices" center className="mx-auto mb-12 max-[900px]:mb-8">
               <h2 className="mt-3 text-balance font-display text-[clamp(28px,4vw,44px)] font-extrabold text-sv-white">What our clients say.</h2>
             </SectionHead>
             <Reveal className="mx-auto max-w-[1200px]">

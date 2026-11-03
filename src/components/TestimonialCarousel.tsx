@@ -90,14 +90,14 @@ export default function TestimonialCarousel({ items }: { items: Testimonial[] })
                 className="m-0 w-full shrink-0 px-px"
               >
                 <div
-                  className="grid h-full grid-cols-[280px_1fr] items-center gap-12 rounded-sv-xl border border-sv-border p-12 max-[900px]:grid-cols-1 max-[900px]:gap-7 max-[900px]:p-7"
+                  className="grid h-full grid-cols-[280px_1fr] items-center gap-12 rounded-sv-xl border border-sv-border p-12 max-[900px]:grid-cols-1 max-[900px]:gap-4 max-[900px]:p-5"
                   style={{
                     background:
                       'radial-gradient(120% 140% at 0% 0%, rgba(29,28,140,.30), transparent 55%), radial-gradient(90% 90% at 100% 100%, rgba(120,119,224,.14), transparent 55%), var(--color-sv-black-soft)',
                   }}
                 >
-                  <figcaption className="flex flex-col items-start gap-5 border-r border-sv-border pr-10 max-[900px]:border-r-0 max-[900px]:border-b max-[900px]:pr-0 max-[900px]:pb-6">
-                    <Quotes size={44} weight="fill" className="text-sv-primary-light/60" aria-hidden="true" />
+                  <figcaption className="flex flex-col items-start gap-5 border-r border-sv-border pr-10 max-[900px]:gap-3 max-[900px]:border-r-0 max-[900px]:border-b max-[900px]:pr-0 max-[900px]:pb-4">
+                    <Quotes size={44} weight="fill" className="text-sv-primary-light/60 max-[900px]:h-7 max-[900px]:w-7" aria-hidden="true" />
                     <div className="flex items-center gap-4">
                       {t.logo ? (
                         <span className="flex h-14 w-[88px] shrink-0 items-center justify-center overflow-hidden rounded-sv-sm bg-[#C2C0B9] p-1.5">
@@ -115,7 +115,7 @@ export default function TestimonialCarousel({ items }: { items: Testimonial[] })
                       {title && <div className="mt-0.5 text-sm text-sv-text-muted">{title}</div>}
                     </div>
                   </figcaption>
-                  <blockquote className="m-0 text-[clamp(16px,1.5vw,20px)] leading-[1.75] text-sv-text">{t.quote}</blockquote>
+                  <blockquote className="m-0 text-[clamp(16px,1.5vw,20px)] leading-[1.75] text-sv-text max-[900px]:leading-[1.65]">{t.quote}</blockquote>
                 </div>
               </figure>
             )
@@ -123,7 +123,7 @@ export default function TestimonialCarousel({ items }: { items: Testimonial[] })
         </div>
       </div>
 
-      <div className="mt-6 flex items-center justify-center gap-5">
+      <div className="mt-6 flex items-center justify-center gap-5 max-[900px]:mt-4">
         <button
           type="button"
           aria-label="Previous testimonial"

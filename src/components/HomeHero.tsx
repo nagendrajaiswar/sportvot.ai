@@ -2,7 +2,7 @@ import { useEffect, useRef, useState } from 'react'
 import { createPortal } from 'react-dom'
 import gsap from 'gsap'
 import { ScrollTrigger } from 'gsap/ScrollTrigger'
-import { Play, X } from '@phosphor-icons/react'
+import { X } from '@phosphor-icons/react'
 import { Container, Eyebrow } from './ui'
 import Btn from './Btn'
 
@@ -171,8 +171,8 @@ export default function HomeHero() {
                 >
                   <img src={SHOWREEL_POSTER} alt="" className="absolute inset-0 h-full w-full object-cover transition-transform duration-700 group-hover:scale-105" />
                   <span className="absolute inset-0 bg-[linear-gradient(180deg,rgba(5,6,7,.05)_30%,rgba(5,6,7,.7)_100%)]" />
-                  <span className="absolute left-1/2 top-1/2 flex h-20 w-20 -translate-x-1/2 -translate-y-1/2 items-center justify-center rounded-full bg-sv-primary text-white shadow-[0_0_0_10px_rgba(120,119,224,.25)] transition-transform duration-300 group-hover:scale-110 max-[640px]:h-16 max-[640px]:w-16">
-                    <Play size={30} weight="fill" className="translate-x-0.5" />
+                  <span className="absolute left-1/2 top-1/2 flex h-16 w-16 -translate-x-1/2 -translate-y-1/2 items-center justify-center rounded-full border border-white/30 bg-black/35 text-xl text-white backdrop-blur-sm transition-transform duration-300 group-hover:scale-110 max-[640px]:h-14 max-[640px]:w-14">
+                    ▶
                   </span>
                   <span className="absolute inset-x-0 bottom-0 flex items-center justify-between gap-4 p-5 text-left max-[640px]:p-4">
                     <span className="font-display text-sm font-bold text-white">Watch the SportVot showreel</span>

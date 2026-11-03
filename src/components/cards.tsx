@@ -129,7 +129,7 @@ export function MediaCard({
       onMouseLeave={onMouseLeave}
       className="stroke-run group block overflow-hidden rounded-sv-lg border border-sv-border bg-sv-surface transition-[border-color,box-shadow] duration-300 hover:border-sv-primary-border hover:shadow-[0_20px_50px_-12px_rgba(0,0,0,.5)]"
     >
-      <div className="aspect-3/4 overflow-hidden">
+      <div className="aspect-3/4 overflow-hidden max-[640px]:aspect-4/3">
         <img src={image} alt={title} className="h-full w-full object-cover transition-transform duration-500 group-hover:scale-105" loading="lazy" />
       </div>
       <div className="p-6 text-center">

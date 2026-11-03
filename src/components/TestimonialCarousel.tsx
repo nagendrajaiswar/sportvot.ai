@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react'
+import { useEffect, useRef, useState } from 'react'
 import { CaretLeft, CaretRight, Quotes } from '@phosphor-icons/react'
 import { cn } from '../lib/utils'
 
@@ -17,16 +17,49 @@ function splitRole(role: string) {
  * (paused on hover/focus), with arrows and dots to move manually.
  */
 export default function TestimonialCarousel({ items }: { items: Testimonial[] }) {
-  const [active, setActive] = useState(0)
+  const n = items.length
+  // `pos` is the track position; slot n is a clone of slide 0, so the loop always moves forward:
+  // after the last testimonial the first one slides in from the right, then the track snaps back to 0 unseen.
+  const [pos, setPos] = useState(0)
+  const [animate, setAnimate] = useState(true)
   const [paused, setPaused] = useState(false)
-  const go = (i: number) => setActive((i + items.length) % items.length)
+  const active = pos % n
+  const snap = useRef<number | null>(null)
+
+  const next = () => setPos((p) => (p >= n ? p : p + 1))
+  const prev = () => {
+    if (pos > 0) return setPos(pos - 1)
+    // from the first slide, jump (unseen) to the clone of it and slide back to the last one
+    setAnimate(false)
+    setPos(n)
+    snap.current = requestAnimationFrame(() => {
+      snap.current = requestAnimationFrame(() => {
+        setAnimate(true)
+        setPos(n - 1)
+      })
+    })
+  }
+
+  useEffect(() => () => {
+    if (snap.current) cancelAnimationFrame(snap.current)
+  }, [])
 
   useEffect(() => {
-    if (paused || items.length < 2) return
+    if (paused || n < 2 || !animate) return
     if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return
-    const id = window.setTimeout(() => setActive((i) => (i + 1) % items.length), INTERVAL_MS)
+    const id = window.setTimeout(next, INTERVAL_MS)
     return () => window.clearTimeout(id)
-  }, [active, paused, items.length])
+  }, [pos, paused, animate, n])
+
+  // Once the slide-in of the clone finishes, reset to the real first slide without animating
+  const onTrackEnd = (e: React.TransitionEvent<HTMLDivElement>) => {
+    if (e.target !== e.currentTarget || pos !== n) return
+    setAnimate(false)
+    setPos(0)
+    snap.current = requestAnimationFrame(() => {
+      snap.current = requestAnimationFrame(() => setAnimate(true))
+    })
+  }
 
   return (
     <div
@@ -39,16 +72,21 @@ export default function TestimonialCarousel({ items }: { items: Testimonial[] })
       onBlurCapture={() => setPaused(false)}
     >
       <div className="overflow-hidden rounded-sv-xl">
-        <div className="flex transition-transform duration-700 ease-sv-soft" style={{ transform: `translateX(-${active * 100}%)` }}>
-          {items.map((t, i) => {
+        <div
+          className={cn('flex ease-sv-soft', animate && 'transition-transform duration-700')}
+          style={{ transform: `translateX(-${pos * 100}%)` }}
+          onTransitionEnd={onTrackEnd}
+        >
+          {[...items, items[0]].map((t, i) => {
+            const isClone = i === n
             const { title, org } = splitRole(t.role)
             return (
               <figure
-                key={t.name}
+                key={isClone ? `${t.name}-clone` : t.name}
                 role="group"
                 aria-roledescription="slide"
-                aria-label={`${i + 1} of ${items.length}`}
-                aria-hidden={i !== active}
+                aria-label={`${isClone ? 1 : i + 1} of ${n}`}
+                aria-hidden={isClone || i !== active}
                 className="m-0 w-full shrink-0 px-px"
               >
                 <div
@@ -89,7 +127,7 @@ export default function TestimonialCarousel({ items }: { items: Testimonial[] })
         <button
           type="button"
           aria-label="Previous testimonial"
-          onClick={() => go(active - 1)}
+          onClick={prev}
           className="flex h-10 w-10 cursor-pointer items-center justify-center rounded-full border border-sv-border-strong text-sv-white transition-colors duration-300 hover:border-white/70 hover:bg-white/10"
         >
           <CaretLeft size={16} weight="bold" />
@@ -102,7 +140,7 @@ export default function TestimonialCarousel({ items }: { items: Testimonial[] })
               role="tab"
               aria-selected={i === active}
               aria-label={`Show testimonial from ${t.name}`}
-              onClick={() => setActive(i)}
+              onClick={() => setPos(i)}
               className={cn(
                 'h-2.5 cursor-pointer rounded-full transition-all duration-300',
                 i === active ? 'w-8 bg-sv-primary-light' : 'w-2.5 bg-white/25 hover:bg-white/45',
@@ -113,7 +151,7 @@ export default function TestimonialCarousel({ items }: { items: Testimonial[] })
         <button
           type="button"
           aria-label="Next testimonial"
-          onClick={() => go(active + 1)}
+          onClick={next}
           className="flex h-10 w-10 cursor-pointer items-center justify-center rounded-full border border-sv-border-strong text-sv-white transition-colors duration-300 hover:border-white/70 hover:bg-white/10"
         >
           <CaretRight size={16} weight="bold" />

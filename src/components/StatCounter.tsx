@@ -24,8 +24,9 @@ export function StatsGrid({ stats, featureFirst, className }: { stats: Stat[]; f
       </div>
     )
   }
+  const cols = ({ 2: 'grid-cols-2', 3: 'grid-cols-3', 4: 'grid-cols-4', 5: 'grid-cols-5' } as Record<number, string>)[stats.length] ?? 'grid-cols-4'
   return (
-    <div className={cn('grid gap-5 max-[900px]:grid-cols-2', className)} style={{ gridTemplateColumns: `repeat(${stats.length}, minmax(0, 1fr))` }}>
+    <div className={cn('grid gap-5', cols, 'max-[900px]:grid-cols-2 max-[560px]:grid-cols-1', className)}>
       {stats.map((s) => (
         <StatCard key={s.label} {...s} />
       ))}

@@ -39,7 +39,7 @@ export function ForkCard({
       <h3 className="mt-4 font-display text-[clamp(24px,3vw,32px)] font-extrabold text-sv-white">{title}</h3>
       {audience && <p className="mt-3 text-sm text-sv-text-muted">{audience}</p>}
       <p className="mt-4 max-w-[440px] flex-1 text-base text-white/75">{body}</p>
-      <span className="mt-7 inline-flex w-fit items-center justify-center rounded-full border border-white/30 px-8 py-3.5 font-display text-[15px] font-bold text-sv-white transition-colors duration-300 group-hover:border-sv-primary group-hover:bg-sv-primary">
+      <span className="mt-7 inline-flex w-fit items-center justify-center rounded-full border border-white/30 px-8 py-3.5 font-display text-[15px] font-bold text-sv-white transition-colors duration-300 group-hover:border-white/70 group-hover:bg-white/10">
         {cta}
       </span>
     </Link>
@@ -136,7 +136,7 @@ export function MediaCard({
         <h3 className="font-display text-xl font-extrabold text-sv-white">{title}</h3>
         <p className="mt-2 text-sm text-sv-text-muted">{body}</p>
         {cta && (
-          <span className="mt-5 inline-flex w-fit items-center justify-center rounded-full border border-sv-border-strong px-6 py-3 font-display text-sm font-bold text-sv-white transition-colors duration-300 group-hover:border-sv-primary group-hover:bg-sv-primary">
+          <span className="mt-5 inline-flex w-fit items-center justify-center rounded-full border border-sv-border-strong px-6 py-3 font-display text-sm font-bold text-sv-white transition-colors duration-300 group-hover:border-white/70 group-hover:bg-white/10">
             {cta}
           </span>
         )}
@@ -253,7 +253,7 @@ export function PlayCard({
       <h3 className="mt-4 text-[19px] text-sv-white">{title}</h3>
       <p className="mt-2 text-sm text-sv-text-muted">{body}</p>
       {cta && (
-        <span className="mt-5 inline-flex w-fit items-center justify-center rounded-full border border-sv-border-strong px-6 py-3 font-display text-sm font-bold text-sv-white transition-colors duration-300 group-hover:border-sv-primary group-hover:bg-sv-primary">
+        <span className="mt-5 inline-flex w-fit items-center justify-center rounded-full border border-sv-border-strong px-6 py-3 font-display text-sm font-bold text-sv-white transition-colors duration-300 group-hover:border-white/70 group-hover:bg-white/10">
           {cta}
         </span>
       )}

@@ -26,7 +26,7 @@ export function StatsGrid({ stats, featureFirst, className }: { stats: Stat[]; f
   }
   const cols = ({ 2: 'grid-cols-2', 3: 'grid-cols-3', 4: 'grid-cols-4', 5: 'grid-cols-5' } as Record<number, string>)[stats.length] ?? 'grid-cols-4'
   return (
-    <div className={cn('grid gap-5', cols, 'max-[900px]:grid-cols-2 max-[560px]:grid-cols-1', className)}>
+    <div className={cn('grid gap-5 max-[480px]:gap-3', cols, 'max-[900px]:grid-cols-2', className)}>
       {stats.map((s) => (
         <StatCard key={s.label} {...s} />
       ))}
@@ -68,7 +68,7 @@ function StatCard({ target, suffix, label, big }: Stat & { big?: boolean }) {
       onMouseLeave={onMouseLeave}
       className={cn(
         'stroke-run relative flex flex-col justify-between overflow-hidden rounded-sv-lg border border-sv-border bg-sv-surface transition-[border-color,box-shadow] duration-300 hover:border-sv-primary-border hover:shadow-[0_20px_50px_-12px_rgba(0,0,0,.5)]',
-        big ? 'min-h-[300px] p-10 max-[640px]:min-h-[220px] max-[640px]:p-7' : 'min-h-[150px] p-7 max-[480px]:min-h-[132px] max-[480px]:p-5',
+        big ? 'min-h-[300px] p-10 max-[640px]:min-h-[220px] max-[640px]:p-7' : 'min-h-[150px] p-7 max-[480px]:min-h-[118px] max-[480px]:p-4',
       )}
       style={{
         background: big

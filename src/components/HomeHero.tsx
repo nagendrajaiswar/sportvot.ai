@@ -1,39 +1,36 @@
 import { useEffect, useRef, useState } from 'react'
 import { createPortal } from 'react-dom'
 import gsap from 'gsap'
+import { ScrollTrigger } from 'gsap/ScrollTrigger'
 import { Play, X } from '@phosphor-icons/react'
 import { Container, Eyebrow } from './ui'
 import Btn from './Btn'
 
-// Still background behind the headline (a frame from the showreel; swap for a dedicated hero photo any time).
-const HERO_BG = '/hero-bg.webp'
+const NOISE_BG =
+  "data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='120' height='120'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E"
 
-// The reel plays muted inside the card and, in the lightbox, with sound. The final text + voiceover showreel
-// is still in production — swap this src when it lands.
-const SHOWREEL_SRC = '/herovideo.m4v'
+const HERO_VIDEO_SRC = '/herovideo.m4v'
+
+// Layout option. true: a dedicated showreel player sits on the right of the headline and is the only thing that
+// opens the video (the background loop is ambient and dimmed behind it). false: the original layout, where the
+// whole full-bleed hero is the click target.
+const SIDE_PLAYER = true
 const SHOWREEL_POSTER = '/showreel-poster.webp'
+const SHOWREEL_LENGTH = '1:48'
 
-// Card geometry, as on veo.com: it starts inset with 32px corners and grows to edge-to-edge, square-cornered.
-const CARD_RADIUS = 32
-const insetPx = () => (window.innerWidth < 900 ? 32 : 192) // total horizontal inset at the start
-
-/**
- * Hero: calm full-bleed still, centred headline and CTAs, and a rounded video card below the text that grows to
- * full width as the page scrolls (modelled on veo.com). Clicking the card opens the reel in a lightbox with sound.
- */
 export default function HomeHero() {
   const sectionRef = useRef<HTMLElement | null>(null)
-  const cardWrapRef = useRef<HTMLDivElement | null>(null)
-  const cardRef = useRef<HTMLButtonElement | null>(null)
-  const cardVideoRef = useRef<HTMLVideoElement | null>(null)
+  const videoRef = useRef<HTMLVideoElement | null>(null)
+  const scrimRef = useRef<HTMLDivElement | null>(null)
   const line1 = useRef<HTMLSpanElement | null>(null)
   const line2 = useRef<HTMLSpanElement | null>(null)
   const line3 = useRef<HTMLSpanElement | null>(null)
   const subRef = useRef<HTMLParagraphElement | null>(null)
   const ctaRef = useRef<HTMLDivElement | null>(null)
+  const playerRef = useRef<HTMLDivElement | null>(null)
   const [lightboxOpen, setLightboxOpen] = useState(false)
 
-  // Headline entrance + scroll-driven growth of the video card
+  // Entrance timeline + scroll parallax on the background video
   useEffect(() => {
     // gsap.context + revert() (rather than a plain tl.kill()) so React 18 StrictMode's
     // dev-mode double-invoke (mount -> cleanup -> mount) can't leave elements stuck at
@@ -46,40 +43,78 @@ export default function HomeHero() {
         .to(lines, { yPercent: 0, duration: 1.1, stagger: 0.12, ease: 'power4.out' })
         .from(subRef.current, { opacity: 0, y: 24, duration: 0.8, ease: 'power3.out' }, '-=.6')
         .from(ctaRef.current ? Array.from(ctaRef.current.children) : [], { opacity: 0, y: 16, duration: 0.6, stagger: 0.1, ease: 'power3.out' }, '-=.4')
+        .from(playerRef.current, { opacity: 0, y: 30, scale: 0.96, duration: 0.9, ease: 'power3.out' }, '-=1.1')
 
-      const mm = gsap.matchMedia()
-      mm.add('(prefers-reduced-motion: no-preference)', () => {
-        const full = () => cardWrapRef.current?.clientWidth ?? window.innerWidth
-        // From the moment the card's top edge enters the bottom of the screen until it sits ~20% from the top.
-        gsap.fromTo(
-          cardRef.current,
-          { width: () => full() - insetPx(), borderRadius: CARD_RADIUS },
-          {
-            width: () => full(),
-            borderRadius: 0,
-            ease: 'power2.out',
-            scrollTrigger: {
-              trigger: cardWrapRef.current,
-              start: 'top bottom',
-              end: 'top 20%',
-              scrub: true,
-              invalidateOnRefresh: true,
-            },
-          },
-        )
-      })
+      if (sectionRef.current && videoRef.current) {
+        ScrollTrigger.create({
+          trigger: sectionRef.current,
+          start: 'top top',
+          end: 'bottom top',
+          scrub: true,
+          onUpdate: (self) => gsap.set(videoRef.current, { yPercent: self.progress * 18 }),
+        })
+      }
     }, sectionRef)
 
     return () => ctx.revert()
   }, [])
 
-  // Pause the card's teaser while the lightbox is open; lock page scroll
+  // Cursor-follow spotlight — punches a soft hole in the dark scrim so the
+  // full-brightness video shows through wherever the pointer is, across the whole hero.
+  useEffect(() => {
+    const section = sectionRef.current
+    const scrim = scrimRef.current
+    if (!section || !scrim) return
+
+    const target = { x: -9999, y: -9999 }
+    const current = { x: -9999, y: -9999 }
+    let raf = 0
+
+    const loop = () => {
+      current.x += (target.x - current.x) * 0.08
+      current.y += (target.y - current.y) * 0.08
+      scrim.style.setProperty('--x', `${current.x}px`)
+      scrim.style.setProperty('--y', `${current.y}px`)
+      raf = requestAnimationFrame(loop)
+    }
+    raf = requestAnimationFrame(loop)
+
+    const onEnter = (e: PointerEvent) => {
+      const r = section.getBoundingClientRect()
+      // Snap immediately (no easing) to wherever the pointer entered — otherwise the
+      // spotlight eases in from its last position (or the -9999 off-screen park spot),
+      // which reads as the torch flying in from a fixed corner instead of just appearing.
+      target.x = current.x = e.clientX - r.left
+      target.y = current.y = e.clientY - r.top
+    }
+    const onMove = (e: PointerEvent) => {
+      const r = section.getBoundingClientRect()
+      target.x = e.clientX - r.left
+      target.y = e.clientY - r.top
+    }
+    const onLeave = () => {
+      target.x = -9999
+      target.y = -9999
+    }
+
+    section.addEventListener('pointerenter', onEnter)
+    section.addEventListener('pointermove', onMove)
+    section.addEventListener('pointerleave', onLeave)
+    return () => {
+      cancelAnimationFrame(raf)
+      section.removeEventListener('pointerenter', onEnter)
+      section.removeEventListener('pointermove', onMove)
+      section.removeEventListener('pointerleave', onLeave)
+    }
+  }, [])
+
+  // Pause the background loop while the lightbox is open; lock page scroll
   useEffect(() => {
     if (lightboxOpen) {
-      cardVideoRef.current?.pause()
+      videoRef.current?.pause()
       document.body.style.overflow = 'hidden'
     } else {
-      cardVideoRef.current?.play().catch(() => {})
+      videoRef.current?.play().catch(() => {})
       document.body.style.overflow = ''
     }
     return () => {
@@ -97,17 +132,55 @@ export default function HomeHero() {
   }, [lightboxOpen])
 
   return (
-    <section ref={sectionRef} className="relative overflow-hidden bg-sv-black">
-      {/* Background still + overlay, covering the text and the card area */}
-      <img src={HERO_BG} alt="" className="absolute inset-0 h-full w-full object-cover" />
-      <div className="absolute inset-0 bg-[linear-gradient(180deg,rgba(5,6,7,.55)_0%,rgba(5,6,7,.42)_45%,rgba(5,6,7,.75)_100%)]" />
+    <section
+      ref={sectionRef}
+      className="relative flex min-h-[100svh] items-center overflow-hidden bg-[length:160%_160%] bg-sv-black [animation:sv-hero-drift_18s_ease-in-out_infinite_alternate]"
+      style={{
+        backgroundImage:
+          'radial-gradient(60% 60% at 20% 20%, rgba(29,28,140,.45), transparent 60%), radial-gradient(50% 50% at 85% 15%, rgba(120,119,224,.28), transparent 60%)',
+        // Belt-and-suspenders clip: GPU-composited <video> layers can visually escape a
+        // plain overflow:hidden under transform in some browsers — clip-path doesn't have
+        // that gap, and it's what actually stopped the parallax video from spilling into
+        // the marquee below.
+        clipPath: 'inset(0)',
+      }}
+    >
+      <video
+        ref={videoRef}
+        className="absolute inset-0 h-full w-full object-cover"
+        autoPlay
+        muted
+        loop
+        playsInline
+        onError={(e) => {
+          ;(e.currentTarget as HTMLVideoElement).style.display = 'none'
+        }}
+      >
+        <source src={HERO_VIDEO_SRC} type="video/mp4" />
+      </video>
 
-      <div className="relative z-2">
-        <div className="flex min-h-[calc(100svh-96px)] items-center justify-center pt-[130px] pb-16 max-[900px]:pt-[110px]">
-          <Container>
-            <div className="mx-auto max-w-[900px] text-center">
-              <Eyebrow center>The Global Sports Production Platform</Eyebrow>
-              <h1 className="mt-5 font-display text-[clamp(44px,7.4vw,76px)] font-extrabold leading-[1.02] tracking-[-0.02em] text-sv-white">
+      {/* Dark scrim with a cursor-follow spotlight hole — purely visual, so the mask
+          cutout never eats clicks (masked-out areas stop receiving pointer events). */}
+      <div ref={scrimRef} className={`hero-video-scrim pointer-events-none absolute inset-0 h-full w-full ${SIDE_PLAYER ? 'hero-video-scrim--split' : ''}`} />
+
+      {/* Full-hero click target (original layout only), kept separate from the scrim above so the whole area is clickable */}
+      {!SIDE_PLAYER && (
+        <button
+          type="button"
+          aria-label="Watch the full video"
+          onClick={() => setLightboxOpen(true)}
+          className="absolute inset-0 h-full w-full cursor-pointer border-0 bg-transparent p-0"
+        />
+      )}
+
+      <div className="pointer-events-none absolute inset-0 opacity-[.03]" style={{ backgroundImage: `url("${NOISE_BG}")` }} />
+
+      <div className={`pointer-events-none relative z-2 w-full py-[140px] pb-24 ${SIDE_PLAYER ? 'max-[1000px]:pt-[104px] max-[1000px]:pb-14' : ''}`}>
+        <Container>
+          <div className={SIDE_PLAYER ? 'grid grid-cols-[1.05fr_1fr] items-center gap-14 max-[1000px]:grid-cols-1 max-[1000px]:gap-10' : undefined}>
+            <div>
+              <Eyebrow>The Global Sports Production Platform</Eyebrow>
+              <h1 className={`mt-5 font-display font-extrabold leading-[1.02] tracking-[-0.02em] text-sv-white ${SIDE_PLAYER ? 'text-[clamp(44px,6.2vw,72px)]' : 'text-[clamp(44px,8.4vw,72px)]'}`}>
                 <span className="block overflow-hidden">
                   <span ref={line1} className="block">
                     Every Game.
@@ -124,10 +197,10 @@ export default function HomeHero() {
                   </span>
                 </span>
               </h1>
-              <p ref={subRef} className="mx-auto mt-6 max-w-[680px] text-[clamp(16px,2vw,21px)] text-white/80">
+              <p ref={subRef} className={`mt-6 text-[clamp(16px,2vw,21px)] text-sv-text-muted ${SIDE_PLAYER ? 'max-w-[560px]' : 'max-w-[640px]'}`}>
                 Professional live sports production, powered by flexible capture, cloud-based workflows and intelligent broadcasting technology — from grassroots competitions to international events.
               </p>
-              <div ref={ctaRef} className="mt-10 flex flex-wrap justify-center gap-4">
+              <div ref={ctaRef} className={`pointer-events-auto mt-12 flex flex-wrap gap-4 ${SIDE_PLAYER ? 'max-[1000px]:mt-8' : ''}`}>
                 <Btn to="#proposal" variant="primary">
                   Get a Proposal
                 </Btn>
@@ -136,44 +209,31 @@ export default function HomeHero() {
                 </Btn>
               </div>
             </div>
-          </Container>
-        </div>
 
-        {/* The video card — starts inset with rounded corners, grows to edge-to-edge on scroll */}
-        <div ref={cardWrapRef} className="flex justify-center pb-24 max-[900px]:pb-14">
-          <button
-            ref={cardRef}
-            type="button"
-            aria-label="Play the SportVot showreel"
-            onClick={() => setLightboxOpen(true)}
-            className="group relative block aspect-video w-[calc(100%-192px)] cursor-pointer overflow-hidden border-0 bg-sv-black-soft p-0 max-[900px]:w-[calc(100%-32px)]"
-            style={{ borderRadius: CARD_RADIUS }}
-          >
-            <video
-              ref={cardVideoRef}
-              className="absolute inset-0 h-full w-full object-cover transition-transform duration-700 group-hover:scale-[1.03]"
-              autoPlay
-              muted
-              loop
-              playsInline
-              poster={SHOWREEL_POSTER}
-              onError={(e) => {
-                ;(e.currentTarget as HTMLVideoElement).style.display = 'none'
-              }}
-            >
-              <source src={SHOWREEL_SRC} type="video/mp4" />
-            </video>
-            <span className="absolute inset-0 bg-[linear-gradient(180deg,rgba(5,6,7,.1),rgba(5,6,7,.45))]" />
-            <span className="absolute inset-0 flex items-center justify-center gap-6 px-6 max-[640px]:gap-4">
-              <span className="flex h-[72px] w-[72px] shrink-0 items-center justify-center rounded-full bg-black/55 text-white backdrop-blur-sm transition-transform duration-300 group-hover:scale-110 max-[640px]:h-14 max-[640px]:w-14">
-                <Play size={30} weight="fill" className="translate-x-0.5" />
-              </span>
-              <span className="max-w-[300px] text-left font-display text-[clamp(15px,1.6vw,21px)] font-medium leading-snug text-white">
-                See how SportVot powers live sports production, from grassroots to global.
-              </span>
-            </span>
-          </button>
-        </div>
+            {SIDE_PLAYER && (
+              <div ref={playerRef} className="pointer-events-auto relative">
+                {/* soft glow so the card reads as its own object against the moving background */}
+                <div aria-hidden="true" className="absolute -inset-6 rounded-[44px] bg-[radial-gradient(60%_60%_at_50%_50%,rgba(120,119,224,.32),transparent_72%)] blur-2xl" />
+                <button
+                  type="button"
+                  aria-label="Play the SportVot showreel with sound"
+                  onClick={() => setLightboxOpen(true)}
+                  className="group relative block aspect-video w-full cursor-pointer overflow-hidden rounded-sv-xl border border-white/20 bg-sv-black-soft p-0 shadow-[0_30px_80px_-20px_rgba(0,0,0,.85)] transition-[border-color,transform] duration-300 hover:-translate-y-1 hover:border-sv-primary-border"
+                >
+                  <img src={SHOWREEL_POSTER} alt="" className="absolute inset-0 h-full w-full object-cover transition-transform duration-700 group-hover:scale-105" />
+                  <span className="absolute inset-0 bg-[linear-gradient(180deg,rgba(5,6,7,.05)_30%,rgba(5,6,7,.7)_100%)]" />
+                  <span className="absolute left-1/2 top-1/2 flex h-20 w-20 -translate-x-1/2 -translate-y-1/2 items-center justify-center rounded-full bg-sv-primary text-white shadow-[0_0_0_10px_rgba(120,119,224,.25)] transition-transform duration-300 group-hover:scale-110 max-[640px]:h-16 max-[640px]:w-16">
+                    <Play size={30} weight="fill" className="translate-x-0.5" />
+                  </span>
+                  <span className="absolute inset-x-0 bottom-0 flex items-center justify-between gap-4 p-5 text-left max-[640px]:p-4">
+                    <span className="font-display text-sm font-bold text-white">Watch the SportVot showreel</span>
+                    <span className="shrink-0 rounded-full border border-white/25 bg-black/45 px-3 py-1 text-xs font-bold text-white backdrop-blur-sm">{SHOWREEL_LENGTH}</span>
+                  </span>
+                </button>
+              </div>
+            )}
+          </div>
+        </Container>
       </div>
 
       {lightboxOpen &&
@@ -187,7 +247,14 @@ export default function HomeHero() {
             >
               <X size={22} weight="bold" />
             </button>
-            <video src={SHOWREEL_SRC} controls autoPlay playsInline className="max-h-[85vh] w-full max-w-5xl rounded-sv-lg" onClick={(e) => e.stopPropagation()} />
+            <video
+              src={HERO_VIDEO_SRC}
+              controls
+              autoPlay
+              playsInline
+              className="max-h-[85vh] w-full max-w-5xl rounded-sv-lg"
+              onClick={(e) => e.stopPropagation()}
+            />
           </div>,
           document.body,
         )}

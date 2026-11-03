@@ -228,40 +228,12 @@
   animation-play-state: running;
 }
 
-/* Hero video scrim — dark everywhere, with a soft glow that follows the cursor
-   (via --x/--y, updated in JS) to gently reveal the full-brightness video beneath.
-   The gradient has a wide, slow falloff on purpose so the reveal reads as a soft
-   glow rather than a hard-edged circle. */
+/* Hero video scrim — same dark veil as the SportVot Play hero: heavy on the left and top, easing off to the right,
+   darkening towards the bottom so the video blends into the page. */
 .hero-video-scrim {
   background:
-    linear-gradient(90deg, rgba(5, 6, 7, 0.78) 0%, rgba(5, 6, 7, 0.42) 34%, transparent 64%),
-    linear-gradient(180deg, rgba(5, 6, 7, 0.34) 0%, rgba(5, 6, 7, 0.28) 60%, var(--color-sv-black) 100%);
-  -webkit-mask-image: radial-gradient(
-    circle 340px at var(--x, -9999px) var(--y, -9999px),
-    transparent 0%,
-    rgba(0, 0, 0, 0.25) 40%,
-    rgba(0, 0, 0, 0.7) 70%,
-    black 100%
-  );
-  mask-image: radial-gradient(
-    circle 340px at var(--x, -9999px) var(--y, -9999px),
-    transparent 0%,
-    rgba(0, 0, 0, 0.25) 40%,
-    rgba(0, 0, 0, 0.7) 70%,
-    black 100%
-  );
-  -webkit-mask-repeat: no-repeat;
-  mask-repeat: no-repeat;
-  -webkit-mask-size: 100% 100%;
-  mask-size: 100% 100%;
-}
-
-/* Used when the hero has a dedicated player on the right: an even, calmer veil so the moving background never
-   competes with the card (the left-heavy default leaves the right side bright). */
-.hero-video-scrim--split {
-  background:
-    linear-gradient(90deg, rgba(5, 6, 7, 0.8) 0%, rgba(5, 6, 7, 0.58) 48%, rgba(5, 6, 7, 0.68) 100%),
-    linear-gradient(180deg, rgba(5, 6, 7, 0.34) 0%, rgba(5, 6, 7, 0.28) 60%, var(--color-sv-black) 100%);
+    linear-gradient(90deg, rgba(5, 6, 7, 0.82) 0%, rgba(5, 6, 7, 0.5) 32%, transparent 62%),
+    linear-gradient(180deg, rgba(5, 6, 7, 0.78) 0%, rgba(5, 6, 7, 0.88) 55%, var(--color-sv-black) 100%);
 }
 
 .cursor-dot {

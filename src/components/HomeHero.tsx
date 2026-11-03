@@ -21,7 +21,6 @@ const SHOWREEL_LENGTH = '1:48'
 export default function HomeHero() {
   const sectionRef = useRef<HTMLElement | null>(null)
   const videoRef = useRef<HTMLVideoElement | null>(null)
-  const scrimRef = useRef<HTMLDivElement | null>(null)
   const line1 = useRef<HTMLSpanElement | null>(null)
   const line2 = useRef<HTMLSpanElement | null>(null)
   const line3 = useRef<HTMLSpanElement | null>(null)
@@ -57,55 +56,6 @@ export default function HomeHero() {
     }, sectionRef)
 
     return () => ctx.revert()
-  }, [])
-
-  // Cursor-follow spotlight — punches a soft hole in the dark scrim so the
-  // full-brightness video shows through wherever the pointer is, across the whole hero.
-  useEffect(() => {
-    const section = sectionRef.current
-    const scrim = scrimRef.current
-    if (!section || !scrim) return
-
-    const target = { x: -9999, y: -9999 }
-    const current = { x: -9999, y: -9999 }
-    let raf = 0
-
-    const loop = () => {
-      current.x += (target.x - current.x) * 0.08
-      current.y += (target.y - current.y) * 0.08
-      scrim.style.setProperty('--x', `${current.x}px`)
-      scrim.style.setProperty('--y', `${current.y}px`)
-      raf = requestAnimationFrame(loop)
-    }
-    raf = requestAnimationFrame(loop)
-
-    const onEnter = (e: PointerEvent) => {
-      const r = section.getBoundingClientRect()
-      // Snap immediately (no easing) to wherever the pointer entered — otherwise the
-      // spotlight eases in from its last position (or the -9999 off-screen park spot),
-      // which reads as the torch flying in from a fixed corner instead of just appearing.
-      target.x = current.x = e.clientX - r.left
-      target.y = current.y = e.clientY - r.top
-    }
-    const onMove = (e: PointerEvent) => {
-      const r = section.getBoundingClientRect()
-      target.x = e.clientX - r.left
-      target.y = e.clientY - r.top
-    }
-    const onLeave = () => {
-      target.x = -9999
-      target.y = -9999
-    }
-
-    section.addEventListener('pointerenter', onEnter)
-    section.addEventListener('pointermove', onMove)
-    section.addEventListener('pointerleave', onLeave)
-    return () => {
-      cancelAnimationFrame(raf)
-      section.removeEventListener('pointerenter', onEnter)
-      section.removeEventListener('pointermove', onMove)
-      section.removeEventListener('pointerleave', onLeave)
-    }
   }, [])
 
   // Pause the background loop while the lightbox is open; lock page scroll
@@ -159,9 +109,8 @@ export default function HomeHero() {
         <source src={HERO_VIDEO_SRC} type="video/mp4" />
       </video>
 
-      {/* Dark scrim with a cursor-follow spotlight hole — purely visual, so the mask
-          cutout never eats clicks (masked-out areas stop receiving pointer events). */}
-      <div ref={scrimRef} className={`hero-video-scrim pointer-events-none absolute inset-0 h-full w-full ${SIDE_PLAYER ? 'hero-video-scrim--split' : ''}`} />
+      {/* Dark scrim (same veil as the Play hero) */}
+      <div className="hero-video-scrim pointer-events-none absolute inset-0 h-full w-full" />
 
       {/* Full-hero click target (original layout only), kept separate from the scrim above so the whole area is clickable */}
       {!SIDE_PLAYER && (

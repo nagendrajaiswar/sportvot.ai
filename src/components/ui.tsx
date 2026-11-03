@@ -106,17 +106,18 @@ export function TwoCol({ className, children }: { className?: string; children: 
   return <div className={cn('grid grid-cols-2 items-center gap-12 max-[900px]:grid-cols-1', className)}>{children}</div>
 }
 
-export function ColMedia({ reverse, children }: { reverse?: boolean; children: React.ReactNode }) {
+export function ColMedia({ reverse, image, alt = '', children }: { reverse?: boolean; image?: string; alt?: string; children?: React.ReactNode }) {
   return (
     <Reveal
       scale
       className={cn(
-        'flex aspect-4/3 items-center justify-center rounded-sv-xl border border-sv-border p-6 text-center font-display font-extrabold text-sv-text-faint',
+        'aspect-4/3 rounded-sv-xl border border-sv-border text-center font-display font-extrabold text-sv-text-faint',
+        image ? 'overflow-hidden' : 'flex items-center justify-center p-6',
         reverse && 'order-2',
       )}
-      style={{ background: 'radial-gradient(80% 80% at 30% 20%, rgba(120,119,224,.16), transparent), var(--color-sv-surface)' }}
+      style={image ? undefined : { background: 'radial-gradient(80% 80% at 30% 20%, rgba(120,119,224,.16), transparent), var(--color-sv-surface)' }}
     >
-      {children}
+      {image ? <img src={image} alt={alt} className="h-full w-full object-cover" loading="lazy" /> : children}
     </Reveal>
   )
 }

@@ -51,7 +51,7 @@ export default function About() {
                 aiming to be the leader in digital sports production.
               </p>
             </Reveal>
-            <ColMedia>Grassroots to global.</ColMedia>
+            <ColMedia image="/about/mission.webp" alt="A cameraman filming a footballer mid-kick at sunset while a spectator watches the live stream on a phone" />
           </TwoCol>
         </Container>
       </Section>

@@ -1,4 +1,5 @@
 import { Link } from 'react-router-dom'
+import { MapPin } from '@phosphor-icons/react'
 import { useTilt } from '../lib/useTilt'
 import { cn } from '../lib/utils'
 
@@ -327,19 +328,7 @@ export function SpecCard({ image, title, body }: { image: string; title: string;
 
 /* ---------- Venue card ---------- */
 
-export function VenueCard({
-  icon,
-  name,
-  city,
-  type,
-  capacity,
-}: {
-  icon: React.ReactNode
-  name: string
-  city: string
-  type: string
-  capacity: string
-}) {
+export function VenueCard({ image, name, location }: { image: string; name: string; location: string }) {
   const { ref, onMouseEnter, onMouseMove, onMouseLeave } = useTilt<HTMLDivElement>()
   return (
     <div
@@ -349,17 +338,14 @@ export function VenueCard({
       onMouseLeave={onMouseLeave}
       className="stroke-run overflow-hidden rounded-sv-lg border border-sv-border bg-sv-surface transition-[border-color,box-shadow] duration-300 hover:border-sv-primary-border hover:shadow-[0_20px_50px_-12px_rgba(0,0,0,.5)]"
     >
-      <div className="flex h-[140px] items-center justify-center bg-[linear-gradient(160deg,rgba(120,119,224,.16),rgba(29,28,140,.20))] text-sv-text-faint">
-        {icon}
+      <div className="aspect-16/10 overflow-hidden bg-sv-black-soft">
+        <img src={image} alt={`${name}, ${location}`} className="h-full w-full object-cover" loading="lazy" />
       </div>
       <div className="p-6">
         <h4 className="font-display text-lg font-extrabold text-sv-white">{name}</h4>
-        <div className="mt-1.5 text-sm text-sv-text-muted">{city}</div>
-        <div className="mt-4 flex items-center justify-between border-t border-sv-border pt-4">
-          <span className="rounded-full border border-sv-border-strong px-3 py-1 text-[11px] font-bold uppercase tracking-[0.04em] text-sv-text-muted">
-            {type}
-          </span>
-          <span className="text-xs font-bold text-sv-primary-light">{capacity}</span>
+        <div className="mt-1.5 flex items-center gap-1.5 text-sm text-sv-text-muted">
+          <MapPin size={16} weight="bold" className="shrink-0 text-sv-primary-light" />
+          {location}
         </div>
       </div>
     </div>

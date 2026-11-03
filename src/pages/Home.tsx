@@ -80,13 +80,13 @@ export default function Home() {
           <SectionHead eyebrow="Scale & Trust" center className="mx-auto">
             <h2 className="mt-3 text-balance font-display text-[clamp(32px,5vw,56px)] font-extrabold text-sv-white">Built to Deliver. Proven at Scale.</h2>
           </SectionHead>
-          <StatsGrid stats={STATS} className="mt-14" />
+          <StatsGrid stats={STATS} featureFirst className="mt-14" />
 
-          <div className="mt-[88px]">
-            <Reveal as="h3" className="text-center font-display text-[22px] font-bold text-sv-text-muted">
-              What our clients say.
-            </Reveal>
-            <Reveal className="mx-auto mt-8 max-w-[1200px]">
+          <div className="mt-28 max-[900px]:mt-20">
+            <SectionHead eyebrow="Client Voices" center className="mx-auto mb-12">
+              <h2 className="mt-3 text-balance font-display text-[clamp(28px,4vw,44px)] font-extrabold text-sv-white">What our clients say.</h2>
+            </SectionHead>
+            <Reveal className="mx-auto max-w-[1200px]">
               <TestimonialCarousel items={TESTIMONIALS} />
             </Reveal>
           </div>

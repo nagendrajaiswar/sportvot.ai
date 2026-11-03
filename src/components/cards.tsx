@@ -1,5 +1,4 @@
 import { Link } from 'react-router-dom'
-import { MapPin } from '@phosphor-icons/react'
 import { useTilt } from '../lib/useTilt'
 import { cn } from '../lib/utils'
 
@@ -328,7 +327,19 @@ export function SpecCard({ image, title, body }: { image: string; title: string;
 
 /* ---------- Venue card ---------- */
 
-export function VenueCard({ image, name, location }: { image: string; name: string; location: string }) {
+export function VenueCard({
+  image,
+  name,
+  location,
+  tag,
+  mapUrl,
+}: {
+  image: string
+  name: string
+  location: string
+  tag: string
+  mapUrl: string
+}) {
   const { ref, onMouseEnter, onMouseMove, onMouseLeave } = useTilt<HTMLDivElement>()
   return (
     <div
@@ -338,14 +349,21 @@ export function VenueCard({ image, name, location }: { image: string; name: stri
       onMouseLeave={onMouseLeave}
       className="stroke-run overflow-hidden rounded-sv-lg border border-sv-border bg-sv-surface transition-[border-color,box-shadow] duration-300 hover:border-sv-primary-border hover:shadow-[0_20px_50px_-12px_rgba(0,0,0,.5)]"
     >
-      <div className="aspect-16/10 overflow-hidden bg-sv-black-soft">
+      <div className="aspect-video overflow-hidden bg-sv-black-soft">
         <img src={image} alt={`${name}, ${location}`} className="h-full w-full object-cover" loading="lazy" />
       </div>
       <div className="p-6">
-        <h4 className="font-display text-lg font-extrabold text-sv-white">{name}</h4>
-        <div className="mt-1.5 flex items-center gap-1.5 text-sm text-sv-text-muted">
-          <MapPin size={16} weight="bold" className="shrink-0 text-sv-primary-light" />
-          {location}
+        <h4 className="truncate font-display text-lg font-extrabold text-sv-white" title={name}>
+          {name}
+        </h4>
+        <div className="mt-1.5 text-sm text-sv-text-muted">{location}</div>
+        <div className="mt-4 flex items-center justify-between border-t border-sv-border pt-4">
+          <span className="rounded-full border border-sv-border-strong px-3 py-1 text-[11px] font-bold uppercase tracking-[0.04em] text-sv-text-muted">
+            {tag}
+          </span>
+          <a href={mapUrl} target="_blank" rel="noopener" className="text-xs font-bold text-sv-primary-light transition-colors hover:text-white">
+            View on Map →
+          </a>
         </div>
       </div>
     </div>

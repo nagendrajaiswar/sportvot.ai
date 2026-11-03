@@ -91,20 +91,20 @@ const TESTIMONIALS = [
   },
 ]
 
-// Smart sports facilities, with photos supplied by SportVot (public/play/venues/). Name and location come from
-// each image's filename. Raghuvanshi Mills had no location in its filename — "Mumbai" is assumed from the others.
+// Venues as listed on the live sportvot.ai/play page (names, areas, categories and Google Maps links), with the
+// photos supplied by SportVot in public/play/venues/.
 const VENUES = [
-  { image: '/play/venues/play-the-turf-malad.webp', name: 'Play The Turf', location: 'Malad, Mumbai' },
-  { image: '/play/venues/nine-stars-dahisar.webp', name: 'Nine Stars', location: 'Dahisar, Mumbai' },
-  { image: '/play/venues/st-francis-borivali.webp', name: 'St. Francis', location: 'Borivali, Mumbai' },
-  { image: '/play/venues/players-turf-kanchpada.webp', name: 'Players Turf', location: 'Kanchpada, Mumbai' },
-  { image: '/play/venues/players-turf-goregaon.webp', name: 'Players Turf', location: 'Goregaon, Mumbai' },
-  { image: '/play/venues/sagar-tech-turf-saki-naka.webp', name: 'Sagar Tech Turf', location: 'Saki Naka, Mumbai' },
-  { image: '/play/venues/jb-metal-saki-naka.webp', name: 'JB Metal', location: 'Saki Naka, Mumbai' },
-  { image: '/play/venues/players-turf-marol.webp', name: 'Players Turf', location: 'Marol, Mumbai' },
-  { image: '/play/venues/salvation-turf-dadar.webp', name: 'Salvation Turf', location: 'Dadar, Mumbai' },
-  { image: '/play/venues/raghuvanshi-mills.webp', name: 'Raghuvanshi Mills', location: 'Mumbai' },
-  { image: '/play/venues/st-stanislaus-bandra.webp', name: 'St. Stanislaus', location: 'Bandra, Mumbai' },
+  { image: '/play/venues/st-stanislaus-bandra.webp', name: 'SportVot x Astro Park - St Stanislaus', location: 'Bandra', tag: 'Multi-sports', mapUrl: 'https://maps.app.goo.gl/CH4Wq2TAppaRTzcV7' },
+  { image: '/play/venues/raghuvanshi-mills.webp', name: 'SportVot x Astro Park - Raghuvanshi Mills', location: 'Lower Parel', tag: 'Multi-sports', mapUrl: 'https://maps.app.goo.gl/fr2LzSsayjCZ6KuZ7' },
+  { image: '/play/venues/salvation-turf-dadar.webp', name: 'SportVot x Astro Park - Salvation Turf', location: 'Dadar', tag: 'Multi-sports', mapUrl: 'https://maps.app.goo.gl/kZKe165jpfgrWS6B7' },
+  { image: '/play/venues/players-turf-marol.webp', name: 'SportVot x Players Turf Marol', location: 'Marol', tag: 'Multi-sports', mapUrl: 'https://maps.app.goo.gl/JV8LvKVbqPM8nMJD8?g_st=ac' },
+  { image: '/play/venues/jb-metal-saki-naka.webp', name: 'SportVot x Jb metal Turf', location: 'Sakinaka', tag: 'Multi-sports', mapUrl: 'https://maps.app.goo.gl/8zE6UuwXADbp1XPg7?g_st=ac' },
+  { image: '/play/venues/sagar-tech-turf-saki-naka.webp', name: 'SportVot x Sagar tech Turf', location: 'Sakinaka', tag: 'Cricket', mapUrl: 'https://maps.app.goo.gl/U54E4un1BEW9KL2q8?g_st=ac' },
+  { image: '/play/venues/players-turf-goregaon.webp', name: 'SportVot x Players Turf Goregaon', location: 'Goregaon West', tag: 'Multi-sports', mapUrl: 'https://maps.app.goo.gl/fecV1tfgHhkZr7zEA?g_st=ac' },
+  { image: '/play/venues/players-turf-kanchpada.webp', name: 'SportVot x Players Turf kanchpada', location: 'Malad west', tag: 'Multi-sports', mapUrl: 'https://maps.app.goo.gl/PTcGJW2TbivSXwUs9?g_st=ac' },
+  { image: '/play/venues/st-francis-borivali.webp', name: 'SportVot x St Francis', location: 'Borivali', tag: 'Multi-sports', mapUrl: 'https://maps.app.goo.gl/n77D12AxZruDrkP57?g_st=ac' },
+  { image: '/play/venues/nine-stars-dahisar.webp', name: 'SportVot x Ninestar', location: 'Dahisar', tag: 'Multi-sports', mapUrl: 'https://maps.app.goo.gl/LdiMJUJg4b8VEc3S6' },
+  { image: '/play/venues/play-the-turf-malad.webp', name: 'SportVot x Play the turf', location: 'Malad west', tag: 'Multi-sports', mapUrl: 'https://maps.app.goo.gl/TARmsuCihLNXLFdQ8' },
 ]
 
 const CATEGORIES = [
@@ -157,12 +157,12 @@ export default function Play() {
           <SectionHead eyebrow="Venues" center className="mx-auto mb-14">
             <h2 className="mt-3 text-balance font-display text-[clamp(32px,5vw,56px)] font-extrabold text-sv-white">Find the right venue for your event.</h2>
             <p className="mx-auto mt-4 max-w-[820px] text-center text-[19px] text-sv-text-muted">
-              Smart sports facilities across Mumbai, ready for your next tournament or team event.
+              Our growing network of turfs and sports venues across Mumbai and Delhi NCR.
             </p>
           </SectionHead>
           <RevealGroup className="grid grid-cols-3 gap-6 max-[900px]:grid-cols-2 max-[560px]:grid-cols-1">
             {VENUES.map((v) => (
-              <VenueCard key={v.image} {...v} />
+              <VenueCard key={v.mapUrl} {...v} />
             ))}
           </RevealGroup>
         </Container>
